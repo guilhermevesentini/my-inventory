@@ -1,36 +1,115 @@
 <template>
-    <div>
-      <h1>Login</h1>
-      <form @submit.prevent="submitForm">
-        <div>
-          <label for="email">Email:</label>
-          <input id="email" type="email" v-model="email" required />
-        </div>
-        <div>
-          <label for="password">Senha:</label>
-          <input id="password" type="password" v-model="password" required />
-        </div>
-        <button type="submit">Entrar</button>
-      </form>
-    </div>
-  </template>
-  
-  <script lang="ts" setup>
-  import router from '@/router';
-import { ref } from 'vue';
-  
-  const email = ref('');
-  const password = ref('');
-  
-  const submitForm = () => {
-    // aqui você pode fazer a validação do email e senha
-    if (email.value === 'usuario@exemplo.com' && password.value === 'senha123') {
-      alert('Login realizado com sucesso!');
-      // redireciona para a página de dashboard
-      router.push('/dashboard');
-    } else {
-      alert('Email ou senha incorretos. Tente novamente.');
+  <div class="form-signin">
+    <form @submit.prevent="submit">
+      <h1 class="h3 mb-3 fw-normal text-center">iNVENTORY</h1>
+
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingInput" placeholder="Digite seu usuario" v-model="username" required>
+        <label for="floatingInput">Usuario</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Digite sua senha" v-model="password" required>
+        <label for="floatingPassword">Password</label>
+      </div>
+
+      <div class="w-100 mb-3 text-center link_novo_usuario">
+        <a @click="Registrar">Registrar novo usuário</a>
+      </div>
+
+      <!-- <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div> -->
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
+      <p class="mt-2 mb-3 text-muted text-center">&copy; 2023 - Guilherme Vesentini</p>
+    </form>
+  </div>
+</template>
+
+<script lang="ts">
+import router from '@/router';
+import { defineComponent, ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+export default defineComponent({
+  setup() {
+    const username = ref('');
+    const password = ref('');
+    const router = useRouter();
+
+    const submit = async () => {
+      const req = await fetch(`http://localhost:3001/users?username=${username.value}&password=${password.value}`);
+      const response = await req.json();
+      console.log(response);
+
+      const token = response[0].token;
+      localStorage.setItem('token', token);
+
+      if (req.ok) {
+        router.push('/dashboard');
+      } else {
+        alert('Usuário não encontrado.')
+      }
+    };
+
+
+    return { username, password, submit };
+  },
+  methods:{
+    Registrar(){
+      router.push({ path: `/NovoUsuario` });
     }
-  };
-  </script>
-  
+  }
+});
+</script>
+
+<style scoped>
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 10% auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating {
+  margin: 15px 0;
+}
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.link_novo_usuario:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+</style>

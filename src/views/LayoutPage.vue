@@ -12,8 +12,7 @@
             <i class="material-icons light" title="Light Mode">light_mode</i>
           </div>
         </div>
-
-        <i class="material-icons">settings</i>
+        <i class="material-icons" @click="logout">logout</i>
       </div>
     </header>
     <main>
@@ -35,9 +34,15 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from "@vue/runtime-core";
+import { computed, defineComponent, onMounted, ref } from "@vue/runtime-core";
 import { darkMode, toggleMode } from "@/darkMode";
+import router from "@/router";
 
+
+const logout = (() => {
+  localStorage.removeItem('token');
+  router.push({ path: `/login` });
+})
 </script>
 
 <style>

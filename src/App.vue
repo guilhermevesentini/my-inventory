@@ -1,9 +1,9 @@
 <template>
-  <LayoutPage />
+  <router-view />
 </template>
 
 <script lang="ts" setup>
-import LayoutPage from './views/LayoutPage.vue';
+//import LayoutPage from "./views/LayoutPage.vue";
 </script>
 
 <style>
@@ -16,6 +16,8 @@ import LayoutPage from './views/LayoutPage.vue';
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
+  overflow: hidden;
 }
 i {
   cursor: pointer;  
