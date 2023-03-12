@@ -3,7 +3,23 @@
 </template>
 
 <script lang="ts" setup>
-//import LayoutPage from "./views/LayoutPage.vue";
+import { isAuthenticated } from '../auth';
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth && !isAuthenticated()) {
+    next('/login');
+  } else if (to.path === '/login' && isAuthenticated()) {
+    next('/dashboard');
+  } else {
+    next();
+  }
+});
+
+
+
 </script>
 
 <style>
@@ -12,14 +28,15 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  overflow: auto;
+  height: 100%;
 }
 body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  overflow: hidden;
 }
 i {
   cursor: pointer;  
 }
+
 </style>

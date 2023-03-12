@@ -3,26 +3,25 @@
     <h1>Dashboard</h1>
 
     <div class="chart">
-      <h2>Total de Items: {{ totalDeItems }}</h2>
+      <h2>Total de Items: {{ totalDeItems }} </h2>
     </div>
+
+    <BarChart />
+
   </div>
 </template>
 
 
-
 <script lang="ts" setup>
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { IProduto } from './types';
-
-const myChart = ref<null | HTMLCanvasElement>(null);
+import BarChart from '../components/BarChart.vue'
 
 const listaDeProdutos = ref<IProduto[]>([]);
 
 onMounted(() => {
   getProdutos()
 })
-
-
 
 const getProdutos = (async () => {
   const req = await fetch("http://localhost:3001/produtos");
@@ -38,6 +37,5 @@ const totalDeItems = computed(() => {
 
 </script>
 
-<style>
-  /* estilos para os componentes do dashboard */
-</style>
+
+<style></style>

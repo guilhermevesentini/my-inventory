@@ -28,16 +28,21 @@
             </div>
         </div>
         <div class="acoes">
-            <button class="btn btn-secondary" @click="Limpar">Limpar</button>
-            <button class="btn btn-success" @click="Salvar">Salvar</button>
+            <div class="acoes_item">
+                <button class="btn btn-secondary" @click="Voltar">Voltar</button>
+            </div>
+            <div class="acoes_item">
+                <button class="btn btn-secondary" @click="Limpar">Limpar</button>
+                <button class="btn btn-success" @click="Salvar">Salvar</button>
+            </div>
         </div>
-
     </div>
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, watch } from "@vue/runtime-core"
+import { computed, reactive } from "@vue/runtime-core"
 import { IProduto, ETipoProduto } from '@/views/types'
+import router from "@/router";
 //import CurrencyInput from 'vue3-currency-input';
 
 let produtoDetails: IProduto = reactive({
@@ -101,6 +106,16 @@ const tiposProduto: ETipoProduto[] = [
 let produto = computed(() => produtoDetails)
 
 const validarProduto = ((produto: IProduto) => {
+    var validateName = produto.nome.length > 20 ? true : false;
+    var validateDescricao = produto.descricao.length > 20 ? true : false;
+
+    var hasLength = validateName || validateDescricao;
+
+    if(hasLength){
+        alert("Nome ou descrição não deve conter mais do que 20 caracters!");
+        return false
+    }
+
     if (!produto.nome || !produto.descricao || !produto.tipo || !produto.quantidade || !produto.preco) {
         return false;
     }
@@ -118,10 +133,10 @@ const Salvar = (async () => {
         headers: { "Content-Type": "application/json" },
         body: dataJson,
     });
-    const res = await req.json();
-
+    //const res = await req.json();
     if (req.ok) {
         Limpar()
+        router.push('/inventory')
     }
 })
 
@@ -133,6 +148,11 @@ const Limpar = (() => {
     produtoDetails.preco = 0;
 })
 
+const Voltar = (() => {
+    Limpar()
+    router.push('/inventory')
+})
+
 </script>
 
 <style scoped>
@@ -142,10 +162,10 @@ const Limpar = (() => {
 
 .acoes {
     display: flex;
-    margin: 10px;
-    position: absolute;
-    right: 0;
-    bottom: 0;
+    margin: 10px 0;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
 }
 
 .acoes button {

@@ -47,7 +47,7 @@ export default defineComponent({
       localStorage.setItem('token', token);
 
       if (req.ok) {
-        router.push('/dashboard');
+        router.replace('/dashboard');
       } else {
         alert('Usuário não encontrado.')
       }

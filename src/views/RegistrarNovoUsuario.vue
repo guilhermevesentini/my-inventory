@@ -32,7 +32,7 @@
 
 <script lang="ts" setup>
 import router from '@/router';
-import { computed, onMounted, reactive, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 interface UsuariosCadastrados {
@@ -104,7 +104,7 @@ const submit = async () => {
         body: dataJson,
     });
 
-    const res = await req.json();
+    //const res = await req.json();
 
     if (req.ok) {
         route.push('/dashboard');

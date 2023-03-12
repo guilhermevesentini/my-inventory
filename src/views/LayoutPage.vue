@@ -34,18 +34,18 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineComponent, onMounted, ref } from "@vue/runtime-core";
 import { darkMode, toggleMode } from "@/darkMode";
+import { clearLocalStorage } from "@/utils";
 import router from "@/router";
 
 
 const logout = (() => {
-  localStorage.removeItem('token');
+  clearLocalStorage()
   router.push({ path: `/login` });
 })
 </script>
 
-<style>
+<style scoped>
 .light_mode_on {
   background-color: #fff;
   color: #333;
@@ -88,6 +88,9 @@ header img {
 
 main {
   display: flex;
+  overflow: auto;
+  overflow-y: hidden;
+  height: 100%;
 }
 
 .sidebar {
@@ -95,7 +98,6 @@ main {
   width: 10%;
   color: #fff;
   height: 100vh;
-
 }
 
 .sidebar ul {
@@ -118,15 +120,7 @@ main {
 
 .main-content {
   width: 100%;
-}
-
-.adicionar_produto {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  border-radius: 40%;
-  padding: 10px;
-  font-size: 10px;
-  opacity: 0.9;
+  height: 85vh;
+  overflow: auto;
 }
 </style>

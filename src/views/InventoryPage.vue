@@ -108,7 +108,7 @@ const deletarProduto = (async (id: number) => {
   const req = await fetch(`http://localhost:3001/produtos/${id}`, {
     method: "DELETE",
   });
-  const res = await req.json();
+  //const res = await req.json();
 
   if (req.ok) {
     getProdutos()
@@ -145,22 +145,31 @@ const totalPreco = computed(() => {
 
 .table_line {
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 40px !important;
 }
 
 .table_line:hover {
-  background-color: #b5e6fd;
-  color: #333;
+  background-color: #a1a1a167;
+}
+
+table { 
+  height: 100%;
+  overflow: auto;
+}
+
+table tbody {
+  overflow: scroll;
+  overflow-y: scroll;
+  height: 50px !important;
 }
 
 .container_pesquisar input {
   width: 100%;
   margin: 10px 0;
   padding: 8px;
-}
-
-.table-body-scrollable {
-  max-height: 10px !important;
-  overflow-y: scroll;
 }
 
 .mensagem_nao_contem_produto {
@@ -174,5 +183,15 @@ const totalPreco = computed(() => {
   align-content: center;
   align-items: center;
   justify-content: center;
+}
+
+.adicionar_produto {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  border-radius: 40%;
+  padding: 10px;
+  font-size: 10px;
+  opacity: 0.9;
 }
 </style>

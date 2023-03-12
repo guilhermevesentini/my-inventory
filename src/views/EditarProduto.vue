@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from "@vue/runtime-core"
+import { computed, onMounted, reactive } from "@vue/runtime-core"
 import { IProduto, ETipoProduto } from '@/views/types'
 import router from "@/router";
 
@@ -115,7 +115,9 @@ const tiposProduto: ETipoProduto[] = [
 let produtoEditado = computed(() => produto)
 
 const validarProduto = ((produtoEditado: IProduto) => {
-    if (!produto.nome || !produto.descricao || !produto.tipo || !produto.quantidade || !produto.preco) {
+    if(!produtoEditado) return false
+    var validateFields = !produto.nome || !produto.descricao || !produto.tipo || !produto.quantidade || !produto.preco;
+    if (validateFields) {
         return false;
     }
     return true;
@@ -140,7 +142,7 @@ const Salvar = (async () => {
 
     const response = await req.json();
 
-    console.log(response);
+    router.push('/inventory')
 })
 
 </script>
