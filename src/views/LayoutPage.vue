@@ -1,48 +1,16 @@
 <template>
   <div class="layout_page" :class="{ dark_mode_on: darkMode, light_mode_on: !darkMode }">
-    <header>
-      <h4>iNVETORY</h4>
-      <div class="header">
-
-        <div class="switch_mode" @click="toggleMode">
-          <div class="light_mode" v-if="!darkMode">
-            <i class="material-icons dark" title="Dark Mode">dark_mode</i>
-          </div>
-          <div class="dark_mode" v-else>
-            <i class="material-icons light" title="Light Mode">light_mode</i>
-          </div>
-        </div>
-        <i class="material-icons" @click="logout">logout</i>
-      </div>
-    </header>
-    <main>
-      <div class="sidebar">
-        <ul>
-          <router-link to="/dashboard" v-slot="{ navigate }">
-            <li @click="navigate"><i class="material-icons">dashboard</i></li>
-          </router-link>
-          <router-link to="/inventory" v-slot="{ navigate }">
-            <li @click="navigate"><i class="material-icons">inventory_2</i></li>
-          </router-link>
-        </ul>
-      </div>
-      <div class="main-content">
-        <router-view />
-      </div>
-    </main>
+    <HeaderCompVue />
+    <MainContentVue />
   </div>
 </template>
 
 <script lang="ts" setup>
 import { darkMode, toggleMode } from "@/darkMode";
-import { clearLocalStorage } from "@/utils";
-import router from "@/router";
+import HeaderCompVue from "./Layout/HeaderCompVue.vue";
+import SideBarComVueVue from "./Layout/SideBarComVue.vue";
+import MainContentVue from "./Layout/MainContentVue.vue";
 
-
-const logout = (() => {
-  clearLocalStorage()
-  router.push({ path: `/login` });
-})
 </script>
 
 <style scoped>
@@ -61,66 +29,5 @@ const logout = (() => {
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 1rem;
-}
-
-.header {
-  display: flex;
-  gap: 1rem;
-}
-
-header img {
-  height: 2rem;
-}
-
-
-
-.header i {
-  padding: 5px 10px;
-}
-
-
-main {
-  display: flex;
-  overflow: auto;
-  overflow-y: hidden;
-  height: 100%;
-}
-
-.sidebar {
-  text-align: center;
-  width: 10%;
-  color: #fff;
-  height: 100vh;
-}
-
-.sidebar ul {
-  background-color: #1a1a1a;
-  width: 50%;
-  margin-left: 20%;
-  border-radius: 10%;
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar ul li {
-  padding: 20px;
-}
-
-.sidebar ul a {
-  color: #fff;
-}
-
-
-.main-content {
-  width: 100%;
-  height: 85vh;
-  overflow: auto;
 }
 </style>

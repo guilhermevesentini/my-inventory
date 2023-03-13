@@ -60,6 +60,24 @@
       "quantidade": 24,
       "preco": 12,
       "total": 0
+    },
+    {
+      "id": 9,
+      "nome": "wadwad",
+      "descricao": "awdwadawd",
+      "tipo": "Brinquedos",
+      "quantidade": 12,
+      "preco": 21,
+      "total": 0
+    },
+    {
+      "id": 10,
+      "nome": "eqdadaw",
+      "descricao": "adwadawd",
+      "tipo": "Câmeras e Drones",
+      "quantidade": 12,
+      "preco": 12,
+      "total": 0
     }
   ],
   "users": [

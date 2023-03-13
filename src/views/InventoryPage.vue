@@ -1,10 +1,7 @@
 <template>
   <div class="container">
-    <div class="container_pesquisar">
-      <input type="search" placeholder="Digite o item" v-model="filtro" />
-    </div>
-    <table class="table table-bordered" :class="{ dark_mode_on_table: darkMode, light_mode_on_table: !darkMode }"
-      v-if="!hasProduct">
+    <BarraDePesquisa @filtroMudou="atualizarFiltro" />
+    <table class="table table-bordered" :class="{ dark_mode_on_table: darkMode, light_mode_on_table: !darkMode }">
       <thead>
         <tr>
           <th>Nome</th>
@@ -40,9 +37,6 @@
         </tr>
       </tfoot>
     </table>
-    <div class="mensagem_nao_contem_produto" v-if="hasProduct">
-      <p>Não existe produto</p>
-    </div>
   </div>
   <router-link to="/novoProduto" v-slot="{ navigate }">
     <button @click="navigate" class="btn btn-primary adicionar_produto">
@@ -56,22 +50,24 @@ import { computed, onMounted, ref } from "@vue/runtime-core";
 import { IProduto } from "./types";
 import { darkMode } from "@/darkMode";
 import router from "@/router";
+import BarraDePesquisa from '@/components/BarraDePesquisa.vue'
 
 const listaDeProdutos = ref<Array<IProduto>>([]);
-const filtro = ref<string>('');
+const filtroAtual = ref<string>('');
 
-let hasProduct = false;
-
-function removerAcentos(texto:string) {
+function removerAcentos(texto: string) {
   return texto
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase();
 }
 
+function atualizarFiltro(filtro: string) {
+  filtroAtual.value = filtro
+}
 
 const produtosFiltrados = computed(() => {
-  const termoBusca = removerAcentos(filtro.value.trim().toLowerCase());
+  const termoBusca = removerAcentos(filtroAtual.value.trim().toLowerCase());
   if (!termoBusca) {
     return listaDeProdutosComputed.value;
   }
@@ -155,7 +151,7 @@ const totalPreco = computed(() => {
   background-color: #a1a1a167;
 }
 
-table { 
+table {
   height: 100%;
   overflow: auto;
 }
@@ -166,11 +162,7 @@ table tbody {
   height: 50px !important;
 }
 
-.container_pesquisar input {
-  width: 100%;
-  margin: 10px 0;
-  padding: 8px;
-}
+
 
 .mensagem_nao_contem_produto {
   display: flex;

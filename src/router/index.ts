@@ -7,9 +7,11 @@ import EditarProduto from "@/views/EditarProduto.vue";
 import Login from "@/views/LoginPage.vue";
 import RegistrarNovoUsuario from "@/views/RegistrarNovoUsuario.vue";
 
-import {isAuthenticated} from '../../auth'
+import {isAuthenticated} from '../../auth';
 
 const routes: RouteRecordRaw[] = [
+  
+  { path: '/', redirect: '/login' },
   { path: '/login', component: Login },
   { path: '/NovoUsuario', component: RegistrarNovoUsuario },
   {

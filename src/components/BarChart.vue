@@ -24,4 +24,11 @@ const chartOptions = {
     height: 450px !important;
     padding:40px;
 }
+
+@media (max-width: 650px) {
+  #my-chart-id {
+    height: 350px !important;
+    padding: 31px;
+  }
+}
 </style>

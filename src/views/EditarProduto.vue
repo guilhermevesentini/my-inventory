@@ -26,7 +26,12 @@
             </div>
         </div>
         <div class="acoes">
-            <button class="btn btn-success" @click="Salvar">Salvar</button>
+            <div class="acoes_item">
+                <button class="btn btn-secondary" @click="Voltar">Voltar</button>
+            </div>
+            <div class="acoes_item">
+                <button class="btn btn-success" @click="Salvar">Salvar</button>
+            </div>
         </div>
 
     </div>
@@ -145,6 +150,9 @@ const Salvar = (async () => {
     router.push('/inventory')
 })
 
+const Voltar = (() => {
+    router.push('/inventory')
+})
 </script>
 
 <style scoped>
@@ -154,10 +162,10 @@ const Salvar = (async () => {
 
 .acoes {
     display: flex;
-    margin: 10px;
-    position: absolute;
+    margin: 10px 0;
+    justify-content: space-between;
+    flex-direction: row;
     right: 0;
-    bottom: 0;
 }
 
 .acoes button {
