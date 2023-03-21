@@ -1,6 +1,11 @@
 <template>
   <div class="container">
-    <BarraDePesquisa @filtroMudou="atualizarFiltro" />
+    <!-- <BarraDePesquisa @filtroMudou="atualizarFiltro" /> -->
+    <router-link to="/novoProduto" v-slot="{ navigate }">
+      <button @click="navigate" class="btn btn-primary adicionar_produto">
+        <i class="material-icons">add</i>Adicionar
+      </button>
+    </router-link>
     <table class="table table-bordered" :class="{ dark_mode_on_table: darkMode, light_mode_on_table: !darkMode }">
       <thead>
         <tr>
@@ -38,11 +43,6 @@
       </tfoot>
     </table>
   </div>
-  <router-link to="/novoProduto" v-slot="{ navigate }">
-    <button @click="navigate" class="btn btn-primary adicionar_produto">
-      <i class="material-icons">add</i>
-    </button>
-  </router-link>
 </template>
 
 <script lang="ts" setup>
@@ -162,8 +162,6 @@ table tbody {
   height: 50px !important;
 }
 
-
-
 .mensagem_nao_contem_produto {
   display: flex;
   width: 100%;
@@ -178,12 +176,16 @@ table tbody {
 }
 
 .adicionar_produto {
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-  border-radius: 40%;
-  padding: 10px;
-  font-size: 10px;
-  opacity: 0.9;
+  display: flex;
+  float: right;
+  margin: 10px 0;
+  padding: 7px;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+}
+
+.adicionar_produto i {
+  margin-right: 5px;
 }
 </style>

@@ -1,7 +1,14 @@
 <template>
   <div class="layout_page" :class="{ dark_mode_on: darkMode, light_mode_on: !darkMode }">
     <HeaderCompVue />
-    <MainContentVue />
+    <div class="row">
+      <div class="col-md-2">
+        <SideBarComVueVue />
+      </div>
+      <div class="col-md-10">
+        <MainContentVue />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -28,6 +35,7 @@ import MainContentVue from "./Layout/MainContentVue.vue";
   display: flex;
   flex-direction: column;
   height: 100vh;
-  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 </style>
