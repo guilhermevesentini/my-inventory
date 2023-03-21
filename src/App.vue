@@ -36,5 +36,5 @@ body {
 i {
   cursor: pointer;  
 }
-
+@import '~apexcharts/dist/apexcharts.css';
 </style>

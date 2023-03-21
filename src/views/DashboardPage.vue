@@ -8,13 +8,18 @@
 
     <BarChart />
 
+    <div>
+      <ChartVue :options="$options" :series="series" />
+    </div>
+
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue';
 import { IProduto } from './types';
-import BarChart from '../components/BarChart.vue'
+import BarChart from '../components/BarChart.vue';
+import ChartVue from '@/components/ChartVue.vue';
 
 const listaDeProdutos = ref<IProduto[]>([]);
 
