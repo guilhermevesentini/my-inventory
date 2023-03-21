@@ -1,11 +1,18 @@
 <template>
   <div class="container">
-    <!-- <BarraDePesquisa @filtroMudou="atualizarFiltro" /> -->
-    <router-link to="/novoProduto" v-slot="{ navigate }">
-      <button @click="navigate" class="btn btn-primary adicionar_produto">
-        <i class="material-icons">add</i>Adicionar
-      </button>
-    </router-link>
+    <div class="row">
+      <div class="col-md-8">
+        <BarraDePesquisa @filtroMudou="atualizarFiltro" />
+      </div>
+      <div class="col-md-4">
+        <router-link to="/novoProduto" v-slot="{ navigate }">
+        <button @click="navigate" class="btn btn-primary adicionar_produto">
+          <i class="material-icons">add</i>Adicionar
+        </button>
+      </router-link>
+      </div>      
+    </div>
+
     <table class="table table-bordered" :class="{ dark_mode_on_table: darkMode, light_mode_on_table: !darkMode }">
       <thead>
         <tr>
@@ -137,6 +144,11 @@ const totalPreco = computed(() => {
 
 .light_mode_on_table {
   color: #333;
+}
+
+.acoes-topo {
+  display: flex;
+  justify-content: space-between;
 }
 
 .table_line {
