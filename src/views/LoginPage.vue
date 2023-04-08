@@ -4,11 +4,13 @@
       <h1 class="h3 mb-3 fw-normal text-center">iNVENTORY</h1>
 
       <div class="form-floating">
-        <input type="text" class="form-control" id="floatingInput" placeholder="Digite seu usuario" v-model="username" required>
+        <input type="text" class="form-control" id="floatingInput" placeholder="Digite seu usuario" v-model="username"
+          required>
         <label for="floatingInput">Usuario</label>
       </div>
       <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Digite sua senha" v-model="password" required>
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Digite sua senha"
+          v-model="password" required>
         <label for="floatingPassword">Password</label>
       </div>
 
@@ -29,6 +31,7 @@
 
 <script lang="ts">
 import router from '@/router';
+import { isUnaryExpression } from '@babel/types';
 import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -38,13 +41,29 @@ export default defineComponent({
     const password = ref('');
     const router = useRouter();
 
+    interface IUser {
+      _id: string,
+      id: number,
+      username: string,
+    }
+
     const submit = async () => {
       const req = await fetch(`http://localhost:3001/users?username=${username.value}&password=${password.value}`);
       const response = await req.json();
-      console.log(response);
+      const user = response[0];
 
       const token = response[0].token;
+      console.log(token);
+
       localStorage.setItem('token', token);
+
+      const usuario: IUser = {
+        _id: user._id,
+        id: user.id,
+        username: user.username,
+      }
+
+      localStorage.setItem('user', JSON.stringify(usuario));
 
       if (req.ok) {
         router.replace('/dashboard');
@@ -56,8 +75,8 @@ export default defineComponent({
 
     return { username, password, submit };
   },
-  methods:{
-    Registrar(){
+  methods: {
+    Registrar() {
       router.push({ path: `/NovoUsuario` });
     }
   }
@@ -92,6 +111,7 @@ body {
 .form-signin .form-floating {
   margin: 15px 0;
 }
+
 .form-signin .form-floating:focus-within {
   z-index: 2;
 }
@@ -111,5 +131,4 @@ body {
 .link_novo_usuario:hover {
   cursor: pointer;
   text-decoration: underline;
-}
-</style>
+}</style>

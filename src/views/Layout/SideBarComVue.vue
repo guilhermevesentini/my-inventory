@@ -17,10 +17,11 @@
 
 <style scoped>
 .sidebar {
-    color: #fff ;
+    color: #fff;
     background-color: #1a1a1a;
     padding: 20px;
     height: 100vh;
+    min-width: 160px;
 }
 
 .sidebar ul {
@@ -52,7 +53,27 @@
         align-content: center;
         align-items: flex-start;
         justify-content: center;
-        max-height: 100vh;
+        height: 88px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        
+        height: 88px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: stretch;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sidebar ul {
+        display: flex;
+    }
+
+    .sidebar ul li {
+        padding: 10px;
     }
 }
 </style>

@@ -6,14 +6,15 @@
       </div>
       <div class="col-md-4">
         <router-link to="/novoProduto" v-slot="{ navigate }">
-        <button @click="navigate" class="btn btn-primary adicionar_produto">
-          <i class="material-icons">add</i>Adicionar
-        </button>
-      </router-link>
-      </div>      
+          <button @click="navigate" class="btn btn-primary adicionar_produto">
+            <i class="material-icons">add</i>Adicionar
+          </button>
+        </router-link>
+      </div>
     </div>
 
-    <table class="table table-bordered" :class="{ dark_mode_on_table: darkMode, light_mode_on_table: !darkMode }">
+    <table id="table-desktop" class="table table-bordered"
+      :class="{ dark_mode_on_table: darkMode, light_mode_on_table: !darkMode }">
       <thead>
         <tr>
           <th>Nome</th>
@@ -49,6 +50,39 @@
         </tr>
       </tfoot>
     </table>
+
+    <table id="table-mobile" class="table table-bordered"
+      :class="{ dark_mode_on_table: darkMode, light_mode_on_table: !darkMode }">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Tipo</th>
+          <th>Quantidade</th>
+          <th>Preço</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="produto in produtosFiltrados" :key="produto.id" class="table_line">
+          <td @click="selecionarLinha(produto.id)">{{ produto.nome }}</td>
+          <td @click="selecionarLinha(produto.id)">{{ produto.tipo }}</td>
+          <td @click="selecionarLinha(produto.id)">{{ produto.quantidade }}</td>
+          <td @click="selecionarLinha(produto.id)">{{ produto.preco }}</td>
+          <td @click="selecionarLinha(produto.id)">{{ produto.total }}</td>
+          <td style="text-align: center"><i class="material-icons" @click="deletarProduto(produto.id)"
+              title="deletar">close</i></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>total</th>
+          <th>{{ totalQuantidade }}</th>
+          <th>{{ totalPreco }}</th>
+          <th></th>
+        </tr>
+      </tfoot>
+    </table>
   </div>
 </template>
 
@@ -61,6 +95,10 @@ import BarraDePesquisa from '@/components/BarraDePesquisa.vue'
 
 const listaDeProdutos = ref<Array<IProduto>>([]);
 const filtroAtual = ref<string>('');
+
+const getUser: any = localStorage.getItem('user')
+const userToJs = JSON.parse(getUser);
+
 
 function removerAcentos(texto: string) {
   return texto
@@ -87,16 +125,15 @@ const produtosFiltrados = computed(() => {
   });
 });
 
-
 onMounted(() => {
-  getProdutos()
+  getProdutos(userToJs._id);
 })
 
-const getProdutos = (async () => {
-  const req = await fetch("http://localhost:3001/produtos");
+const getProdutos = async (userId: number) => {
+  const req = await fetch(`http://localhost:3001/user-produtos?userId=${userId}`);
   const response = await req.json();
-  listaDeProdutos.value = response;
-})
+  listaDeProdutos.value = response[0].produtos;
+}
 
 const listaDeProdutosComputed = computed(() => {
   const produtosComTotal = listaDeProdutos.value.map(produto => {
@@ -107,16 +144,31 @@ const listaDeProdutosComputed = computed(() => {
 });
 
 
-const deletarProduto = (async (id: number) => {
-  const req = await fetch(`http://localhost:3001/produtos/${id}`, {
-    method: "DELETE",
+const deletarProduto = async (productId: number) => {
+  const req = await fetch(`http://localhost:3001/user-produtos?userId=${userToJs._id}`, {
+    method: "GET"
   });
-  //const res = await req.json();
 
   if (req.ok) {
-    getProdutos()
+    const userProdutos = await req.json();
+    const produtosAtualizados = userProdutos[0].produtos.filter((produto: any) => produto.id !== productId);
+    const reqAtualizacao = await fetch(`http://localhost:3001/user-produtos/produtos`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ produtos: produtosAtualizados })
+    });
+
+    if (reqAtualizacao.ok) {
+      getProdutos(userToJs._id);
+    }
   }
-})
+}
+
+
+
+
 
 const selecionarLinha = ((produto: number) => {
   router.push({ path: `/EditarProduto/${produto}` });
@@ -199,5 +251,19 @@ table tbody {
 
 .adicionar_produto i {
   margin-right: 5px;
+}
+
+#table-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  #table-mobile {
+    display: block;
+  }
+
+  #table-desktop {
+    display: none;
+  }
 }
 </style>

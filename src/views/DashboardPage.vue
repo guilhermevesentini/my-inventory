@@ -8,30 +8,27 @@
 
     <BarChart />
 
-    <div>
-      <ChartVue :options="$options" :series="series" />
-    </div>
-
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue';
 import { IProduto } from './types';
-import BarChart from '../components/BarChart.vue';
-import ChartVue from '@/components/ChartVue.vue';
 
 const listaDeProdutos = ref<IProduto[]>([]);
+const getUser: any = localStorage.getItem('user')
+const userToJs = JSON.parse(getUser);
 
 onMounted(() => {
-  getProdutos()
+  getProdutos(userToJs._id);
 })
 
-const getProdutos = (async () => {
-  const req = await fetch("http://localhost:3001/produtos");
+const getProdutos = async (userId: number) => {
+  const req = await fetch(`http://localhost:3001/user-produtos?userId=ae77fa5b2fc1d3fa8b42194638f7d938`);
   const response = await req.json();
-  listaDeProdutos.value = response;
-})
+  return response[0].produtos || [];
+}
+
 
 const totalDeItems = computed(() => {
   return listaDeProdutos.value.reduce((total, produto) => {
