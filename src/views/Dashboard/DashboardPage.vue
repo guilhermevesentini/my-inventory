@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h1>Dashboard</h1>
-
     <div class="chart">
       <h2>Total de Items: {{ totalDeItems }} </h2>
     </div>
@@ -13,7 +11,7 @@
 
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue';
-import { IProduto } from './types';
+import { IProduto } from '../types';
 
 const listaDeProdutos = ref<IProduto[]>([]);
 const getUser: any = localStorage.getItem('user')

@@ -1,13 +1,13 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-import layoutPage from '@/views/LayoutPage.vue'
-import DashboardPage from "@/views/DashboardPage.vue";
-import InventoryPage from "@/views/InventoryPage.vue";
-import AdicionarProduto from "@/views/AdicionarProduto.vue";
-import EditarProduto from "@/views/EditarProduto.vue";
-import Login from "@/views/LoginPage.vue";
-import RegistrarNovoUsuario from "@/views/RegistrarNovoUsuario.vue";
+import layoutPage from '@/views/Layout/LayoutPage.vue'
+import DashboardPage from "@/views/Dashboard/DashboardPage.vue";
+import InventoryPage from "@/views/Inventory/InventoryPage.vue";
+import AdicionarProduto from "@/components/Inventory/AdicionarProduto.vue";
+import EditarProduto from "@/components/Inventory/EditarProduto.vue";
+import Login from "@/views/Login/LoginPage.vue";
+import RegistrarNovoUsuario from "@/views/Login/RegistrarNovoUsuario.vue";
 
-import {isAuthenticated} from '../../auth';
+import { isAuthenticated } from '../../auth';
 
 const routes: RouteRecordRaw[] = [
   
@@ -21,88 +21,31 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: "/dashboard",
-        name: "dashboardPage",
+        name: "Dashboard",
         component: DashboardPage,
         meta: { requiresAuth: true },
       },
       {
         path: "/inventory",
-        name: "inventoryPage",
+        name: "Inventory",
         component: InventoryPage,
         meta: { requiresAuth: true },
       },
       {
         path: "/novoProduto",
-        name: "novoProdutoPage",
+        name: "Inventory / Novo Produto",
         component: AdicionarProduto,
         meta: { requiresAuth: true },
       },
       {
         path: "/EditarProduto/:id",
-        name: "EditarProdutoPage",
+        name: "Inventory / Editar Produto",
         component: EditarProduto,
         meta: { requiresAuth: true },
       },
     ],
   },
-  // {
-  //   path: "/dashboard",
-  //   name: "dashboardPage",
-  //   component: DashboardPage,
-  //   meta: { requiresAuth: true },
-  // },
-  // {
-  //   path: "/inventory",
-  //   name: "inventoryPage",
-  //   component: InventoryPage,
-  //   meta: { requiresAuth: true },
-  // },
-  // {
-  //   path: "/novoProduto",
-  //   name: "novoProdutoPage",
-  //   component: AdicionarProduto,
-  //   meta: { requiresAuth: true },
-  // },
-  // {
-  //   path: "/EditarProduto/:id",
-  //   name: "EditarProdutoPage",
-  //   component: EditarProduto,
-  //   meta: { requiresAuth: true },
-  // },
 ];
-
-// const routes: Array<RouteRecordRaw> = [
-//   {
-//     path: "/",
-//     redirect: '/dashboard'
-//   },
-//   {
-//     path: "/dashboard",
-//     name: "dashboardPage",
-//     component: DashboardPage,
-//   },
-//   {
-//     path: "/inventory",
-//     name: "inventoryPage",
-//     component: InventoryPage,
-//   },
-//   {
-//     path: "/novoProduto",
-//     name: "novoProdutoPage",
-//     component: AdicionarProduto,
-//   },
-//   {
-//     path: "/EditarProduto/:id",
-//     name: "EditarProdutoPage",
-//     component: EditarProduto,
-//   },
-//   {
-//     path: "/login",
-//     name: "LoginPage",
-//     component: Login,
-//   },
-  
-// ];
 
 const router = createRouter({
   history: createWebHashHistory(),

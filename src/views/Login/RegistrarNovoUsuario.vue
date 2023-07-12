@@ -2,7 +2,7 @@
     <div class="registrar_usuario">
         <div class="row">
             <div class="col-md-6 registrar_img">
-                <img src="../assets/img/background-registrar.jpg" alt="imagem inventory">
+                <img src="../../assets/img/background-registrar.jpg" alt="imagem inventory">
             </div>
             <div class="col-md-6 registrar_form">
                 <div class="form-signin">

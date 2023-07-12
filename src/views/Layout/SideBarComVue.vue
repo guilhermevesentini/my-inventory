@@ -1,6 +1,6 @@
 <template>
     <div class="sidebar">
-        <ul>
+        <ul>            
             <router-link to="/dashboard" v-slot="{ navigate }">
                 <li @click="navigate"><i class="material-icons">dashboard</i>Dashboard</li>
             </router-link>
@@ -17,13 +17,19 @@
 
 <style scoped>
 .sidebar {
-    color: #fff;
-    background-color: #1a1a1a;
-    padding: 20px;
-    height: 100vh;
+    padding: 0.5rem;
+    height: 100%;
     min-width: 160px;
 }
-
+.sidebar_header {
+    padding: 0.5rem 0;
+}
+.divider {
+    position: absolute;
+    height: 1px;
+    color: gray;;
+    width: 100%;
+}
 .sidebar ul {
     list-style: none;
     padding-left: 0rem;
@@ -31,18 +37,25 @@
 
 .sidebar ul li {
     padding: 20px 0;
-    font-size: 18px;
+    font-size: 16px;
     display: flex;
     flex-direction: row;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .sidebar ul li i {
-    margin-right: 10px;
+    margin-right: 10px; 
+    font-size: 22px;
 }
 
 .sidebar ul a {
-    color: #fff;
+    color: unset;
     text-decoration: none;
+}
+.sidebar ul li:hover {
+    background-color: #6b6b6b;
+    color: #fff;
 }
 
 @media (max-width: 776px) {
@@ -73,7 +86,7 @@
     }
 
     .sidebar ul li {
-        padding: 10px;
+        padding: 0.5rem;
     }
 }
 </style>

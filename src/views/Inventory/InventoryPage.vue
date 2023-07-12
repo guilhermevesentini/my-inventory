@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" style="min-width: 100%;">
     <div class="row">
       <div class="col-md-8">
         <BarraDePesquisa @filtroMudou="atualizarFiltro" />
@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <table id="table-desktop" class="table table-bordered"
+    <table id="table-desktop" class="table table-bordered light"
       :class="{ dark_mode_on_table: darkMode, light_mode_on_table: !darkMode }">
       <thead>
         <tr>
@@ -88,7 +88,7 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from "@vue/runtime-core";
-import { IProduto } from "./types";
+import { IProduto } from "../types";
 import { darkMode } from "@/darkMode";
 import router from "@/router";
 import BarraDePesquisa from '@/components/BarraDePesquisa.vue'
@@ -192,10 +192,12 @@ const totalPreco = computed(() => {
 <style scoped>
 .dark_mode_on_table {
   color: #fff;
+  background-color: #333;
 }
 
 .light_mode_on_table {
   color: #333;
+  background-color: #fff;
 }
 
 .acoes-topo {
