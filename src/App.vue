@@ -32,9 +32,9 @@ router.beforeEach((to, from, next) => {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   overflow: hidden;
-  height: 100vh;
+  height: 100%;
 }
-html {
+body, html {
   height: 100%;
 }
 i {

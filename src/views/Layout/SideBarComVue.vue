@@ -1,5 +1,11 @@
 <template>
     <div class="sidebar">
+        <div class="logo">
+            iNVENTORY
+        </div>
+        <ul>
+            
+        </ul>
         <ul>            
             <router-link to="/dashboard" v-slot="{ navigate }">
                 <li @click="navigate"><i class="material-icons">dashboard</i>Dashboard</li>
@@ -16,10 +22,20 @@
 </script>
 
 <style scoped>
-.sidebar {
-    padding: 0.5rem;
+.sidebar {    
     height: 100%;
     min-width: 160px;
+}
+.sidebar .logo {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    min-height: 55px;
+    border-bottom: 1ps solid gray;
+    box-shadow: 0px 4px 4px -3px rgba(0, 0, 0, 0.37);
+    -webkit-box-shadow: 0px 4px 4px -3px rgba(0, 0, 0, 0.37);
+    -moz-box-shadow: 0px 4px 4px -3px rgba(0, 0, 0, 0.37);
+    border-right: 0.5px solid rgba(128, 128, 128, 0.281);
 }
 .sidebar_header {
     padding: 0.5rem 0;
@@ -36,11 +52,11 @@
 }
 
 .sidebar ul li {
-    padding: 20px 0;
     font-size: 16px;
     display: flex;
     flex-direction: row;
     padding: 10px;
+    margin: 0 5px;
     border-radius: 10px;
 }
 

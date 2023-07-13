@@ -1,12 +1,11 @@
 <template>
-  <div class="layout_page" :class="{ dark_mode_on: darkMode, light_mode_on: !darkMode }">
-    <HeaderCompVue />
+  <div class="layout_page" :class="{ dark_mode_on: darkMode, light_mode_on: !darkMode }">    
     <div class="wrapper">
-      <div class="row">
+      <div class="wrapper_container row">
         <div class="col-2" style="padding-right: 0;">
           <SideBarComVueVue />
         </div>
-        <div class="col-10" style="padding-left: 0;">
+        <div class="col-10" style="padding-left: 0; height: inherit;">
           <MainContentVue />
         </div>
       </div>
@@ -41,7 +40,7 @@ import MainContentVue from "./MainContentVue.vue";
 .wrapper {
   height: 100%;
 }
-.wrapper .row {
+.wrapper .wrapper_container {
   height: 100%;
 }
 </style>

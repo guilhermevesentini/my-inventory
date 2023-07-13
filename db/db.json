@@ -15,38 +15,17 @@
       "id": 2
     }
   ],
-  "user-produtos": [
+  "produtos": [
     {
-      "userId": "ae77fa5b2fc1d3fa8b42194638f7d938",
-      "produtos": [
-        {
-          "id": 1,
-          "nome": "teste",
-          "descricao": "teste",
-          "tipo": "Ar e Ventilação",
-          "quantidade": 1,
-          "preco": 15,
-          "total": 0
-        },
-        {
-          "id": 2,
-          "nome": "teste",
-          "descricao": "teste",
-          "tipo": "Ar e Ventilação",
-          "quantidade": 1,
-          "preco": 15,
-          "total": 0
-        },
-        {
-          "id": 3,
-          "nome": "teste",
-          "descricao": "teste",
-          "tipo": "Ar e Ventilação",
-          "quantidade": 1,
-          "preco": 15,
-          "total": 0
-        }
-      ]
+      "_id": "ae77fa5b2fc1d3fa8b42194638f7d938",
+      "_id_Produto": "ae0958acb06fc321841a69d65811dbbe",
+      "nome": "wadwad",
+      "descricao": "awdwad",
+      "tipo": "Automotivo",
+      "quantidade": 15,
+      "preco": 1516448,
+      "total": 0,
+      "id": 1
     }
   ]
 }

@@ -1,88 +1,60 @@
 <template>
-  <div class="container" style="min-width: 100%;">
-    <div class="row">
-      <div class="col-md-8">
-        <BarraDePesquisa @filtroMudou="atualizarFiltro" />
+  <div class="row" style="margin: 10px 0;">
+    <div class="col-md-8">
+      <BarraDePesquisa @filtroMudou="atualizarFiltro"/>
+    </div>
+    <div class="col-md-4">
+      <router-link to="/novoProduto" v-slot="{ navigate }">
+        <button @click="navigate" class="btn btn-primary adicionar_produto">
+          <i class="material-icons">add</i>Adicionar
+        </button>
+      </router-link>
+    </div>
+    <div class="col-md-12">
+      <div class="mensagem_nao_contem_produto" v-if="produtosFiltrados.length <= 0">
+        <div>Não existe nenhum produto cadastrado.</div>
       </div>
-      <div class="col-md-4">
-        <router-link to="/novoProduto" v-slot="{ navigate }">
-          <button @click="navigate" class="btn btn-primary adicionar_produto">
-            <i class="material-icons">add</i>Adicionar
-          </button>
-        </router-link>
+      <div class="table-responsive custom-scrollbar" v-if="produtosFiltrados.length > 0" style="
+           max-height: calc(100vh - 195px); overflow-y: auto; margin: 10px 0;
+            ">
+        <table id="table-desktop" class="table table-bordered table-responsive light">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Descrição</th>
+              <th>Tipo</th>
+              <th>Quantidade</th>
+              <th>Preço</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="produto in produtosFiltrados" :key="produto.id" class="table_line">
+              <td @click="selecionarLinha(produto.id)">{{ produto.nome }}</td>
+              <td @click="selecionarLinha(produto.id)">{{ produto.descricao }}</td>
+              <td @click="selecionarLinha(produto.id)">{{ produto.tipo }}</td>
+              <td @click="selecionarLinha(produto.id)">{{ produto.quantidade }}</td>
+              <td @click="selecionarLinha(produto.id)">{{ produto.preco }}</td>
+              <td @click="selecionarLinha(produto.id)">{{ produto.total }}</td>
+              <td style="text-align: center"><i class="material-icons" @click="deletarProduto(produto.id)"
+                  title="deletar">delete</i></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>total</th>
+              <th></th>
+              <th></th>
+              <th>{{ totalQuantidade }}</th>
+              <th></th>
+              <th>{{ totalPreco }}</th>
+              <th></th>
+            </tr>
+          </tfoot>
+        </table>
       </div>
     </div>
-
-    <table id="table-desktop" class="table table-bordered light"
-      :class="{ dark_mode_on_table: darkMode, light_mode_on_table: !darkMode }">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Descrição</th>
-          <th>Tipo</th>
-          <th>Quantidade</th>
-          <th>Preço</th>
-          <th>Total</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="produto in produtosFiltrados" :key="produto.id" class="table_line">
-          <td @click="selecionarLinha(produto.id)">{{ produto.nome }}</td>
-          <td @click="selecionarLinha(produto.id)">{{ produto.descricao }}</td>
-          <td @click="selecionarLinha(produto.id)">{{ produto.tipo }}</td>
-          <td @click="selecionarLinha(produto.id)">{{ produto.quantidade }}</td>
-          <td @click="selecionarLinha(produto.id)">{{ produto.preco }}</td>
-          <td @click="selecionarLinha(produto.id)">{{ produto.total }}</td>
-          <td style="text-align: center"><i class="material-icons" @click="deletarProduto(produto.id)"
-              title="deletar">close</i></td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <th>total</th>
-          <th></th>
-          <th></th>
-          <th>{{ totalQuantidade }}</th>
-          <th></th>
-          <th>{{ totalPreco }}</th>
-          <th></th>
-        </tr>
-      </tfoot>
-    </table>
-
-    <table id="table-mobile" class="table table-bordered"
-      :class="{ dark_mode_on_table: darkMode, light_mode_on_table: !darkMode }">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Tipo</th>
-          <th>Quantidade</th>
-          <th>Preço</th>
-          <th>Total</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="produto in produtosFiltrados" :key="produto.id" class="table_line">
-          <td @click="selecionarLinha(produto.id)">{{ produto.nome }}</td>
-          <td @click="selecionarLinha(produto.id)">{{ produto.tipo }}</td>
-          <td @click="selecionarLinha(produto.id)">{{ produto.quantidade }}</td>
-          <td @click="selecionarLinha(produto.id)">{{ produto.preco }}</td>
-          <td @click="selecionarLinha(produto.id)">{{ produto.total }}</td>
-          <td style="text-align: center"><i class="material-icons" @click="deletarProduto(produto.id)"
-              title="deletar">close</i></td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <th>total</th>
-          <th>{{ totalQuantidade }}</th>
-          <th>{{ totalPreco }}</th>
-          <th></th>
-        </tr>
-      </tfoot>
-    </table>
   </div>
 </template>
 
@@ -129,10 +101,12 @@ onMounted(() => {
   getProdutos(userToJs._id);
 })
 
-const getProdutos = async (userId: number) => {
-  const req = await fetch(`http://localhost:3001/user-produtos?userId=${userId}`);
+const getProdutos = async (userId: string) => {
+  const req = await fetch(`http://localhost:3001/produtos`);
   const response = await req.json();
-  listaDeProdutos.value = response[0].produtos;
+
+  const produtosDoUsuario = response.filter(produto => produto._id === userId.toString());
+  listaDeProdutos.value = produtosDoUsuario;
 }
 
 const listaDeProdutosComputed = computed(() => {
@@ -144,30 +118,15 @@ const listaDeProdutosComputed = computed(() => {
 });
 
 
-const deletarProduto = async (productId: number) => {
-  const req = await fetch(`http://localhost:3001/user-produtos?userId=${userToJs._id}`, {
-    method: "GET"
+const deletarProduto = async (productId: string) => {
+  const req = await fetch(`http://localhost:3001/produtos/${productId}`, {
+    method: "DELETE",
   });
 
   if (req.ok) {
-    const userProdutos = await req.json();
-    const produtosAtualizados = userProdutos[0].produtos.filter((produto: any) => produto.id !== productId);
-    const reqAtualizacao = await fetch(`http://localhost:3001/user-produtos/produtos`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ produtos: produtosAtualizados })
-    });
-
-    if (reqAtualizacao.ok) {
-      getProdutos(userToJs._id);
-    }
+    getProdutos(userToJs._id);
   }
 }
-
-
-
 
 
 const selecionarLinha = ((produto: number) => {
@@ -219,21 +178,52 @@ const totalPreco = computed(() => {
 
 table {
   height: 100%;
-  overflow: auto;
+  border-collapse: collapse;
 }
 
-table tbody {
-  overflow: scroll;
-  overflow-y: scroll;
-  height: 50px !important;
+th,
+td {
+  padding: 11px solid #ddd;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  background-color: #f2f2f2;
+  z-index: 2;
+}
+
+tfoot th {
+  position: sticky;
+  bottom: 0;
+  background-color: #f2f2f2;
+  z-index: 2;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #888888 #f2f2f2;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: #f2f2f2;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #888888;
+  border-radius: 10px;
 }
 
 .mensagem_nao_contem_produto {
   display: flex;
   width: 100%;
-  height: 100px;
+  min-height: calc(100vh - 195px);
   padding: 20px 10px;
-  background-color: #b5e6fd;
+  background-color: #d6d6d6;
   flex-direction: row;
   flex-wrap: nowrap;
   align-content: center;

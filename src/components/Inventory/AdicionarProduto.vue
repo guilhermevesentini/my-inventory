@@ -46,7 +46,8 @@ import router from "@/router";
 //import CurrencyInput from 'vue3-currency-input';
 
 let produtoDetails: IProduto = reactive({
-    id: 0,
+    _id: '',
+    _id_Produto: '',
     nome: "",
     descricao: "",
     tipo: "",
@@ -127,7 +128,21 @@ const Salvar = (async () => {
         alert("Preencha todos os campos do produto!");
         return;
     }
+
+    // Gerar id aleatório
+    const idBytes = new Uint8Array(16);
+    crypto.getRandomValues(idBytes);
+    const idProduto : string = Array.from(idBytes, b => b.toString(16).padStart(2, '0')).join('').toString();
+
+    const getUser: any = localStorage.getItem('user')
+    const idUsuario = JSON.parse(getUser);
+
+    // Alterar o valor do campo "_id" do objeto "produto.value"
+    produto.value._id_Produto = idProduto;
+    produto.value._id = idUsuario._id
+
     const dataJson = JSON.stringify(produto.value);
+    
     const req = await fetch("http://localhost:3001/produtos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -1,10 +1,7 @@
 <template>
   <header>
-    <div class="row" style="padding-right: 0;">
-      <div class="logo col-2">
-        iNVENTORY
-      </div>
-      <div class="header_menu col-10">
+    <div class="row" style="padding-right: 0;">      
+      <div class="header_menu">
         <div class="header_menu__breadcrumb">{{ $route.name }}</div>
         <div class="header_menu__icons">
           <div class="switch_mode" @click="toggleMode">
@@ -39,6 +36,7 @@ const logout = (() => {
 header {
   position: sticky;
   width: 100%;
+  min-height: 55px;
   padding: 0.7rem;
   box-shadow: 0px 4px 4px -3px rgba(0, 0, 0, 0.37);
   -webkit-box-shadow: 0px 4px 4px -3px rgba(0, 0, 0, 0.37);

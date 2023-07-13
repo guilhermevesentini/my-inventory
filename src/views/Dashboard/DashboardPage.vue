@@ -14,17 +14,22 @@ import { ref, computed, onMounted } from 'vue';
 import { IProduto } from '../types';
 
 const listaDeProdutos = ref<IProduto[]>([]);
-const getUser: any = localStorage.getItem('user')
-const userToJs = JSON.parse(getUser);
 
 onMounted(() => {
-  getProdutos(userToJs._id);
+  getProdutos();
 })
 
-const getProdutos = async (userId: number) => {
-  const req = await fetch(`http://localhost:3001/user-produtos?userId=ae77fa5b2fc1d3fa8b42194638f7d938`);
+const getProdutos = async () => {
+  const userId = localStorage.getItem('user');
+  const user = JSON.parse(userId);
+  if (!userId) {
+    // Lógica para lidar com o caso em que o ID do usuário não está disponível
+    return [];
+  }
+
+  const req = await fetch(`http://localhost:3001/produtos?userId=${user.id}`);
   const response = await req.json();
-  return response[0].produtos || [];
+  return response ? listaDeProdutos.value = response : [];
 }
 
 
