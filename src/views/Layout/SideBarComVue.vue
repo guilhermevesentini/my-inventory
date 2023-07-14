@@ -1,18 +1,21 @@
 <template>
-    <div class="sidebar">
-        <div class="logo">
-            iNVENTORY
-        </div>
-        <ul>
-            
-        </ul>
+    <div class="sidebar">        
         <ul>            
-            <router-link to="/dashboard" v-slot="{ navigate }">
-                <li @click="navigate"><i class="material-icons">dashboard</i>Dashboard</li>
+            <li>
+                <div class="logo">
+                    iNVENTORY
+                </div>
+            </li>
+            <li>
+                <router-link to="/dashboard" v-slot="{ navigate }">
+                    <a @click="navigate"><i class="material-icons">dashboard</i>Dashboard</a>
+                </router-link>                
+            </li>
+            <li>
+                <router-link to="/inventory" v-slot="{ navigate }">
+                <a @click="navigate"><i class="material-icons">inventory_2</i>Inventory</a>
             </router-link>
-            <router-link to="/inventory" v-slot="{ navigate }">
-                <li @click="navigate"><i class="material-icons">inventory_2</i>Inventory</li>
-            </router-link>
+            </li>
         </ul>
     </div>
 </template>
@@ -25,6 +28,9 @@
 .sidebar {    
     height: 100%;
     min-width: 160px;
+    box-shadow: 4px 0px 4px -3px rgba(0, 0, 0, 0.37);
+    -webkit-box-shadow: 4px 0px 10px -3px rgba(0, 0, 0, 0.37);
+    -moz-box-shadow: 4px 0px 4px -3px rgba(0, 0, 0, 0.37);
 }
 .sidebar .logo {
     display: flex;
@@ -37,21 +43,12 @@
     -moz-box-shadow: 0px 4px 4px -3px rgba(0, 0, 0, 0.37);
     border-right: 0.5px solid rgba(128, 128, 128, 0.281);
 }
-.sidebar_header {
-    padding: 0.5rem 0;
-}
-.divider {
-    position: absolute;
-    height: 1px;
-    color: gray;;
-    width: 100%;
-}
 .sidebar ul {
     list-style: none;
     padding-left: 0rem;
 }
 
-.sidebar ul li {
+.sidebar ul li:not(:first-child) {
     font-size: 16px;
     display: flex;
     flex-direction: row;
@@ -69,7 +66,7 @@
     color: unset;
     text-decoration: none;
 }
-.sidebar ul li:hover {
+.sidebar ul li:not(:first-child):hover {
     background-color: #6b6b6b;
     color: #fff;
 }
@@ -82,14 +79,11 @@
         align-content: center;
         align-items: flex-start;
         justify-content: center;
-        height: 88px;
     }
 }
 
 @media (max-width: 768px) {
     .sidebar {
-        
-        height: 88px;
         flex-direction: row;
         flex-wrap: wrap;
         align-content: stretch;

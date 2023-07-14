@@ -41,5 +41,4 @@ const totalDeItems = computed(() => {
 
 </script>
 
-
 <style></style>

@@ -22,8 +22,6 @@ router.beforeEach((to, from, next) => {
 
 <style>
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 #app {
@@ -32,7 +30,6 @@ router.beforeEach((to, from, next) => {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   overflow: hidden;
-  height: 100%;
 }
 body, html {
   height: 100%;
