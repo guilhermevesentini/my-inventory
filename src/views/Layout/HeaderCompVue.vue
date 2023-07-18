@@ -1,6 +1,6 @@
 <template>
-  <header>
-    <div class="row" style="padding-right: 0;">      
+  <header :class="{ dark_mode_on: darkMode, light_mode_on: !darkMode }">
+    <div class="row" style="padding-right: 0;" >      
       <div class="header_menu">
         <div class="header_menu__breadcrumb">{{ $route.name }}</div>
         <div class="header_menu__icons">
@@ -35,6 +35,7 @@ const logout = (() => {
 <style scoped>
 header {
   position: sticky;
+  background-color: #fff;
   width: 100%;
   min-height: 55px;
   padding: 0.7rem;

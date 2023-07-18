@@ -53,7 +53,7 @@
     display: flex;
     flex-direction: row;
     padding: 10px;
-    margin: 0 5px;
+    margin: 5px 5px;
     border-radius: 10px;
 }
 
@@ -65,6 +65,7 @@
 .sidebar ul a {
     color: unset;
     text-decoration: none;
+    display: flex;
 }
 .sidebar ul li:not(:first-child):hover {
     background-color: #6b6b6b;
