@@ -20,22 +20,7 @@ router.beforeEach((to, from, next) => {
 
 </script>
 
-<style>
-* {
-  box-sizing: border-box;
-}
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  overflow: hidden;
-}
-body, html {
-  height: 100%;
-}
-i {
-  cursor: pointer;  
-}
+<style lang="scss">
 @import '~apexcharts/dist/apexcharts.css';
+@import '@/scss/index.scss';
 </style>

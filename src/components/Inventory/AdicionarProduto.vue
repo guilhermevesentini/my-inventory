@@ -51,8 +51,6 @@ const config: IGerarId = {
     tipo: 'string'
 }
 
-//import CurrencyInput from 'vue3-currency-input';
-
 let produtoDetails: IProduto = reactive({
     id: 0,
     _id: '',
