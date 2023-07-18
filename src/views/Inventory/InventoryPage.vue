@@ -60,7 +60,7 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from "@vue/runtime-core";
-import { IProduto } from "../types";
+import { IProduto } from "../../@types/types";
 import { darkMode } from "@/darkMode";
 import router from "@/router";
 import BarraDePesquisa from '@/components/BarraDePesquisa.vue'

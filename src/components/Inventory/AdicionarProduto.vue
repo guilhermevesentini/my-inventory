@@ -41,51 +41,31 @@
 
 <script setup lang="ts">
 import { computed, reactive } from "@vue/runtime-core"
-import { IProduto, ETipoProduto } from '@/views/types'
+import { IProduto, ETipoProduto } from '@/@types/types'
 import router from "@/router";
+import useGerarId from "@/composables/shared/useCriarRandomId"
+import { IGerarId } from "@/composables/types";
+
+const config: IGerarId = {
+    quantidade: 16,
+    tipo: 'string'
+}
+
 //import CurrencyInput from 'vue3-currency-input';
 
 let produtoDetails: IProduto = reactive({
+    id: 0,
     _id: '',
     _id_Produto: '',
     nome: "",
     descricao: "",
-    tipo: "",
+    tipo: [],
     quantidade: 0,
     preco: 0,
     total: 0
 })
 
 const tiposProduto: ETipoProduto[] = [
-    ETipoProduto.AcessoriosTecnologia,
-    ETipoProduto.ArVentilacao,
-    ETipoProduto.Artesanato,
-    ETipoProduto.ArtigosFesta,
-    ETipoProduto.Audio,
-    ETipoProduto.Automotivo,
-    ETipoProduto.Bebes,
-    ETipoProduto.BelezaPerfumaria,
-    ETipoProduto.BemEstarSexual,
-    ETipoProduto.Brinquedos,
-    ETipoProduto.CamaMesaBanho,
-    ETipoProduto.CamerasDrones,
-    ETipoProduto.CasaConstrucao,
-    ETipoProduto.CasaInteligente,
-    ETipoProduto.CelularSmartphone,
-    ETipoProduto.Colchoes,
-    ETipoProduto.ComercioIndustria,
-    ETipoProduto.Cursos,
-    ETipoProduto.Decoracao,
-    ETipoProduto.Eletrodomesticos,
-    ETipoProduto.Eletroportateis,
-    ETipoProduto.EsporteLazer,
-    ETipoProduto.Ferramentas,
-    ETipoProduto.FilmesSeries,
-    ETipoProduto.FloresJardim,
-    ETipoProduto.Games,
-    ETipoProduto.Informatica,
-    ETipoProduto.InstrumentosMusicais,
-    ETipoProduto.Livros,
     ETipoProduto.Mercado,
     ETipoProduto.Moda,
     ETipoProduto.Moveis,
@@ -129,16 +109,13 @@ const Salvar = (async () => {
         return;
     }
 
-    // Gerar id aleatório
-    const idBytes = new Uint8Array(16);
-    crypto.getRandomValues(idBytes);
-    const idProduto : string = Array.from(idBytes, b => b.toString(16).padStart(2, '0')).join('').toString();
+    const novoId = useGerarId(config);
 
     const getUser: any = localStorage.getItem('user')
     const idUsuario = JSON.parse(getUser);
 
     // Alterar o valor do campo "_id" do objeto "produto.value"
-    produto.value._id_Produto = idProduto;
+    produto.value._id_Produto = novoId;
     produto.value._id = idUsuario._id
 
     const dataJson = JSON.stringify(produto.value);
@@ -158,7 +135,7 @@ const Salvar = (async () => {
 const Limpar = (() => {
     produtoDetails.nome = '';
     produtoDetails.descricao = '';
-    produtoDetails.tipo = '';
+    produtoDetails.tipo = [];
     produtoDetails.quantidade = 0;
     produtoDetails.preco = 0;
 })
@@ -186,4 +163,4 @@ const Voltar = (() => {
 .acoes button {
     margin: 5px;
 }
-</style>
+</style>@/@types/types

@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, reactive } from "@vue/runtime-core"
-import { IProduto, ETipoProduto } from '@/views/types'
+import { IProduto, ETipoProduto } from '@/@types/types'
 import router from "@/router";
 
 const routeId = router.currentRoute.value.params.id;
@@ -48,15 +48,7 @@ onMounted(() => {
     getProduto(Number(router.currentRoute.value.params.id));
 })
 
-let produto = reactive<IProduto>({
-    id: 0,
-    nome: '',
-    descricao: '',
-    tipo: '',
-    quantidade: 0,
-    preco: 0,
-    total: 0
-})
+let produto = reactive<IProduto>({})
 
 const getProduto = (async (id: number) => {
     const req = await fetch(`http://localhost:3001/produtos/${id}`);

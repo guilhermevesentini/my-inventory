@@ -11,7 +11,7 @@
 
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue';
-import { IProduto } from '../types';
+import { IProduto } from '../../@types/types';
 
 const listaDeProdutos = ref<IProduto[]>([]);
 
