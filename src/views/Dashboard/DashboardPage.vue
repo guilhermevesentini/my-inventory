@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="chart">
+    <!-- <div class="chart">
       <h2>Total de Items: {{ totalDeItems }} </h2>
-    </div>
-
+    </div> -->
+    <CardLayout/>
     <BarChart />
 
   </div>
@@ -12,6 +12,7 @@
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue';
 import { IProduto } from '../../@types/types';
+import CardLayout from '@/views/shared/CardsLayout.vue'
 
 const listaDeProdutos = ref<IProduto[]>([]);
 

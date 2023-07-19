@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts" setup>
-import { darkMode, toggleMode } from "@/darkMode";
+import { darkMode, toggleMode } from "@/composables/shared/darkMode";
 import HeaderCompVue from "./HeaderCompVue.vue";
 import SideBarComVueVue from "./SideBarComVue.vue";
 import MainContentVue from "./MainContentVue.vue";
@@ -44,3 +44,4 @@ import Footer from "./FooterLayout.vue";
 -moz-box-shadow: 6px -1px 12px -5px rgba(0,0,0,0.75);
 }
 </style>
+@/composables/shared/darkMode

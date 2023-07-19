@@ -5,7 +5,7 @@
 </template>
 <script lang="ts" setup>
 import { defineEmits, ref, watch } from 'vue'
-import { darkMode } from "@/darkMode";
+import { darkMode } from "@/composables/shared/darkMode";
 let filtro = ref('')
 
 const emitters = defineEmits({
@@ -34,4 +34,4 @@ watch(() => filtro.value, (novoFiltro: string) => {
   padding: 8px;
   border: 1px solid #80808061;
 }
-</style>
+</style>@/composables/shared/darkMode

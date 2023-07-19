@@ -1,8 +1,7 @@
 <template>
   <header :class="{ dark_mode_on: darkMode, light_mode_on: !darkMode }">
     <div class="row" style="padding-right: 0;" >      
-      <div class="header_menu">
-        <div class="header_menu__breadcrumb">{{ $route.name }}</div>
+      <div class="header_menu">        
         <div class="header_menu__icons">
           <div class="switch_mode" @click="toggleMode">
             <div class="light_mode" v-if="!darkMode">
@@ -23,7 +22,7 @@
 <script lang="ts" setup>
 import router from '@/router';
 import { clearLocalStorage } from '@/utils';
-import { darkMode, toggleMode } from "@/darkMode";
+import { darkMode, toggleMode } from "@/composables/shared/darkMode";
 
 const logout = (() => {
   clearLocalStorage()
@@ -53,13 +52,11 @@ header .logo {
 }
 .header_menu {
   display: flex;
-    justify-content: space-between;
+  justify-content: flex-end;
     align-items: center;
     padding: 0 2rem;
 }
-.header_menu__breadcrumb {
-  font-size: 14px;
-}
+
 .header_menu__icons {
   display: flex;
 }

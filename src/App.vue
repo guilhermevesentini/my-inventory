@@ -23,4 +23,21 @@ router.beforeEach((to, from, next) => {
 <style lang="scss">
 @import '~apexcharts/dist/apexcharts.css';
 @import '@/scss/index.scss';
+
+* {
+    box-sizing: border-box;
+  }
+  #app {
+    font-family: -var($font-family-sans-serif);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2c3e50;
+    overflow: hidden;
+  }
+  body, html {
+    height: 100%;
+  }
+  i {
+    cursor: pointer;  
+  }
 </style>

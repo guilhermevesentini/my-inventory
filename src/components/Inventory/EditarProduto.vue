@@ -1,6 +1,7 @@
 <template>
-    <div class="container">
+    <div class="container">        
         <div class="row">
+            <MenuDeAcoes />
             <div class="input_form col-md-4">
                 <label>Nome:</label>
                 <input class="form-control" type="text" placeholder="Digite o Nome" v-model="produto.nome" />
@@ -25,15 +26,6 @@
                 <input class="form-control" type="number" placeholder="Digite o Preço" v-model="produto.preco" />
             </div>
         </div>
-        <div class="acoes">
-            <div class="acoes_item">
-                <button class="btn btn-secondary" @click="Voltar">Voltar</button>
-            </div>
-            <div class="acoes_item">
-                <button class="btn btn-success" @click="Salvar">Salvar</button>
-            </div>
-        </div>
-
     </div>
 </template>
 
@@ -41,6 +33,7 @@
 import { computed, onMounted, reactive } from "@vue/runtime-core"
 import { IProduto, ETipoProduto } from '@/@types/types'
 import router from "@/router";
+import MenuDeAcoes from '@/components/shared/MenuSuperiorAcoes.vue'
 
 const routeId = router.currentRoute.value.params.id;
 
@@ -62,35 +55,6 @@ const getProduto = (async (id: number) => {
 })
 
 const tiposProduto: ETipoProduto[] = [
-    ETipoProduto.AcessoriosTecnologia,
-    ETipoProduto.ArVentilacao,
-    ETipoProduto.Artesanato,
-    ETipoProduto.ArtigosFesta,
-    ETipoProduto.Audio,
-    ETipoProduto.Automotivo,
-    ETipoProduto.Bebes,
-    ETipoProduto.BelezaPerfumaria,
-    ETipoProduto.BemEstarSexual,
-    ETipoProduto.Brinquedos,
-    ETipoProduto.CamaMesaBanho,
-    ETipoProduto.CamerasDrones,
-    ETipoProduto.CasaConstrucao,
-    ETipoProduto.CasaInteligente,
-    ETipoProduto.CelularSmartphone,
-    ETipoProduto.Colchoes,
-    ETipoProduto.ComercioIndustria,
-    ETipoProduto.Cursos,
-    ETipoProduto.Decoracao,
-    ETipoProduto.Eletrodomesticos,
-    ETipoProduto.Eletroportateis,
-    ETipoProduto.EsporteLazer,
-    ETipoProduto.Ferramentas,
-    ETipoProduto.FilmesSeries,
-    ETipoProduto.FloresJardim,
-    ETipoProduto.Games,
-    ETipoProduto.Informatica,
-    ETipoProduto.InstrumentosMusicais,
-    ETipoProduto.Livros,
     ETipoProduto.Mercado,
     ETipoProduto.Moda,
     ETipoProduto.Moveis,

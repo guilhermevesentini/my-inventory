@@ -1,15 +1,7 @@
 <template>
-  <div class="row" style="margin: 10px 0;">
-    <div class="col-md-8">
-      <BarraDePesquisa @filtroMudou="atualizarFiltro"/>
-    </div>
-    <div class="col-md-4">
-      <router-link to="/novoProduto" v-slot="{ navigate }">
-        <button @click="navigate" class="btn btn-primary adicionar_produto">
-          <i class="material-icons">add</i>Adicionar
-        </button>
-      </router-link>
-    </div>
+  <div class="invetory">
+    <div class="row" style="margin: 10px 0;">     
+    <MenuDeAcoes />
     <div class="col-md-12">
       <div class="mensagem_nao_contem_produto" v-if="produtosFiltrados.length <= 0">
         <div>Não existe nenhum produto cadastrado.</div>
@@ -56,14 +48,17 @@
       </div>
     </div>
   </div>
+  </div>
+  
 </template>
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from "@vue/runtime-core";
 import { IProduto } from "../../@types/types";
-import { darkMode } from "@/darkMode";
+import { darkMode } from "@/composables/shared/darkMode";
 import router from "@/router";
-import BarraDePesquisa from '@/components/BarraDePesquisa.vue'
+import BarraDePesquisa from '@/components/BarraDePesquisa.vue';
+import MenuDeAcoes from '@/components/shared/MenuSuperiorAcoes.vue'
 
 const listaDeProdutos = ref<Array<IProduto>>([]);
 const filtroAtual = ref<string>('');
@@ -148,7 +143,11 @@ const totalPreco = computed(() => {
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
+.invetory {
+  
+}
 .dark_mode_on_table {
   color: #fff;
   background-color: #333;
@@ -258,4 +257,4 @@ tfoot th {
     display: none;
   }
 }
-</style>
+</style>@/composables/shared/darkMode

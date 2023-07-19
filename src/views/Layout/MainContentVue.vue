@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts" setup>
-import { darkMode } from "@/darkMode";
+import { darkMode } from "@/composables/shared/darkMode";
 import HeaderCompVue from "./HeaderCompVue.vue";
 
 </script>
@@ -24,11 +24,11 @@ import HeaderCompVue from "./HeaderCompVue.vue";
 }
 
 .main-content__frame {
-  padding: 0.7rem;
-  margin: 0.5rem;
-  border-radius: 10px;
-  background-color: #fff;
-  height: calc(100% - 71px);
+    padding: 0 0.7rem;
+    margin: 0.5rem;
+    border-radius: 10px;
+    background-color: #fff;
+    height: calc(100% - 71px);
 }
 
 .light_mode_on {
@@ -46,4 +46,4 @@ import HeaderCompVue from "./HeaderCompVue.vue";
         margin-left: 0;
     }
 }
-</style>
+</style>@/composables/shared/darkMode

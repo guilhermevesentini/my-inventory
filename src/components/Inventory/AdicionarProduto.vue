@@ -1,6 +1,9 @@
 <template>
     <div class="container">
         <div class="row">
+            <MenuDeAcoes />
+            <br>
+            <br>
             <div class="input_form col-md-4">
                 <label>Nome:</label>
                 <input class="form-control" type="text" placeholder="Digite o Nome" v-model="produtoDetails.nome" />
@@ -45,6 +48,7 @@ import { IProduto, ETipoProduto } from '@/@types/types'
 import router from "@/router";
 import useGerarId from "@/composables/shared/useCriarRandomId"
 import { IGerarId } from "@/composables/types";
+import MenuDeAcoes from '@/components/shared/MenuSuperiorAcoes.vue'
 
 const config: IGerarId = {
     quantidade: 16,
