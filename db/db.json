@@ -17,28 +17,45 @@
   ],
   "produtos": [
     {
+      "id": 1,
       "_id": "ae77fa5b2fc1d3fa8b42194638f7d938",
-      "_id_Produto": "ae0958acb06fc321841a69d65811dbbe",
-      "nome": "wadwad",
-      "descricao": "awdwad",
-      "tipo": "Mercado",
+      "_id_Produto": "07f257491bc0324638b86c577a7c3332",
+      "nome": "testeeee",
+      "descricao": "teste",
+      "codigo": "teste",
+      "marca": "teste",
+      "modelo": "teste",
+      "categoria": "Mercado",
       "quantidade": 15,
-      "preco": 1516448,
+      "preco": 15,
+      "fornecedor": "teste",
+      "dataAquisicao": "2023-07-13",
+      "localizacao": "teste",
+      "tag": "teste",
+      "observacao": "testeawdwadwa",
       "total": 0,
-      "id": 1
+      "tipo": "Papelaria"
     },
-    [],
-    [],
     {
       "id": 2,
       "_id": "ae77fa5b2fc1d3fa8b42194638f7d938",
-      "_id_Produto": "412a8af26881bd6d3168e8ae61d2e320",
-      "nome": "awdwad",
+      "_id_Produto": "f3eed423d2d31c4887c636ec8bf4d413",
+      "nome": "gui",
       "descricao": "awdwad",
-      "tipo": "Música e Shows",
-      "quantidade": 15,
-      "preco": 15,
-      "total": 0
+      "codigo": "awdwadwa",
+      "marca": "dwadawd",
+      "modelo": "awdwadwad",
+      "categoria": "Natal",
+      "quantidade": 23,
+      "preco": 444.5,
+      "fornecedor": "888",
+      "dataAquisicao": "2023-07-17",
+      "localizacao": "123123",
+      "tag": "123213",
+      "observacao": "123213213123",
+      "total": 0,
+      "tipo": "Pet Shop"
     }
-  ]
+  ],
+  "cadastros": []
 }

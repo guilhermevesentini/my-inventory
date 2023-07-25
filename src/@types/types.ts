@@ -37,4 +37,10 @@ export enum ETipoProduto {
     TVVideo = 'TV e Vídeo',
     UtilidadesDomesticas = 'Utilidades Domésticas',
 }
+
+export interface ICadastro {
+
+    id: number,
+    nome: string,
+}
   

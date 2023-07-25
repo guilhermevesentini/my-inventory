@@ -2,9 +2,11 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import layoutPage from '@/views/Layout/LayoutPage.vue'
 import DashboardPage from "@/views/Dashboard/DashboardPage.vue";
 import InventoryPage from "@/views/Inventory/InventoryPage.vue";
-import AdicionarProduto from "@/components/Inventory/AdicionarProduto.vue";
-import EditarProduto from "@/components/Inventory/EditarProduto.vue";
-import InventoryConfiguration from '@/components/Inventory/InventoryConfiguration.vue'
+import AdicionarProduto from "@/components/Inventory/Produtos/AdicionarProduto.vue";
+import EditarProduto from "@/components/Inventory/Produtos/EditarProduto.vue";
+import InventoryConfiguration from '@/components/Inventory/Cadastros/InventoryConfiguration.vue'
+import AdicionarCadastro from '@/components/Inventory/Cadastros/AdicionarCadastro.vue'
+import EditarCadastro from '@/components/Inventory/Cadastros/EditarCadastro.vue'
 import Login from "@/views/Login/LoginPage.vue";
 import RegistrarNovoUsuario from "@/views/Login/RegistrarNovoUsuario.vue";
 
@@ -31,6 +33,7 @@ const routes: RouteRecordRaw[] = [
         name: "Inventory",
         component: InventoryPage,
         meta: { requiresAuth: true },
+        
       },
       {
         path: "/novoProduto",
@@ -48,6 +51,18 @@ const routes: RouteRecordRaw[] = [
         path: "/Inventory_config/",
         name: "Configurar",
         component: InventoryConfiguration,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "/Adicionar_cadastro",
+        name: "Adicionar Cadastro",
+        component: AdicionarCadastro,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "/Editar_cadastro",
+        name: "Editar Cadastro",
+        component: EditarCadastro,
         meta: { requiresAuth: true },
       },
     ],

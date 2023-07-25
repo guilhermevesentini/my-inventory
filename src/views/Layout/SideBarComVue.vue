@@ -84,8 +84,8 @@ export default defineComponent({
     .logo {
         display: flex;
         align-items: center;
-        padding: 15px;
-        min-height: 55px;
+        padding: 0.8rem;
+        min-height: 57px;
         background-color: #0067ff;
         color: #fff;
         border-bottom: 1ps solid gray;

@@ -18,7 +18,11 @@
 
     <div class="col-md-12">
       <div class="mensagem_nao_contem_produto" v-if="produtosFiltrados.length <= 0">
-        <div>Não existe nenhum produto cadastrado.</div>
+        <img src="../../../dist/img/empty.png" alt="empty">
+        <div>
+          <p>Não existe nenhum produto cadastrado.</p>
+          <p>Clique em Adicionar para cadastrar seu primeiro produto.</p>
+        </div>
       </div>
       <div class="table-responsive custom-scrollbar" v-if="produtosFiltrados.length > 0" style="
            max-height: calc(100vh - 195px); overflow-y: auto; margin: 10px 0;
@@ -49,8 +53,8 @@
               <td>{{ produto.nome }}</td>
               <td>{{ produto.tipo }}</td>
               <td>{{ produto.quantidade }}</td>
-              <td>{{ produto.preco }}</td>
-              <td>{{ produto.total }}</td>
+              <td>{{ produto.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</td>
+              <td>{{ produto.total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</td>
               <td style="text-align: center; max-width: 25px;">
                 <i class="material-icons" @click="selecionarLinha(produto.id)" title="Editar">edit</i>
               </td>
@@ -69,7 +73,7 @@
               <th colspan="3">Total</th>
               <th>{{ totalQuantidade }}</th>
               <th></th>
-              <th>{{ totalPreco }}</th>
+              <th>{{ totalPreco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</th>
               <th colspan="2"></th>
             </tr>
           </tfoot>
@@ -183,6 +187,8 @@ const totalPreco = computed(() => {
   justify-content: space-between;
   align-items: center;
   height: 4em;
+  border-bottom: 1px solid #80808040;
+  margin-bottom: 1.5rem;
   .inventory__actions___filters {
     display: flex;
     align-items: center;
@@ -194,11 +200,19 @@ const totalPreco = computed(() => {
 
     .inventory__actions___filters--btn-Adicionar {
       display: flex;
-      padding: 25px;
+      padding: 5px;
+      margin: 5px;
+      border-radius: 5px;
+      color: #333;
 
       i {
         text-decoration: none;
-      }
+      }      
+    }
+    .inventory__actions___filters--btn-Adicionar:hover {
+      border: 1px solid #0067ff;
+      color: #0067ff;
+      transition: ease-in-out 0.5s;
     }
   }
 }
@@ -271,16 +285,24 @@ table {
 }
 
 .mensagem_nao_contem_produto {
-  display: flex;
-  width: 100%;
-  min-height: calc(100vh - 195px);
-  padding: 20px 10px;
-  background-color: #d6d6d6;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-content: center;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - 195px);
+    padding: 20px 10px;
+    background-color: #ffffff;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 400px;
+      margin: 1em;
+    }
+    p {
+      text-align: center;
+    }
 }
 
 .adicionar_produto {
