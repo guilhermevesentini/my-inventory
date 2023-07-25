@@ -22,63 +22,63 @@
             <div class="row">
                 <div class="input_form col-md-4">
                     <label>Nome:</label>
-                    <input class="form-control" type="text" placeholder="Digite o Nome" v-model="produtoDetails.nome" />
+                    <input class="form-control" type="text" placeholder="Digite o nome" v-model="produtoDetails.nome" />
                 </div>
                 <div class="input_form col-md-4">
                     <label>Descrição:</label>
-                    <input class="form-control" type="text" placeholder="Digite a Descrição"
+                    <input class="form-control" type="text" placeholder="Digite a descrição"
                         v-model="produtoDetails.descricao" />
                 </div>
                 <div class="input_form col-md-4">
                     <label>Codigo:</label>
-                    <input class="form-control" type="text" placeholder="Digite a Descrição"
-                        v-model="produtoDetails.descricao" />
+                    <input class="form-control" type="text" placeholder="Digite o código"
+                        v-model="produtoDetails.codigo" />
                 </div>
                 <div class="input_form col-md-4">
                     <label>Marca:</label>
-                    <input class="form-control" type="text" placeholder="Digite a Descrição"
-                        v-model="produtoDetails.descricao" />
+                    <input class="form-control" type="text" placeholder="Digite a marca"
+                        v-model="produtoDetails.marca" />
                 </div>
                 <div class="input_form col-md-4">
                     <label>Modelo:</label>
-                    <input class="form-control" type="text" placeholder="Digite a Descrição"
-                        v-model="produtoDetails.descricao" />
+                    <input class="form-control" type="text" placeholder="Digite o modelo"
+                        v-model="produtoDetails.modelo" />
                 </div>                
                 <div class="input_form col-md-4">
                     <label>Categoria:</label>
-                    <select class="form-control" v-model="produtoDetails.tipo">
+                    <select class="form-control" v-model="produtoDetails.categoria" placeholder="Selecione...">
                         <option disabled value="">Selecione uma opção</option>
-                        <option v-for="tipo in tiposProduto" :value="tipo" :key="tipo">{{ tipo }}</option>
+                        <option v-for="categoria in categorias" :value="categoria" :key="categoria">{{ categoria }}</option>
                     </select>
                 </div>
                 <div class="input_form col-md-4">
                     <label>Quantidade:</label>
-                    <input class="form-control" type="number" placeholder="Digite a Quantidade"
+                    <input class="form-control" type="number" placeholder="Digite a quantidade"
                         v-model="produtoDetails.quantidade" />
                 </div>
                 <div class="input_form col-md-4">
                     <label>Preço:</label>
-                    <input class="form-control" type="number" placeholder="Digite o Preço" v-model="produtoDetails.preco" />
+                    <input class="form-control" type="number" placeholder="Digite o preço" v-model="produtoDetails.preco" />
                 </div>
                 <div class="input_form col-md-4">
                     <label>Fornecedor:</label>
-                    <input class="form-control" type="number" placeholder="Digite o Preço" v-model="produtoDetails.preco" />
+                    <input class="form-control" type="text" placeholder="Digite o fornecedor" v-model="produtoDetails.fornecedor" />
                 </div>
                 <div class="input_form col-md-4">
                     <label>Data de Aquisição:</label>
-                    <input class="form-control" type="number" placeholder="Digite o Preço" v-model="produtoDetails.preco" />
+                    <input class="form-control" type="date" placeholder="Digite a data de aquisição" v-model="produtoDetails.dataAquisicao" />
                 </div>
                 <div class="input_form col-md-4">
                     <label>Unidade:</label>
-                    <input class="form-control" type="number" placeholder="Digite o Preço" v-model="produtoDetails.preco" />
+                    <input class="form-control" type="text" placeholder="Digite a localização" v-model="produtoDetails.localizacao" />
                 </div>
                 <div class="input_form col-md-4">
                     <label>Tag:</label>
-                    <input class="form-control" type="number" placeholder="Digite o Preço" v-model="produtoDetails.preco" />
+                    <input class="form-control" type="text" placeholder="Digite a tag" v-model="produtoDetails.tag" />
                 </div>
                 <div class="input_form col-md-12" style="width: 100%">
                     <label>Observação:</label>
-                    <textarea name="observacao" rows="6" style="width: 100%;"></textarea>
+                    <textarea name="observacao" rows="6" style="width: 100%;" placeholder="Digite sua observação" v-model="produtoDetails.observacao"></textarea>
                 </div>
             </div>
         </div>
@@ -105,13 +105,21 @@ let produtoDetails: IProduto = reactive({
     _id_Produto: '',
     nome: "",
     descricao: "",
-    tipo: [],
+    codigo: "",
+    marca: "",
+    modelo: "",
+    categoria: [],
     quantidade: 0,
     preco: 0,
-    total: 0
+    fornecedor: "",
+    dataAquisicao: "",
+    localizacao: "",
+    tag: "",
+    observacao: '',
+    total: 0,
 })
 
-const tiposProduto: ETipoProduto[] = [
+const categorias: ETipoProduto[] = [
     ETipoProduto.Mercado,
     ETipoProduto.Moda,
     ETipoProduto.Moveis,
@@ -143,7 +151,7 @@ const validarProduto = ((produto: IProduto) => {
         return false
     }
 
-    if (!produto.nome || !produto.descricao || !produto.tipo || !produto.quantidade || !produto.preco) {
+    if (!produto.nome || !produto.descricao || !produto.categoria || !produto.quantidade || !produto.preco) {
         return false;
     }
     return true;
@@ -181,7 +189,7 @@ const Salvar = (async () => {
 const Limpar = (() => {
     produtoDetails.nome = '';
     produtoDetails.descricao = '';
-    produtoDetails.tipo = [];
+    produtoDetails.categoria = [];
     produtoDetails.quantidade = 0;
     produtoDetails.preco = 0;
 })

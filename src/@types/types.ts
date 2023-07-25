@@ -1,13 +1,22 @@
 export interface IProduto {
-    id: number
-    _id: string
-    _id_Produto: string
-    nome: string
-    descricao: string
-    tipo: []
-    quantidade: number
-    preco: number
-    total: number
+
+    id: number,
+    _id: string,
+    _id_Produto: string,
+    nome: string,
+    descricao: string,
+    codigo: string,
+    marca: string,
+    modelo: string,
+    categoria: [],
+    quantidade: number,
+    preco: number,
+    fornecedor: string,
+    dataAquisicao: string,
+    localizacao: string,
+    tag: string,
+    observacao: string,
+    total: number,
 }
 
 export enum ETipoProduto {
@@ -27,5 +36,5 @@ export enum ETipoProduto {
     TelefoniaFixa = 'Telefonia Fixa',
     TVVideo = 'TV e Vídeo',
     UtilidadesDomesticas = 'Utilidades Domésticas',
-  }
+}
   
