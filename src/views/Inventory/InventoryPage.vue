@@ -1,7 +1,21 @@
 <template>
-  <div class="invetory">
-    <div class="row" style="margin: 10px 0;">     
-    <MenuDeAcoes />
+  <div class="row" style="margin: 10px 0;">
+    <div class="col-md-12">
+      <div class="inventory__actions">
+        <div class="inventory__actions___breadCrumb col-md-4">
+          <BreadCrumb />
+        </div>
+        <div class="inventory__actions___filters col-md-8">          
+          <router-link class="inventory__actions___filters--link" to="/novoProduto" v-slot="{ navigate }">
+            <div class="inventory__actions___filters--btn-Adicionar" @click="navigate">
+              <i class="material-icons">add</i>
+              Adicionar
+            </div>
+          </router-link>
+        </div>
+      </div>
+    </div>
+
     <div class="col-md-12">
       <div class="mensagem_nao_contem_produto" v-if="produtosFiltrados.length <= 0">
         <div>Não existe nenhum produto cadastrado.</div>
@@ -9,47 +23,60 @@
       <div class="table-responsive custom-scrollbar" v-if="produtosFiltrados.length > 0" style="
            max-height: calc(100vh - 195px); overflow-y: auto; margin: 10px 0;
             ">
-        <table id="table-desktop" class="table table-bordered table-responsive light">
+        <BarraDePesquisa @filtroMudou="atualizarFiltro" />
+        <table id="table-desktop" class="table table-bordered table-responsive">
           <thead>
             <tr>
+              <!-- <th></th> -->
+              <th>Id</th>
               <th>Nome</th>
-              <th>Descrição</th>
-              <th>Tipo</th>
+              <th>Categoria</th>
               <th>Quantidade</th>
               <th>Preço</th>
               <th>Total</th>
-              <th></th>
+              <th colspan="2">Ações</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="produto in produtosFiltrados" :key="produto.id" class="table_line">
-              <td @click="selecionarLinha(produto.id)">{{ produto.nome }}</td>
-              <td @click="selecionarLinha(produto.id)">{{ produto.descricao }}</td>
-              <td @click="selecionarLinha(produto.id)">{{ produto.tipo }}</td>
-              <td @click="selecionarLinha(produto.id)">{{ produto.quantidade }}</td>
-              <td @click="selecionarLinha(produto.id)">{{ produto.preco }}</td>
-              <td @click="selecionarLinha(produto.id)">{{ produto.total }}</td>
-              <td style="text-align: center"><i class="material-icons" @click="deletarProduto(produto.id)"
-                  title="deletar">delete</i></td>
+            <tr v-for="produto in produtosFiltrados" :key="produto.id" style="max-width: 25px;">
+              <!-- <td @click="toggleIconExpand" style="max-width: 25px;">
+                <a data-bs-toggle="collapse" href="#subLinha" role="button" aria-expanded="false"
+                    aria-controls="subLinha">
+                    <i class="material-icons" title="eye">{{ isExpanded ? 'expand_less' : 'expand_more' }}</i>
+                  </a>
+                </td> -->
+              <td>{{ produto.id }}</td>
+              <td>{{ produto.nome }}</td>
+              <td>{{ produto.tipo }}</td>
+              <td>{{ produto.quantidade }}</td>
+              <td>{{ produto.preco }}</td>
+              <td>{{ produto.total }}</td>
+              <td style="text-align: center; max-width: 25px;">
+                <i class="material-icons" @click="selecionarLinha(produto.id)" title="Editar">edit</i>
+              </td>
+              <td style="text-align: center; max-width: 25px;">
+                <i class="material-icons" @click="deletarProduto(produto.id)" title="deletar">delete</i>
+              </td>
             </tr>
+            <!-- <tr>
+              <td colspan="10" class="collapse" id="subLinha">
+                <div>adawdwad</div>
+              </td>              
+            </tr> -->
           </tbody>
           <tfoot>
             <tr>
-              <th>total</th>
-              <th></th>
-              <th></th>
+              <th colspan="3">Total</th>
               <th>{{ totalQuantidade }}</th>
               <th></th>
               <th>{{ totalPreco }}</th>
-              <th></th>
+              <th colspan="2"></th>
             </tr>
           </tfoot>
         </table>
       </div>
     </div>
   </div>
-  </div>
-  
 </template>
 
 <script lang="ts" setup>
@@ -58,8 +85,10 @@ import { IProduto } from "../../@types/types";
 import { darkMode } from "@/composables/shared/darkMode";
 import router from "@/router";
 import BarraDePesquisa from '@/components/BarraDePesquisa.vue';
-import MenuDeAcoes from '@/components/shared/MenuSuperiorAcoes.vue'
+import BreadCrumb from "@/components/shared/BreadCrumb.vue";
+//import MenuDeAcoes from '@/components/shared/MenuSuperiorAcoes.vue'
 
+const visible = ref(false)
 const listaDeProdutos = ref<Array<IProduto>>([]);
 const filtroAtual = ref<string>('');
 
@@ -140,14 +169,40 @@ const totalPreco = computed(() => {
   }, 0);
 });
 
+// let isExpanded = false;
 
+// const toggleIconExpand = (): void => {
+//   // Toggle the expansion state
+//   isExpanded = !isExpanded;
+// };
 </script>
 
 <style lang="scss" scoped>
+.inventory__actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4em;
+  .inventory__actions___filters {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 
-.invetory {
-  
+    .inventory__actions___filters--link {
+      text-decoration: none;
+    }
+
+    .inventory__actions___filters--btn-Adicionar {
+      display: flex;
+      padding: 25px;
+
+      i {
+        text-decoration: none;
+      }
+    }
+  }
 }
+
 .dark_mode_on_table {
   color: #fff;
   background-color: #333;
@@ -158,46 +213,44 @@ const totalPreco = computed(() => {
   background-color: #fff;
 }
 
-.acoes-topo {
-  display: flex;
-  justify-content: space-between;
-}
-
-.table_line {
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 40px !important;
-}
-
-.table_line:hover {
-  background-color: #a1a1a167;
-}
-
 table {
   height: 100%;
   border-collapse: collapse;
+
+  thead {
+    th {
+      position: sticky;
+      top: 0;
+      background-color: #f2f2f2;
+      z-index: 2;
+    }
+  }
+
+  tbody {
+    tr:hover {
+      background-color: #333;
+    }
+  }
+
+  tfoot {
+    th {
+      position: sticky;
+      bottom: 0;
+      background-color: #f2f2f2;
+      z-index: 2;
+    }
+  }
+
+  .table_line {
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 40px !important;
+  }
 }
 
-th,
-td {
-  padding: 11px solid #ddd;
-}
 
-thead th {
-  position: sticky;
-  top: 0;
-  background-color: #f2f2f2;
-  z-index: 2;
-}
-
-tfoot th {
-  position: sticky;
-  bottom: 0;
-  background-color: #f2f2f2;
-  z-index: 2;
-}
 
 .custom-scrollbar {
   scrollbar-width: thin;
@@ -256,5 +309,4 @@ tfoot th {
   #table-desktop {
     display: none;
   }
-}
-</style>@/composables/shared/darkMode
+}</style>

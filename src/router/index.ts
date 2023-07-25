@@ -4,6 +4,7 @@ import DashboardPage from "@/views/Dashboard/DashboardPage.vue";
 import InventoryPage from "@/views/Inventory/InventoryPage.vue";
 import AdicionarProduto from "@/components/Inventory/AdicionarProduto.vue";
 import EditarProduto from "@/components/Inventory/EditarProduto.vue";
+import InventoryConfiguration from '@/components/Inventory/InventoryConfiguration.vue'
 import Login from "@/views/Login/LoginPage.vue";
 import RegistrarNovoUsuario from "@/views/Login/RegistrarNovoUsuario.vue";
 
@@ -33,14 +34,20 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: "/novoProduto",
-        name: "Inventory / Novo Produto",
+        name: "Novo Produto",
         component: AdicionarProduto,
         meta: { requiresAuth: true },
       },
       {
         path: "/EditarProduto/:id",
-        name: "Inventory / Editar Produto",
+        name: "Editar Produto",
         component: EditarProduto,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "/Inventory_config/",
+        name: "Configurar",
+        component: InventoryConfiguration,
         meta: { requiresAuth: true },
       },
     ],
