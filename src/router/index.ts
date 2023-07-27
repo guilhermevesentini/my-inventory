@@ -49,7 +49,7 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: "/Inventory_config/",
-        name: "Configurar",
+        name: "Cadastros",
         component: InventoryConfiguration,
         meta: { requiresAuth: true },
       },

@@ -16,7 +16,6 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item" href="#">Configurar Conta</a></li>
               <li><a class="dropdown-item" href="#">Personalizar</a></li>
-              <hr>
               <li><a class="dropdown-item" href="#"  style="display: flex;" @click="logout">Sair</a></li>
             </ul>
           </div>          

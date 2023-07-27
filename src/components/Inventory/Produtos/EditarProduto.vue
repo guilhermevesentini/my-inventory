@@ -1,83 +1,16 @@
 <template>
     <div class="row" style="margin: 10px 0;">
         <div class="col-md-12">
-            <div class="inventory__actions">
-                <div class="inventory__actions___breadCrumb col-md-4">
-                    <BreadCrumb />
-                </div>
-                <div class="inventory__actions___actions col-md-8">
-                    <div class="btn" @click="Voltar">
-                        <i class="material-icons">keyboard_return</i>
-                    </div>
-                    <div class="btn" @click="Salvar">
-                        <i class="material-icons">save</i>
-                    </div>
-                </div>
-            </div>
+            <MenuSuperiorAcoes 
+                name="Editar Produto" 
+                :btnVoltar="true"
+                :btnSalvar="true"
+                @clickVoltar="Voltar"
+                @clickSalvar="Salvar"
+            />
         </div>  
         <div class="col-md-12">
-            <div class="row">
-                <div class="input_form col-md-4">
-                    <label>Nome:</label>
-                    <input class="form-control" type="text" placeholder="Digite o nome" v-model="produto.nome" />
-                </div>
-                <div class="input_form col-md-4">
-                    <label>Descrição:</label>
-                    <input class="form-control" type="text" placeholder="Digite a descrição"
-                        v-model="produto.descricao" />
-                </div>
-                <div class="input_form col-md-4">
-                    <label>Codigo:</label>
-                    <input class="form-control" type="text" placeholder="Digite o código"
-                        v-model="produto.codigo" />
-                </div>
-                <div class="input_form col-md-4">
-                    <label>Marca:</label>
-                    <input class="form-control" type="text" placeholder="Digite a marca"
-                        v-model="produto.marca" />
-                </div>
-                <div class="input_form col-md-4">
-                    <label>Modelo:</label>
-                    <input class="form-control" type="text" placeholder="Digite o modelo"
-                        v-model="produto.modelo" />
-                </div>                
-                <div class="input_form col-md-4">
-                    <label>Categoria:</label>
-                    <select class="form-control" v-model="produto.categoria" placeholder="Selecione...">
-                        <option disabled value="">Selecione uma opção</option>
-                        <option v-for="categoria in categorias" :value="categoria" :key="categoria">{{ categoria }}</option>
-                    </select>
-                </div>
-                <div class="input_form col-md-4">
-                    <label>Quantidade:</label>
-                    <input class="form-control" type="number" placeholder="Digite a quantidade"
-                        v-model="produto.quantidade" />
-                </div>
-                <div class="input_form col-md-4">
-                    <label>Preço:</label>
-                    <input class="form-control" type="number" placeholder="Digite o preço" v-model="produto.preco" />
-                </div>
-                <div class="input_form col-md-4">
-                    <label>Fornecedor:</label>
-                    <input class="form-control" type="text" placeholder="Digite o fornecedor" v-model="produto.fornecedor" />
-                </div>
-                <div class="input_form col-md-4">
-                    <label>Data de Aquisição:</label>
-                    <input class="form-control" type="date" placeholder="Digite a data de aquisição" v-model="produto.dataAquisicao" />
-                </div>
-                <div class="input_form col-md-4">
-                    <label>Unidade:</label>
-                    <input class="form-control" type="text" placeholder="Digite a localização" v-model="produto.localizacao" />
-                </div>
-                <div class="input_form col-md-4">
-                    <label>Tag:</label>
-                    <input class="form-control" type="text" placeholder="Digite a tag" v-model="produto.tag" />
-                </div>
-                <div class="input_form col-md-12" style="width: 100%">
-                    <label>Observação:</label>
-                    <textarea name="observacao" rows="6" style="width: 100%;" placeholder="Digite sua observação" v-model="produto.observacao"></textarea>
-                </div>
-            </div>
+            <FormularioProdutos :produto="produto" @update:produto="updateProdutoDetails" />
         </div>
     </div>
 </template>
@@ -88,6 +21,9 @@ import { IProduto, ETipoProduto } from '@/@types/types'
 import router from "@/router";
 import MenuDeAcoes from '@/components/shared/MenuSuperiorAcoes.vue'
 import BreadCrumb from "../../shared/BreadCrumb.vue";
+import SelectComponent from "@/components/shared/CustomInputSelect.vue"
+import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
+import FormularioProdutos from "@/components/shared/FormularioProdutos.vue";
 
 const routeId = router.currentRoute.value.params.id;
 
@@ -156,6 +92,11 @@ const Salvar = (async () => {
 const Voltar = (() => {
     router.push('/inventory')
 })
+
+const updateProdutoDetails = (updatedProduto) => {
+    produto = updatedProduto;
+};
+
 </script>
 
 <style lang="scss" scoped>

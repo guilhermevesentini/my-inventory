@@ -20,12 +20,12 @@
       "id": 1,
       "_id": "ae77fa5b2fc1d3fa8b42194638f7d938",
       "_id_Produto": "07f257491bc0324638b86c577a7c3332",
-      "nome": "testeeee",
+      "nome": "aaaaaaaaa",
       "descricao": "teste",
       "codigo": "teste",
       "marca": "teste",
       "modelo": "teste",
-      "categoria": "Mercado",
+      "categoria": "Música e Shows",
       "quantidade": 15,
       "preco": 15,
       "fornecedor": "teste",
@@ -45,7 +45,7 @@
       "codigo": "awdwadwa",
       "marca": "dwadawd",
       "modelo": "awdwadwad",
-      "categoria": "Natal",
+      "categoria": "Moda",
       "quantidade": 23,
       "preco": 444.5,
       "fornecedor": "888",
@@ -55,7 +55,240 @@
       "observacao": "123213213123",
       "total": 0,
       "tipo": "Pet Shop"
+    },
+    {
+      "id": 3,
+      "_id": "ae77fa5b2fc1d3fa8b42194638f7d938",
+      "_id_Produto": "b3c5df3252b1aa79b065a1e7951a38e9",
+      "nome": "awdwad",
+      "descricao": "awdwad",
+      "codigo": "21323",
+      "marca": "awdwad",
+      "modelo": "wdawd",
+      "categoria": "Móveis",
+      "quantidade": 132,
+      "preco": 21321,
+      "fornecedor": "dawd",
+      "dataAquisicao": "2023-07-21",
+      "localizacao": "wadwad",
+      "tag": "awdawd",
+      "observacao": "",
+      "total": 0
+    },
+    {
+      "id": 4,
+      "_id": "ae77fa5b2fc1d3fa8b42194638f7d938",
+      "_id_Produto": "6cf2cbbde32e67250eb5efda9eaf100d",
+      "nome": "guilherme",
+      "descricao": "guilherme",
+      "codigo": "321321",
+      "marca": "3213123",
+      "modelo": "guilherme",
+      "quantidade": 21321,
+      "preco": 213213,
+      "fornecedor": "guilherme",
+      "dataAquisicao": "2023-07-28",
+      "localizacao": "ffsef",
+      "tag": "sefsefesf",
+      "observacao": "",
+      "total": 0,
+      "categoria": "Música e Shows"
+    },
+    {
+      "id": 5,
+      "_id": "ae77fa5b2fc1d3fa8b42194638f7d938",
+      "_id_Produto": "bbf3661e7bfcc846ea763bca5eededdb",
+      "nome": "adadad",
+      "descricao": "adadad",
+      "codigo": "2323",
+      "marca": "213213",
+      "modelo": "12da",
+      "categoria": "Móveis",
+      "quantidade": 21,
+      "preco": 3,
+      "fornecedor": "adf",
+      "dataAquisicao": "2023-07-14",
+      "localizacao": "sefesf",
+      "tag": "sefsef",
+      "observacao": "",
+      "total": 0
+    },
+    {
+      "id": 6,
+      "_id": "ae77fa5b2fc1d3fa8b42194638f7d938",
+      "_id_Produto": "2afe805a32ce2f65768f0d38a0999221",
+      "nome": "tsfesf",
+      "descricao": "sefsef",
+      "codigo": "sefsef",
+      "marca": "sefsef",
+      "modelo": "sefsef",
+      "categoria": "Música e Shows",
+      "quantidade": 234,
+      "preco": 234,
+      "fornecedor": "sffs",
+      "dataAquisicao": "2023-07-06",
+      "localizacao": "sefsef",
+      "tag": "sefsef",
+      "observacao": "",
+      "total": 0
+    },
+    {
+      "id": 7,
+      "_id": "ae77fa5b2fc1d3fa8b42194638f7d938",
+      "_id_Produto": "c9b2cf21fb432325784ce16837b71ba2",
+      "nome": "bia",
+      "descricao": "awdawdwad",
+      "codigo": "wadwad",
+      "marca": "wdwad",
+      "modelo": "awdawd",
+      "categoria": "Pet Shop",
+      "quantidade": 42434,
+      "preco": 234324,
+      "fornecedor": "wadwad",
+      "dataAquisicao": "",
+      "localizacao": "",
+      "tag": "",
+      "observacao": "",
+      "total": 0
+    },
+    {
+      "id": 8,
+      "_id": "ae77fa5b2fc1d3fa8b42194638f7d938",
+      "_id_Produto": "789e84065ea860c35e277ea095e5eb03",
+      "nome": "awdawd",
+      "descricao": "awdawdawd",
+      "codigo": "wadwadawd",
+      "marca": "awdawd",
+      "modelo": "awdwada",
+      "categoria": "Religião e Espiritualidade",
+      "quantidade": 123,
+      "preco": 123,
+      "fornecedor": "Amazon",
+      "dataAquisicao": "2023-07-06",
+      "localizacao": "Perus",
+      "tag": "Veiculo",
+      "observacao": "",
+      "total": 0
     }
   ],
-  "cadastros": []
+  "categorias": [
+    {
+      "_id": "366c0de2a2f35351f72e92ffe2bdccef",
+      "nome": "Mercado"
+    },
+    {
+      "_id": "d032a22e66f33c72b8e5e9445aa60ee7",
+      "nome": "Moda"
+    },
+    {
+      "_id": "a1d8907132f07ffedee9f98bbf0779a5",
+      "nome": "Móveis"
+    },
+    {
+      "_id": "ae15a8d73b45700c5b39cc944869e8d6",
+      "nome": "Música e Shows"
+    },
+    {
+      "_id": "b2239d72681dd65d1550f67a5151f85d",
+      "nome": "Natal"
+    },
+    {
+      "_id": "81c855e7c1e5907461df94ab216ba850",
+      "nome": "Papelaria"
+    },
+    {
+      "_id": "ac5b82987fb46b839ccbf0e33e124d5e",
+      "nome": "Pet Shop"
+    },
+    {
+      "_id": "7b32f43ad8817756a343d85c805ad6a2",
+      "nome": "Religião e Espiritualidade"
+    },
+    {
+      "_id": "1cb648dd4c2c93a53dfdd23645bb1c96",
+      "nome": "Relógios"
+    },
+    {
+      "_id": "b74c61c1e48d4d8a018af9b75ec35f94",
+      "nome": "Saúde e Cuidados Pessoais"
+    },
+    {
+      "_id": "4b9fc40d11ed21e35b8a9d8c4a615a3e",
+      "nome": "Serviços"
+    },
+    {
+      "_id": "63c9b1576c285c23b59b7b10ffdb8816",
+      "nome": "Suplementos Alimentares"
+    },
+    {
+      "_id": "f49759ff4daea6e9c8286d6a4bb4c17e",
+      "nome": "Tablets, iPads e E-Readers"
+    },
+    {
+      "_id": "8a68c45be71c1e6f7cf0ce5f0b95be99",
+      "nome": "Telefonia Fixa"
+    },
+    {
+      "_id": "1d6b52b9f4b46522472a7217a59b2f8e",
+      "nome": "TV e Vídeo"
+    },
+    {
+      "_id": "b4cc9b9197321f6321a364c71c59e7fc",
+      "nome": "Utilidades Domésticas"
+    }
+  ],
+  "fornecedores": [
+    {
+      "_id": "366c0de2a2f35351f72e92ffe2bdccef",
+      "nome": "Atalanta"
+    },
+    {
+      "_id": "d032a22e66f33c72b8e5e9445aa60ee7",
+      "nome": "Praise"
+    },
+    {
+      "_id": "a1d8907132f07ffedee9f98bbf0779a5",
+      "nome": "Rockstar"
+    },
+    {
+      "_id": "ae15a8d73b45700c5b39cc944869e8d6",
+      "nome": "Amazon"
+    }
+  ],
+  "unidades": [
+    {
+      "_id": "366c0de2a2f35351f72e92ffe2bdccef",
+      "nome": "São Paulo"
+    },
+    {
+      "_id": "d032a22e66f33c72b8e5e9445aa60ee7",
+      "nome": "Perus"
+    },
+    {
+      "_id": "a1d8907132f07ffedee9f98bbf0779a5",
+      "nome": "São Vicente"
+    },
+    {
+      "_id": "ae15a8d73b45700c5b39cc944869e8d6",
+      "nome": "Barra funda"
+    }
+  ],
+  "tags": [
+    {
+      "_id": "366c0de2a2f35351f72e92ffe2bdccef",
+      "nome": "Embalagem"
+    },
+    {
+      "_id": "d032a22e66f33c72b8e5e9445aa60ee7",
+      "nome": "Veiculo"
+    },
+    {
+      "_id": "a1d8907132f07ffedee9f98bbf0779a5",
+      "nome": "Objeto"
+    },
+    {
+      "_id": "ae15a8d73b45700c5b39cc944869e8d6",
+      "nome": "Roupas"
+    }
+  ]
 }

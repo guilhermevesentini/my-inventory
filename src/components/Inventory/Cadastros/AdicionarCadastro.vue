@@ -20,17 +20,23 @@
         </div>
         <div class="col-md-12">
             <div class="row">
-                <div class="input_form col-md-4">
-                    <label>Nome:</label>
-                    <input class="form-control" type="text" placeholder="Digite o nome" v-model="produtoDetails.nome" />
+                <div class="col-md-4">
+                    <input class="form-control" type="text" placeholder="Digite o nome do cadastro" v-model="ItemName" />
                 </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" placeholder="Digite o nome do item" v-model="nome" />
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary btn-sm" @click="Adicionar">
+                        <i class="material-icons">add</i>
+                    </button>  
+                </div>                              
             </div>
         </div>
         <div class="col-md-12">
         <div class="table-responsive custom-scrollbar" style="
              max-height: calc(100vh - 195px); overflow-y: auto; margin: 10px 0;
               ">
-          <BarraDePesquisa />
           <table id="table-desktop" class="table table-bordered table-responsive">
             <thead>
               <tr>
@@ -41,12 +47,12 @@
             <tbody>
               <tr v-for="cadastro in listaDeCadastros" :key="cadastro.id">
                 <td>{{ cadastro.nome }}</td>                
-                <td style="text-align: center; width: 40px;">
+                <!-- <td style="text-align: center; width: 40px;">
                   <i class="material-icons" @click="selecionarLinha(cadastro.id)" title="Editar">edit</i>
                 </td>
                 <td style="text-align: center; width: 40px;">
                   <i class="material-icons" @click="deletarProduto(cadastro.id)" title="deletar">delete</i>
-                </td>
+                </td> -->
               </tr>
             </tbody>
           </table>
@@ -63,115 +69,108 @@ import useGerarId from "@/composables/shared/useCriarRandomId"
 import { IGerarId } from "@/composables/types";
 import BreadCrumb from "../../shared/BreadCrumb.vue";
 
-const listaDeCadastros = ref([
-    { nome : "teste" }
-]);
+interface IItem {
+    item: Array<{
+        nome: string;
+        id: string;
+        _id: string;
+    }>;
+}
+
 
 const config: IGerarId = {
     quantidade: 16,
     tipo: 'string'
 }
 
-let produtoDetails: IProduto = reactive({
-    id: 0,
-    _id: '',
-    _id_Produto: '',
-    nome: "",
-    descricao: "",
-    codigo: "",
-    marca: "",
-    modelo: "",
-    categoria: [],
-    quantidade: 0,
-    preco: 0,
-    fornecedor: "",
-    dataAquisicao: "",
-    localizacao: "",
-    tag: "",
-    observacao: '',
-    total: 0,
-})
+let nome = ref('')
 
-const categorias: ETipoProduto[] = [
-    ETipoProduto.Mercado,
-    ETipoProduto.Moda,
-    ETipoProduto.Moveis,
-    ETipoProduto.MusicaShows,
-    ETipoProduto.Natal,
-    ETipoProduto.Papelaria,
-    ETipoProduto.PetShop,
-    ETipoProduto.ReligiaoEspiritualidade,
-    ETipoProduto.Relogios,
-    ETipoProduto.SaudeCuidadosPessoais,
-    ETipoProduto.Servicos,
-    ETipoProduto.SuplementosAlimentares,
-    ETipoProduto.TabletsIpadEReaders,
-    ETipoProduto.TelefoniaFixa,
-    ETipoProduto.TVVideo,
-    ETipoProduto.UtilidadesDomesticas,
-];
+const ItemName = ref('');
 
-let produto = computed(() => produtoDetails)
+const listaDeCadastros = reactive<Array<IItem>>([]);
 
-const validarProduto = ((produto: IProduto) => {
-    var validateName = produto.nome.length > 20 ? true : false;
-    var validateDescricao = produto.descricao.length > 20 ? true : false;
-
-    var hasLength = validateName || validateDescricao;
-
-    if (hasLength) {
-        alert("Nome ou descrição não deve conter mais do que 20 caracters!");
-        return false
+    const Adicionar = () => {
+    const isDuplicated = listaDeCadastros.some(item => item.nome === nome.value);
+    if (!isDuplicated) {
+        listaDeCadastros.push({ nome: nome.value, id: 'novoId', _id: '' });
+        nome.value = '';
+    } else {
+        alert('Item duplicado');
     }
+};
 
-    if (!produto.nome || !produto.descricao || !produto.categoria || !produto.quantidade || !produto.preco) {
+const validarProduto = (cadastro) => {
+    if (cadastro.length <= 0) return true;
+
+    const hasInvalidName = cadastro.some(element => element.nome.length > 20 || element.nome === '');
+    if (hasInvalidName) {
+        alert("Nome ou descrição não deve conter mais do que 20 caracteres!");
         return false;
     }
-    return true;
-})
 
-const Salvar = (async () => {
-    if (!validarProduto(produto.value)) {
+    return true;
+};
+
+const criarObjetoParaSalvar = () => {
+  const objetoParaSalvar = {};
+
+  // Convert the reactive proxy array to a plain JavaScript array using slice
+  const listaDeCadastrosArray = listaDeCadastros.slice();
+
+  listaDeCadastrosArray.forEach(category => {
+    if (Array.isArray(category.items)) {
+      objetoParaSalvar[category.itemName] = category.items.map(item => {
+        return {
+          nome: item.nome,
+          id: item.id,
+          _id: item._id
+        };
+      });
+    } else {
+      console.warn(`Items for category "${category.itemName}" is not an array.`);
+    }
+  });
+
+  return objetoParaSalvar;
+};
+
+
+const Salvar = async () => {
+    if (!validarProduto(listaDeCadastros)) {
         alert("Preencha todos os campos do produto!");
-        console.log('teste')
         return;
     }
-    console.log('teste')
-    const novoId = useGerarId(config);
-
-    const getUser: any = localStorage.getItem('user')
+    const getUser = localStorage.getItem('user');
     const idUsuario = JSON.parse(getUser);
 
-    // Alterar o valor do campo "_id" do objeto "produto.value"
-    produto.value._id_Produto = novoId;
-    produto.value._id = idUsuario._id
+    // Assuming you want to set _id for each item in the list.
+    listaDeCadastros.forEach(item => item._id = idUsuario._id);
 
-    const dataJson = JSON.stringify(produto.value);
-    console.log('teste')
-    const req = await fetch("http://localhost:3001/produtos", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: dataJson,
-    });
-    //const res = await req.json();
-    if (req.ok) {
-        Limpar()
-        router.push('/inventory')
+    const objetoParaSalvar = criarObjetoParaSalvar();
+
+    const dataJson = JSON.stringify(objetoParaSalvar);
+
+    try {
+        const req = await fetch("http://localhost:3001/cadastros", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: dataJson,
+        });
+        
+        if (req.ok) {
+            router.push('/inventory_config');
+        } else {
+            alert('Failed to save data.');
+        }
+    } catch (error) {
+        console.error("Error while saving data:", error);
+        alert('An error occurred while saving data.');
     }
-})
+};
 
-const Limpar = (() => {
-    produtoDetails.nome = '';
-    produtoDetails.descricao = '';
-    produtoDetails.categoria = [];
-    produtoDetails.quantidade = 0;
-    produtoDetails.preco = 0;
-})
-
-const Voltar = (() => {
-    Limpar()
-    router.push('/inventory')
-})
+const Voltar = () => {
+    router.push('/inventory_config');
+};
 
 </script>
 

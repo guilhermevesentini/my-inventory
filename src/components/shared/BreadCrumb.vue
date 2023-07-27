@@ -1,8 +1,19 @@
 <template>
-    <div class="breadcrumb">{{ $route.name }}</div>
+    <div class="breadcrumb">{{ props.name }}</div>
 </template>
-<script lang="ts" setup>
+
+<script setup lang="ts">
+import { defineProps, ref, watchEffect } from 'vue';
+
+const props = defineProps({
+    name: {
+        type: String,
+        default: ""
+    }
+});
+
 </script>
+
 <style lang="scss" scoped>
 .breadcrumb {
     display: contents;

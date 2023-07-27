@@ -8,7 +8,7 @@ export interface IProduto {
     codigo: string,
     marca: string,
     modelo: string,
-    categoria: [],
+    categoria: string,
     quantidade: number,
     preco: number,
     fornecedor: string,
@@ -17,6 +17,11 @@ export interface IProduto {
     tag: string,
     observacao: string,
     total: number,
+}
+
+export interface ICategorias {
+    _id: string;
+    nome: string;
 }
 
 export enum ETipoProduto {
