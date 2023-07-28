@@ -8,18 +8,19 @@
             </li>               
             <li class="item">
                 <router-link to="/dashboard">
-                    <a href="#"><i class="material-icons">dashboard</i>Dashboard</a>
+                    <a href="#"><i class="material-icons">insights</i>Dashboard</a>
                 </router-link>
             </li>
             <li class="item" @click="toggleDashboardMenu">
-                <i class="material-icons" title="eye">{{ showDashboardMenu ? 'expand_less' : 'expand_more' }}</i>
+                <i class="material-icons">content_paste</i>                
                 <a>Inventory</a>
+                <i class="material-icons dropdown_icon" title="eye">{{ showDashboardMenu ? 'expand_less' : 'expand_more' }}</i>
             </li>
         </ul>
         <ul class="item collapse" id="dashboardCollapsedMenu"  v-if="showDashboardMenu">
             <li>
                 <router-link to="/inventory">
-                    <a href="#"><i class="material-icons">inventory_2</i>Inventory</a>
+                    <a href="#"><i class="material-icons">list_alt</i>Produtos</a>
                 </router-link>
             </li>
         </ul>
@@ -109,6 +110,12 @@ export default defineComponent({
         border-radius: 10px;
         list-style: none;
         cursor: pointer;
+
+        .dropdown_icon {
+            display: flex;
+            align-items: flex-end;
+            margin-left: 15px;            
+        }
     }
 
     .collapse {

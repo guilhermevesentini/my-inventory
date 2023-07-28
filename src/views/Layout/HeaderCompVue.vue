@@ -5,10 +5,10 @@
         <div class="header_menu__icons">
           <div class="switch_mode" @click="toggleMode">
             <div class="light_mode" v-if="!darkMode">
-              <i class="material-icons dark" title="Dark Mode">dark_mode</i>
+              <i class="material-icons dark" title="Dark Mode">nightlight_round</i>
             </div>
             <div class="dark_mode" v-else>
-              <i class="material-icons light" title="Light Mode">light_mode</i>
+              <i class="material-icons light" title="Light Mode">wb_sunny</i>
             </div>
           </div>
           <div class="dropdown">

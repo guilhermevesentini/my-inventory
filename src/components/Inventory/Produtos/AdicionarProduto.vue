@@ -41,7 +41,7 @@ let produtoDetails: IProduto = reactive({
     marca: "",
     modelo: "",
     categoria: "",
-    quantidade: 0,
+    quantidade: 1,
     preco: 0,
     fornecedor: "",
     dataAquisicao: "",
