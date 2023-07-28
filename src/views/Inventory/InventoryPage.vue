@@ -9,7 +9,7 @@
 
     <div class="col-md-12">
       <div class="mensagem_nao_contem_produto" v-if="produtosFiltrados.length <= 0">
-        <img src="../../../dist/img/empty.png" alt="empty">
+        <img src="../../assets/img/empty.png" alt="empty">
         <div>
           <p>Não existe nenhum produto cadastrado.</p>
           <p>Clique em Adicionar para cadastrar seu primeiro produto.</p>

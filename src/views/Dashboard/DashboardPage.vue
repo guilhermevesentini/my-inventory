@@ -4,7 +4,6 @@
       <h2>Total de Items: {{ totalDeItems }} </h2>
     </div> -->
     <CardLayout/>
-    <BarChart />
 
   </div>
 </template>

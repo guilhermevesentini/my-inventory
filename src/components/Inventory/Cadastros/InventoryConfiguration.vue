@@ -39,7 +39,7 @@
       <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-categoria" role="tabpanel" aria-labelledby="pills-categoria-tab">
           <div class="mensagem_nao_contem_produto" v-if="listaDeCadastros.categorias.length <= 0">
-            <img src="../../../../dist/img/empty.png" alt="empty">
+            <img src="../../../assets/img/empty.png" alt="empty">
             <div>
               <p>Não existe nenhum cadastro.</p>
               <p>Clique em Adicionar para cadastrar.</p>
@@ -51,7 +51,7 @@
           <div class="tab-pane fade show active" id="pills-categoria" role="tabpanel"
             aria-labelledby="pills-categoria-tab">
             <div class="mensagem_nao_contem_produto" v-if="listaDeCadastros.fornecedores.length <= 0">
-              <img src="../../../../dist/img/empty.png" alt="empty">
+              <img src="../../../assets/img/empty.png" alt="empty">
               <div>
                 <p>Não existe nenhum cadastro.</p>
                 <p>Clique em Adicionar para cadastrar.</p>
@@ -64,7 +64,7 @@
           <div class="tab-pane fade show active" id="pills-categoria" role="tabpanel"
             aria-labelledby="pills-categoria-tab">
             <div class="mensagem_nao_contem_produto" v-if="listaDeCadastros.unidades.length <= 0">
-              <img src="../../../../dist/img/empty.png" alt="empty">
+              <img src="../../../assets/img/empty.png" alt="empty">
               <div>
                 <p>Não existe nenhum cadastro.</p>
                 <p>Clique em Adicionar para cadastrar.</p>
@@ -76,7 +76,7 @@
         <div class="tab-pane fade" id="pills-tags" role="tabpanel" aria-labelledby="pills-tags-tab">
           <div class="tab-pane fade show active" id="pills-tags" role="tabpanel" aria-labelledby="pills-tags-tab">
             <div class="mensagem_nao_contem_produto" v-if="listaDeCadastros.tags.length <= 0">
-              <img src="../../../../dist/img/empty.png" alt="empty">
+              <img src="../../../assets/img/empty.png" alt="empty">
               <div>
                 <p>Não existe nenhum cadastro.</p>
                 <p>Clique em Adicionar para cadastrar.</p>
@@ -104,16 +104,13 @@
 </template>
   
 <script lang="ts" setup>
-import { computed, onMounted, ref } from "@vue/runtime-core";
-import { ICadastro } from "../../../@types/types";
-import { darkMode } from "@/composables/shared/darkMode";
+import {  onMounted, ref } from "@vue/runtime-core";
 import router from "@/router";
 import BarraDePesquisa from '@/components/BarraDePesquisa.vue';
 import BreadCrumb from "@/components/shared/BreadCrumb.vue";
 import TableComponent from "@/components/shared/TableComponent.vue";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 import ModalDeCadastro from "./ModalDeCadastro.vue";
-import $ from 'jquery';
 
 let modalIsVisivel = ref<boolean>(false);
 
@@ -185,9 +182,7 @@ const selecionarLinha = ((produto: number) => {
 
 const criarCadastro = () => {
   console.log('teste');
-  //$('#modalAdicionarCadastro').modal('hide')
 }
-
 </script>
   
 <style lang="scss" scoped>

@@ -21,7 +21,6 @@ router.beforeEach((to, from, next) => {
 </script>
 
 <style lang="scss">
-@import '~apexcharts/dist/apexcharts.css';
 @import '@/scss/index.scss';
 
 * {
