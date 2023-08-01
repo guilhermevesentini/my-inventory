@@ -28,7 +28,6 @@ import FormularioProdutos from "@/components/shared/FormularioProdutos.vue";
 const routeId = router.currentRoute.value.params.id;
 
 onMounted(() => {
-    console.log('teste editar')
     getProduto(Number(router.currentRoute.value.params.id));
 })
 
@@ -37,6 +36,8 @@ let produto = reactive<IProduto>({})
 const getProduto = (async (id: number) => {
     const req = await fetch(`http://localhost:3001/produtos/${id}`);
     const response = await req.json();
+    console.log(response);
+    
     Object.assign(produto, response);
 })
 
@@ -82,7 +83,6 @@ const Salvar = (async () => {
     });
 
     if(req.ok){
-        console.log('sucesso')
         router.push('/inventory')
     } else {
         alert("Erro ao salvar suas alterações, tente novamente.");

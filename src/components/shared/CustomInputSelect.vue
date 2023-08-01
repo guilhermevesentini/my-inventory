@@ -21,7 +21,6 @@ const buscarCategorias = async (data: any) => {
             const data = await response.json();
             // Popule a lista categorias apenas com os _id das categorias
             categoriasList.push(...data);
-            console.log(categoriasList)
         } else {
             // Trate o erro, se necessário
             console.error("Erro ao buscar categorias");
@@ -69,7 +68,6 @@ const emit = defineEmits<{
 }>();
 
 watch(selectedValue, (newValue) => {
-    console.log(newValue)
     emit("update:modelValue", newValue);
 });
 

@@ -45,7 +45,7 @@
               <p>Clique em Adicionar para cadastrar.</p>
             </div>
           </div>
-          <TableComponent :items="listaDeCadastros.categorias" v-if="listaDeCadastros.categorias.length > 0" />
+          <TableComponent :items="listaDeCadastros.categorias" :showPagination="true" v-if="listaDeCadastros.categorias.length > 0" />
         </div>
         <div class="tab-pane fade" id="pills-fornecedores" role="tabpanel" aria-labelledby="pills-fornecedores-tab">
           <div class="tab-pane fade show active" id="pills-categoria" role="tabpanel"
@@ -57,7 +57,7 @@
                 <p>Clique em Adicionar para cadastrar.</p>
               </div>
             </div>
-            <TableComponent :items="listaDeCadastros.fornecedores" v-if="listaDeCadastros.fornecedores.length > 0" />
+            <TableComponent :items="listaDeCadastros.fornecedores" :showPagination="true" v-if="listaDeCadastros.fornecedores.length > 0" />
           </div>
         </div>
         <div class="tab-pane fade" id="pills-unidades" role="tabpanel" aria-labelledby="pills-unidades-tab">
@@ -70,7 +70,7 @@
                 <p>Clique em Adicionar para cadastrar.</p>
               </div>
             </div>
-            <TableComponent :items="listaDeCadastros.unidades" v-if="listaDeCadastros.unidades.length > 0" />
+            <TableComponent :items="listaDeCadastros.unidades" :showPagination="true" v-if="listaDeCadastros.unidades.length > 0" />
           </div>
         </div>
         <div class="tab-pane fade" id="pills-tags" role="tabpanel" aria-labelledby="pills-tags-tab">
@@ -82,12 +82,10 @@
                 <p>Clique em Adicionar para cadastrar.</p>
               </div>
             </div>
-            <TableComponent :items="listaDeCadastros.tags" v-if="listaDeCadastros.tags.length > 0" />
+            <TableComponent :items="listaDeCadastros.tags" :showPagination="true" v-if="listaDeCadastros.tags.length > 0" />
           </div>
         </div>
-      </div>
-
-      
+      </div>      
     </div>   
   </div>
   <ModalDeCadastro modalId="modalAdicionarCadastro" title="Cadastro de Fornecedores" @clickSalvar="criarCadastro">
@@ -111,21 +109,9 @@ import BreadCrumb from "@/components/shared/BreadCrumb.vue";
 import TableComponent from "@/components/shared/TableComponent.vue";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 import ModalDeCadastro from "./ModalDeCadastro.vue";
+import { IListaDeCadastros } from "../types"
 
 let modalIsVisivel = ref<boolean>(false);
-
-interface ICadastroItem {
-  id: number;
-  nome: string;
-  // Adicione outras propriedades comuns se existirem
-}
-
-interface IListaDeCadastros {
-  categorias: Array<ICadastroItem>;
-  fornecedores: Array<ICadastroItem>;
-  unidades: Array<ICadastroItem>;
-  tags: Array<ICadastroItem>;
-}
 
 const listaDeCadastros = ref<IListaDeCadastros>({
   categorias: [],
