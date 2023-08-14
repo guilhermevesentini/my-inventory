@@ -71,9 +71,12 @@
         <nav aria-label="Page navigation example">
           <ul class="pagination justify-content">
             <li class="page-item" :class="{ disabled: currentPage === 1 }">
-              <button class="page-link" @click="prevPage" :disabled="currentPage === 1"><span aria-hidden="true">&laquo;</span></button>
+              <button class="page-link" @click="prevPage" :disabled="currentPage === 1">
+                <span aria-hidden="true">&laquo;</span>
+              </button>
             </li>
-            <li class="page-item" v-for="page in Math.ceil(listaDeProdutosComputed.length / itemsPerPage)" :key="page"
+            <li class="page-item" v-for="page in
+             Math.ceil(listaDeProdutosComputed.length / itemsPerPage)" :key="page"
               :class="{ active: currentPage === page }">
               <button class="page-link" @click="currentPage = page">{{ page }}</button>
             </li>

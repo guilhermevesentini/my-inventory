@@ -95,25 +95,6 @@
       "categoria": "Música e Shows"
     },
     {
-      "id": 5,
-      "_id": "ae77fa5b2fc1d3fa8b42194638f7d938",
-      "_id_Produto": "bbf3661e7bfcc846ea763bca5eededdb",
-      "nome": "adadad",
-      "descricao": "adadad",
-      "codigo": "2323",
-      "marca": "213213",
-      "modelo": "12da",
-      "categoria": "Móveis",
-      "quantidade": 21,
-      "preco": 3,
-      "fornecedor": "adf",
-      "dataAquisicao": "2023-07-14",
-      "localizacao": "sefesf",
-      "tag": "sefsef",
-      "observacao": "",
-      "total": 0
-    },
-    {
       "id": 6,
       "_id": "ae77fa5b2fc1d3fa8b42194638f7d938",
       "_id_Produto": "2afe805a32ce2f65768f0d38a0999221",
@@ -401,129 +382,133 @@
   ],
   "categorias": [
     {
-      "_id": "366c0de2a2f35351f72e92ffe2bdccef",
+      "id": "366c0de2a2f35351f72e92ffe2bdccef",
       "nome": "Mercado"
     },
     {
-      "_id": "d032a22e66f33c72b8e5e9445aa60ee7",
+      "id": "d032a22e66f33c72b8e5e9445aa60ee7",
       "nome": "Moda"
     },
     {
-      "_id": "a1d8907132f07ffedee9f98bbf0779a5",
+      "id": "a1d8907132f07ffedee9f98bbf0779a5",
       "nome": "Móveis"
     },
     {
-      "_id": "ae15a8d73b45700c5b39cc944869e8d6",
+      "id": "ae15a8d73b45700c5b39cc944869e8d6",
       "nome": "Música e Shows"
     },
     {
-      "_id": "b2239d72681dd65d1550f67a5151f85d",
-      "nome": "Natal"
-    },
-    {
-      "_id": "81c855e7c1e5907461df94ab216ba850",
+      "id": "81c855e7c1e5907461df94ab216ba850",
       "nome": "Papelaria"
     },
     {
-      "_id": "ac5b82987fb46b839ccbf0e33e124d5e",
+      "id": "ac5b82987fb46b839ccbf0e33e124d5e",
       "nome": "Pet Shop"
     },
     {
-      "_id": "7b32f43ad8817756a343d85c805ad6a2",
+      "id": "7b32f43ad8817756a343d85c805ad6a2",
       "nome": "Religião e Espiritualidade"
     },
     {
-      "_id": "1cb648dd4c2c93a53dfdd23645bb1c96",
+      "id": "1cb648dd4c2c93a53dfdd23645bb1c96",
       "nome": "Relógios"
     },
     {
-      "_id": "b74c61c1e48d4d8a018af9b75ec35f94",
+      "id": "b74c61c1e48d4d8a018af9b75ec35f94",
       "nome": "Saúde e Cuidados Pessoais"
     },
     {
-      "_id": "4b9fc40d11ed21e35b8a9d8c4a615a3e",
+      "id": "4b9fc40d11ed21e35b8a9d8c4a615a3e",
       "nome": "Serviços"
     },
     {
-      "_id": "63c9b1576c285c23b59b7b10ffdb8816",
+      "id": "63c9b1576c285c23b59b7b10ffdb8816",
       "nome": "Suplementos Alimentares"
     },
     {
-      "_id": "f49759ff4daea6e9c8286d6a4bb4c17e",
+      "id": "f49759ff4daea6e9c8286d6a4bb4c17e",
       "nome": "Tablets, iPads e E-Readers"
     },
     {
-      "_id": "8a68c45be71c1e6f7cf0ce5f0b95be99",
+      "id": "8a68c45be71c1e6f7cf0ce5f0b95be99",
       "nome": "Telefonia Fixa"
     },
     {
-      "_id": "1d6b52b9f4b46522472a7217a59b2f8e",
+      "id": "1d6b52b9f4b46522472a7217a59b2f8e",
       "nome": "TV e Vídeo"
     },
     {
-      "_id": "b4cc9b9197321f6321a364c71c59e7fc",
+      "id": "b4cc9b9197321f6321a364c71c59e7fc",
       "nome": "Utilidades Domésticas"
     }
   ],
   "fornecedores": [
     {
-      "_id": "366c0de2a2f35351f72e92ffe2bdccef",
+      "id": "366c0de2a2f35351f72e92ffe2bdccef",
       "nome": "Atalanta"
     },
     {
-      "_id": "d032a22e66f33c72b8e5e9445aa60ee7",
+      "id": "d032a22e66f33c72b8e5e9445aa60ee7",
       "nome": "Praise"
     },
     {
-      "_id": "a1d8907132f07ffedee9f98bbf0779a5",
+      "id": "a1d8907132f07ffedee9f98bbf0779a5",
       "nome": "Rockstar"
     },
     {
-      "_id": "ae15a8d73b45700c5b39cc944869e8d6",
+      "id": "ae15a8d73b45700c5b39cc944869e8d6",
       "nome": "Amazon"
+    },
+    {
+      "nome": "teste",
+      "id": "320be2beb283e18dccb16223f70999dc"
     }
   ],
   "unidades": [
     {
-      "_id": "366c0de2a2f35351f72e92ffe2bdccef",
+      "id": "366c0de2a2f35351f72e92ffe2bdccef",
       "nome": "São Paulo"
     },
     {
-      "_id": "d032a22e66f33c72b8e5e9445aa60ee7",
+      "id": "d032a22e66f33c72b8e5e9445aa60ee7",
       "nome": "Perus"
     },
     {
-      "_id": "a1d8907132f07ffedee9f98bbf0779a5",
+      "id": "a1d8907132f07ffedee9f98bbf0779a5",
       "nome": "São Vicente"
     },
     {
-      "_id": "ae15a8d73b45700c5b39cc944869e8d6",
+      "id": "ae15a8d73b45700c5b39cc944869e8d6",
       "nome": "Barra funda"
+    },
+    {
+      "nome": "zona leste",
+      "id": "bb3e6ec2c34b8a8313f2941b84221071"
     }
   ],
   "tags": [
     {
-      "_id": "366c0de2a2f35351f72e92ffe2bdccef",
+      "id": "366c0de2a2f35351f72e92ffe2bdccef",
       "nome": "Embalagem"
     },
     {
-      "_id": "d032a22e66f33c72b8e5e9445aa60ee7",
+      "id": "d032a22e66f33c72b8e5e9445aa60ee7",
       "nome": "Veiculo"
     },
     {
-      "_id": "a1d8907132f07ffedee9f98bbf0779a5",
+      "id": "a1d8907132f07ffedee9f98bbf0779a5",
       "nome": "Objeto"
     },
     {
-      "_id": "ae15a8d73b45700c5b39cc944869e8d6",
+      "id": "ae15a8d73b45700c5b39cc944869e8d6",
       "nome": "Roupas"
     },
     {
-      "_id": "ae15a8d73b45700c5b39cc944869e8g65",
+      "id": "ae15a8d73b45700c5b39cc944869e8g65",
       "nome": "Tech"
     },
     {
-      "_id": "ae15a8d73b45700c5b39cc944869et84",
+      "id": "ae15a8d73b45700c5b39cc944869et84",
       "nome": "Extra"
     }
   ]

@@ -11,7 +11,7 @@
         <tr v-for="item in itemsToShow" :key="item.id">
           <td>{{ item.nome }}</td>
           <td style="text-align: center; width: 40px;">
-            <i class="material-icons" @click="selecionarLinha(item.id)" title="Editar">edit</i>
+            <i class="material-icons" @click="selecionarLinha(item._id)" title="Editar">edit</i>
           </td>
           <td style="text-align: center; width: 40px;">
             <i class="material-icons" @click="deletarProduto(item.id)" title="deletar">delete</i>
@@ -19,13 +19,31 @@
         </tr>
       </tbody>
     </table>
-    <PaginationComponent :currentPage="current" :totalPageCount="totalPageCount" @nextPage="nextPage"
-      @prevPage="prevPage" v-if="showPaginationCheck" />
+
+    <nav aria-label="Page navigation example" v-if="showPagination">
+    <ul class="pagination justify-content">
+      <li class="page-item" :class="{ disabled: current === 1 }">
+        <button class="page-link" @click="prevPage" :disabled="current === 1">
+          <span aria-hidden="true">&laquo;</span>
+        </button>
+      </li>
+      <li class="page-item" v-for="page in 
+      totalPageCount" :key="page" 
+      :class="{ active: current === page }">
+        <button class="page-link" @click="gotoPage(page)">{{ page }}</button>
+      </li>
+      <li class="page-item" :class="{ disabled: current === Math.ceil(produtosFiltrados?.length / itemsPerPage) }">
+        <button class="page-link" @click="nextPage" :disabled="current === Math.ceil(produtosFiltrados?.length / itemsPerPage)">
+          <span aria-hidden="true">&raquo;</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, defineProps, computed, watch } from 'vue';
+import { ref, defineProps, defineEmits, computed, watch } from 'vue';
 import PaginationComponent from './PaginationComponent.vue';
 
 const props = defineProps({
@@ -65,12 +83,20 @@ const prevPage = () => {
   current.value--;
 };
 
+const gotoPage = (page) => {
+  current.value = page;
+};
+
 const selecionarLinha = (id: number) => {
   // Lógica para selecionar a linha
 };
 
-const deletarProduto = (id: number) => {
-  // Lógica para deletar o produto
+const emit = defineEmits<{
+  (event: "deletar", value: string): void;
+}>();
+
+const deletarProduto = (id: string) => {  
+  emit('deletar', id);
 };
 
 // Watch for changes in itemsPerPage prop and update totalPageCount

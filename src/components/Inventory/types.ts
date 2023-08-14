@@ -10,3 +10,10 @@ export interface ICadastroItem {
     unidades: Array<ICadastroItem>;
     tags: Array<ICadastroItem>;
   }
+
+  export enum ETipos {
+    categorias = 'categoria',
+    fornecedores = 'fornecedor',
+    unidades = 'unidade',
+    tags = 'tag',
+  }
