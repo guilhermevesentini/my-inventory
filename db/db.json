@@ -458,10 +458,6 @@
     {
       "id": "ae15a8d73b45700c5b39cc944869e8d6",
       "nome": "Amazon"
-    },
-    {
-      "nome": "teste",
-      "id": "320be2beb283e18dccb16223f70999dc"
     }
   ],
   "unidades": [
@@ -484,6 +480,10 @@
     {
       "nome": "zona leste",
       "id": "bb3e6ec2c34b8a8313f2941b84221071"
+    },
+    {
+      "nome": "teste",
+      "id": "56ac56b563ae9a8fe20a6e895f6c8d16"
     }
   ],
   "tags": [

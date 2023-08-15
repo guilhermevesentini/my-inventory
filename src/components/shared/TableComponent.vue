@@ -20,7 +20,7 @@
       </tbody>
     </table>
 
-    <nav aria-label="Page navigation example" v-if="showPagination">
+    <nav aria-label="Page navigation example" v-if="showPaginationCheck && showPagination">
     <ul class="pagination justify-content">
       <li class="page-item" :class="{ disabled: current === 1 }">
         <button class="page-link" @click="prevPage" :disabled="current === 1">
@@ -32,8 +32,8 @@
       :class="{ active: current === page }">
         <button class="page-link" @click="gotoPage(page)">{{ page }}</button>
       </li>
-      <li class="page-item" :class="{ disabled: current === Math.ceil(produtosFiltrados?.length / itemsPerPage) }">
-        <button class="page-link" @click="nextPage" :disabled="current === Math.ceil(produtosFiltrados?.length / itemsPerPage)">
+      <li class="page-item" :class="{ disabled: current === Math.ceil(items?.length / itemsPerPage) }">
+        <button class="page-link" @click="nextPage" :disabled="current === Math.ceil(items?.length / itemsPerPage)">
           <span aria-hidden="true">&raquo;</span>
         </button>
       </li>
@@ -63,7 +63,11 @@ const props = defineProps({
 const current = ref(1);
 const itemsPerPage = ref(props.itemsPerPage);
 
-const showPaginationCheck = computed(() => props.showPagination && props.items?.length > 5)
+const showPaginationCheck = computed(() => {
+  const hasLength = itemsPerPage.value < props.items?.length;
+  
+  return props.showPagination && hasLength;
+})
 
 const totalPageCount = computed(() => {
   return Math.ceil((props.items?.length || 0) / itemsPerPage.value);
@@ -76,7 +80,10 @@ const itemsToShow = computed(() => {
 });
 
 const nextPage = () => {
-  current.value++;
+  const totalPages = itemsPerPage.value;
+  if(current.value < totalPages) {
+    current.value++;
+  }  
 };
 
 const prevPage = () => {
