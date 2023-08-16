@@ -95,25 +95,6 @@
       "categoria": "Música e Shows"
     },
     {
-      "id": 6,
-      "_id": "ae77fa5b2fc1d3fa8b42194638f7d938",
-      "_id_Produto": "2afe805a32ce2f65768f0d38a0999221",
-      "nome": "tsfesf",
-      "descricao": "sefsef",
-      "codigo": "sefsef",
-      "marca": "sefsef",
-      "modelo": "sefsef",
-      "categoria": "Música e Shows",
-      "quantidade": 234,
-      "preco": 234,
-      "fornecedor": "sffs",
-      "dataAquisicao": "2023-07-06",
-      "localizacao": "sefsef",
-      "tag": "sefsef",
-      "observacao": "",
-      "total": 0
-    },
-    {
       "id": 7,
       "_id": "ae77fa5b2fc1d3fa8b42194638f7d938",
       "_id_Produto": "c9b2cf21fb432325784ce16837b71ba2",

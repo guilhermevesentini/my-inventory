@@ -28,7 +28,6 @@ import HeaderCompVue from "./HeaderCompVue.vue";
     margin: 0.5rem;
     border-radius: 10px;
     background-color: #fff;
-    height: calc(100% - 71px);
 }
 
 .light_mode_on {

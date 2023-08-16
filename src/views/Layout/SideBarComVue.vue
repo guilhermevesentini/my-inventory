@@ -16,21 +16,31 @@
                 <a>Inventory</a>
                 <i class="material-icons dropdown_icon" title="eye">{{ showDashboardMenu ? 'expand_less' : 'expand_more' }}</i>
             </li>
-        </ul>
-        <ul class="item collapse" id="dashboardCollapsedMenu"  v-if="showDashboardMenu">
+            <ul class="item collapse" id="dashboardCollapsedMenu"  v-if="showDashboardMenu">
             <li>
                 <router-link to="/inventory">
                     <a href="#"><i class="material-icons">list_alt</i>Produtos</a>
                 </router-link>
             </li>
-        </ul>
-        <ul class="item collapse" id="dashboardCollapsedMenu"  v-if="showDashboardMenu">            
-            <li>
-                <router-link to="/inventory_config">
-                    <a href="#"><i class="material-icons">settings</i>Config</a>
+            </ul>
+            <ul class="item collapse" id="dashboardCollapsedMenu"  v-if="showDashboardMenu">            
+                <li>
+                    <router-link to="/inventory_config">
+                        <a href="#"><i class="material-icons">settings</i>Config</a>
+                    </router-link>
+                </li>
+            </ul>
+            <li class="item">
+                <router-link to="/Calendario">
+                    <a href="#"><i class="material-icons">calendar_month</i>Calendário</a>
                 </router-link>
             </li>
-        </ul>
+            <li class="item">
+                <router-link to="/Financeiro">
+                    <a href="#"><i class="material-icons">attach_money</i>Financeiro</a>
+                </router-link>
+            </li>
+        </ul>        
     </div>
     <div class="sidebar">
         

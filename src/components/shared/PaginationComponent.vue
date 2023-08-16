@@ -33,8 +33,8 @@
   });
 
   const emit = defineEmits<{
-  (event: "currentPageChanged", value: number): void;
-}>();
+    (event: "currentPageChanged", value: number): void;
+  }>();
   
   const current = ref(props.currentPage);
   

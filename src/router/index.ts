@@ -11,6 +11,8 @@ import Login from "@/views/Login/LoginPage.vue";
 import RegistrarNovoUsuario from "@/views/Login/RegistrarNovoUsuario.vue";
 
 import { isAuthenticated } from '../../auth';
+import CalendarPageVue from "@/views/Calendar/CalendarPage.vue";
+import FinancePageVue from "@/views/Finance/FinancePage.vue";
 
 const routes: RouteRecordRaw[] = [
   
@@ -63,6 +65,18 @@ const routes: RouteRecordRaw[] = [
         path: "/Editar_cadastro",
         name: "Editar Cadastro",
         component: EditarCadastro,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "/Calendario",
+        name: "Calendário",
+        component: CalendarPageVue,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "/Financeiro",
+        name: "Financeiro",
+        component: FinancePageVue,
         meta: { requiresAuth: true },
       },
     ],
