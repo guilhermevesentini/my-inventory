@@ -39,4 +39,8 @@ router.beforeEach((to, from, next) => {
   i {
     cursor: pointer;  
   }
+
+  .input_form {
+    margin: 7px 0;
+  }
 </style>

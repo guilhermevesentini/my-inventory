@@ -492,5 +492,18 @@
       "id": "ae15a8d73b45700c5b39cc944869et84",
       "nome": "Extra"
     }
+  ],
+  "calendarEvents": [
+    {
+      "id": "a5ee607ab7b685d8af82935a230074cf",
+      "title": "Novo Evento",
+      "start": "2023-08-02T03:00:00.000Z",
+      "end": "2023-08-05T03:00:00.000Z",
+      "allDay": true,
+      "extendedProps": {
+        "editable": true
+      },
+      "editable": true
+    }
   ]
 }
