@@ -270,6 +270,7 @@ const calendarOptions = {
     selectable: true,
     select: criarNovoEvento,
     events: eventos,
+    eventDrop: updateEvent,
     headerToolbar: {
         left: 'prev,next today',
         center: 'title',
