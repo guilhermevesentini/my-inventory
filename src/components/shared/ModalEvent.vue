@@ -1,28 +1,51 @@
 <template>
-    <div>
-        <div class="modal fade" :id="modalId" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Cadastro de {{ title }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p>teste</p>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary" @click="handleSalvar">Salvar</button>
-                    </div>
+    <div class="modal modal-mask" v-show="modalShow" transition="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <slot name="header">
+                        default header
+                    </slot>
+                    <button type="button" class="btn-close" @click="modalShow = false"></button>
+                </div>
+                <div class="modal-body">
+                    <slot name="body">
+                        default body
+                    </slot>
+                </div>
+                <div class="modal-footer">
+                    <slot name="footer">
+                        default footer
+                    </slot>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="modal-mask" v-show="modalShow" transition="modal">
+        <div class="modal-wrapper">
+            <div class="modal-container">
+
+                <div class="modal-header">
+                    <slot name="header">
+                        default header
+                    </slot>
+                </div>
+
+                <div class="modal-body">
+                    <slot name="body">
+                        default body
+                    </slot>
+                </div>
+
+                <div class="modal-footer">
+                    <slot name="footer">
+                        default footer
+                    </slot>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
     </div>
 </template>
   
@@ -30,12 +53,17 @@
 
 import { defineProps, defineEmits, ref, computed } from 'vue';
 
+const modalShow = ref(false)
+
 const props = defineProps({
     modalId: {
         type: String
     },
     title: {
         type: String
+    },
+    modalShow:{
+        type: Boolean
     }
 })
 

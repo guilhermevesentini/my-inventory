@@ -5,25 +5,35 @@
         </div>
 
         <div class="col-md-12">
-
-            <button @click="open = true">Open Modal</button>
-
-            <Teleport to="body">
-            <div v-if="open" class="modal">
-                <p>Hello from the modal!</p>
-                <button @click="open = false">Close</button>
-            </div>
-            </Teleport>
-
-            <br>
-            <br>
-
             <div class="calendar" ref="calendarRef"></div>
         </div>
     </div>
 
-    <ModalEvent modalId="modalCalendario" title='teste' @clickSalvar="criarCadastro" />
+    <div class="modal modal-mask" v-show="modalShow" transition="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cadastro</h5>
+                    <button type="button" class="btn-close" @click="modalShow = false"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input_form col-md-12">
+                                <label>Nome:</label>
+                                <input class="form-control" type="text" placeholder="Digite ao nome" />
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @click="modalShow = false">Fechar</button>
+                    <button type="button" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
   
 <script lang="ts" setup>
@@ -38,10 +48,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import ModalEvent from '@/components/shared/ModalEvent.vue';
 
-let open = ref(false)
-
-let calendar; // Defina a variável calendar fora da função onMounted
-let modalShow = ref(false)
+let calendar;
+let modalShow = ref(false);
 const calendarRef = ref(null);
 
 const handleDateClick = (info) => {
@@ -114,15 +122,6 @@ onMounted(() => {
 <style lang="scss" scoped>
 .calendar {
     padding-bottom: 1rem;
-}
-
-.modal {
-  position: fixed;
-  z-index: 999;
-  top: 20%;
-  left: 50%;
-  width: 300px;
-  margin-left: -150px;
 }
 </style>
   
