@@ -1,7 +1,7 @@
 <template>
     <div class="row" style="margin: 10px 0;">
         <div class="col-md-12">
-            <MenuSuperiorAcoes name="Calendário" :adicionar="true" />
+            <MenuSuperiorAcoes name="Calendário" :btnCriarNovoEvento="true" @clickCriarNovoEvento="handleCriarNovoEvento" />
         </div>
 
         <div class="col-md-12">
@@ -60,6 +60,78 @@
             </div>
         </div>
     </div>
+
+    <div class="modal modal-mask" v-show="modalCriarShow" transition="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Criar Evento</h5>
+                <button type="button" class="btn-close" @click="modalCriarShow = false"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Título:</label>
+                        <input class="form-control" type="text" placeholder="Digite o título" v-model="eventParams.title"/>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="input_form col-md-12">
+                            <input type="checkbox" id="duracao" v-model="eventParams.periodo" />
+                            <label for="duracao" style="margin-left: 5px;">Por período</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12" v-if="!eventParams.periodo">
+                        <div class="input_form col-md-12">
+                            <label>Data:</label>
+                            <input class="form-control" type="date" v-model="eventParams.date"/>
+                        </div>
+                    </div> 
+                    <div class="col-md-12" v-if="eventParams.periodo">
+                        <div class="input_form col-md-12">
+                            <label>Início:</label>
+                            <input class="form-control" type="date" v-model="eventParams.start"/>
+                        </div>
+                    </div>                    
+                    <div class="col-md-12" v-if="eventParams.periodo">
+                        <div class="input_form col-md-12">
+                            <label>Fim:</label>
+                            <input class="form-control" type="date" v-model="eventParams.end"/>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="input_form col-md-12">
+                            <input type="checkbox" id="duracao" v-model="eventParams.allDay" />
+                            <label for="duracao" style="margin-left: 5px;">Durante todo o dia</label>
+                        </div>
+                    </div>
+                    <div class="input_form col-md-6" v-if="!eventParams.allDay">
+                        <label for="inicioHour" style="margin-right: 5px;">Início: </label>
+                        <input type="time" id="inicioHour" v-model="eventParams.hourStart" />
+                    </div>
+                    <div class="input_form col-md-6" v-if="!eventParams.allDay">
+                        <label for="fimHour" style="margin-right: 5px;">Fim:</label>
+                        <input type="time" id="fimHour" v-model="eventParams.hourEnd" />
+                    </div>
+                    <div class="input_form col-md-12">
+                        <label>Observação:</label>
+                        <textarea name="observacao" rows="6" style="width: 100%; max-height: 100px;" placeholder="Digite sua observação"
+                            v-model="eventParams.comments"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"  style="display: flex; justify-content: space-between;">
+                <div>
+                    <button type="button" class="btn btn-secondary" @click="modalCriarShow = false">Fechar</button>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-danger" @click="excluirEvento">Excluir</button>
+                    <button type="button" class="btn btn-primary" @click="criarEvento" style="margin-left: 10px;">Salvar</button>
+                </div>                    
+            </div>
+        </div>
+    </div>
+</div>
+
 </template>
   
 <script lang="ts" setup>
@@ -78,14 +150,18 @@ import { IGerarId } from '@/composables/types';
 
 let calendar: any;
 let modalShow = ref(false);
+let modalCriarShow = ref(false);
 const calendarRef = ref(null);
 const eventos = ref<IEvento[]>([]);
 
 let eventFromCalendar = ref({
     id: '',
     title: '',
+    periodo: '',
     start: '',
     end: '',
+    hourStart: '',
+    hourEnd: '',
     allDay: false,
     extendedProps: {
         editable: true
@@ -102,34 +178,127 @@ const config: IGerarId = {
 }
 
 interface IEvento {
-    id: string
-    Title: string
-    start: Date
-    end: Date
-    allDay: boolean,
+    id: string;
+    title: string;
+    periodo: boolean;
+    date: Date;
+    start: Date;
+    end: Date;
+    hourStart: Date;
+    hourEnd: Date;
+    allDay: boolean;
     extendedProps: {
-        editable: boolean
-    },
-    editable: boolean,
-    comments: string
+        editable: boolean;
+    };
+    editable: boolean;
+    comments: string;
 }
 
 const eventParams = ref<IEvento>({
     id: '',
-    Title: '',
+    title: '',
+    periodo: false,
+    date: new Date(),
     start: new Date(),
     end: new Date(),
+    hourStart: new Date(),
+    hourEnd: new Date(),
     allDay: false,
     extendedProps: {
-        editable: true
+        editable: true,
     },
     editable: true,
-    comments: ''
-})
+    comments: '',
+});
 
 const handleDateClick = async (info) => {
     criarNovoEvento(info)
 }
+
+const handleCriarNovoEvento = async () => {
+    limparParams()
+    modalCriarShow.value = true   
+}
+
+const limparParams = () => {
+    eventParams.value.id = '';
+    eventParams.value.title = '';
+    eventParams.value.periodo = false;
+    eventParams.value.date = new Date();
+    eventParams.value.start = new Date();
+    eventParams.value.end = new Date();
+    eventParams.value.hourStart = '';
+    eventParams.value.hourEnd = '';
+    eventParams.value.allDay = false;
+    eventParams.value.extendedProps.editable = true;
+    eventParams.value.editable = true;
+    eventParams.value.comments = '';
+};
+
+const criarEvento = async () => {
+    const startDateTime = new Date(eventParams.value.date);
+    const endDateTime = new Date(eventParams.value.date);
+
+    const newEvent: IEvento = {
+        id: useGerarId(config),
+        title: eventParams.value.title,
+        date: eventParams.value.date,
+        periodo: eventParams.value.periodo,
+        start: eventParams.value.start,
+        end: eventParams.value.end,
+        hourStart: '',
+        hourEnd: '',
+        allDay: eventParams.value.allDay,
+        extendedProps: {
+            editable: true,
+        },
+        editable: true,
+        comments: eventParams.value.comments,
+    };
+
+    if (!eventParams.value.allDay) {
+        if (!eventParams.value.hourStart || !eventParams.value.hourEnd) {
+            alert('necessário preencher os horários')
+            return
+        }
+        const dateParts = eventParams.value.date.split('-');
+        startDateTime.setFullYear(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2]));
+
+        const hourStartParts = eventParams.value.hourStart.split(':');
+        startDateTime.setHours(parseInt(hourStartParts[0]), parseInt(hourStartParts[1]), 0, 0);
+
+        const hourEndParts = eventParams.value.hourEnd.split(':');
+        endDateTime.setFullYear(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2]));
+        endDateTime.setHours(parseInt(hourEndParts[0]), parseInt(hourEndParts[1]), 0, 0);
+
+        newEvent.start = startDateTime.toISOString();
+        
+        if(eventParams.value.periodo) {
+            // Add one day to endDateTime
+            endDateTime.setDate(endDateTime.getDate() + 1);
+        }
+        
+        newEvent.end = endDateTime.toISOString();
+    }
+
+    const dataJson = JSON.stringify(newEvent);
+
+    const req = await fetch(`http://localhost:3001/calendarEvents`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: dataJson,
+    });
+
+    if (req.ok) {
+        eventos.value.push(newEvent);
+        calendar.refetchEvents();
+    } else {
+        console.error('Erro ao salvar evento');
+    }
+};
+
+
+
 
 const openModal = () => {
     const modal = document.getElementById('myModal');
@@ -180,7 +349,6 @@ const excluirEvento = async () => {
         modalShow.value = false;
     }
 }
-
 
 const handleEventClick = (info) => {
     eventFromCalendar.value.id = info.event.id
