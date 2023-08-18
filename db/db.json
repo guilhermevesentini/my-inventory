@@ -495,14 +495,14 @@
   ],
   "calendarEvents": [
     {
-      "id": "07a0b7e2a3ae138a10ffafe9b5319d82",
-      "title": "awdawdawd",
-      "date": "2023-08-03",
+      "id": "b6b0508d016623776203f44aaa68d9b7",
+      "title": "teste",
+      "date": "2023-08-18",
       "periodo": false,
-      "start": "2023-08-04T01:52:00.000Z",
-      "end": "2023-08-05T02:53:00.000Z",
-      "hourStart": "",
-      "hourEnd": "",
+      "start": "2023-08-18T23:44:00.000Z",
+      "end": "2023-08-19T01:46:00.000Z",
+      "hourStart": "20:44",
+      "hourEnd": "22:46",
       "allDay": false,
       "extendedProps": {
         "editable": true
@@ -511,36 +511,29 @@
       "comments": ""
     },
     {
-      "id": "d95bf602c7a3158e8ab85f124d1cfd27",
-      "title": "awdawd",
-      "date": "2023-08-06",
-      "periodo": false,
-      "start": "2023-08-07T02:54:00.000Z",
-      "end": "2023-08-06T03:55:00.000Z",
-      "hourStart": "",
-      "hourEnd": "",
-      "allDay": false,
+      "id": "7468e05969c68223dcbe233fb0e1d52b",
+      "title": "Novo Evento fee",
+      "start": "2023-08-18T03:00:00.000Z",
+      "end": "2023-08-19T03:00:00.000Z",
+      "allDay": true,
       "extendedProps": {
         "editable": true
       },
       "editable": true,
-      "comments": ""
+      "periodo": "",
+      "hourStart": "",
+      "hourEnd": ""
     },
     {
-      "id": "13ae30535d069fcd6c982c9f34c1e2ca",
-      "title": "awdwad",
-      "date": "2023-08-11",
-      "periodo": false,
-      "start": "2023-08-12T00:53:00.000Z",
-      "end": "2023-08-12T01:54:00.000Z",
-      "hourStart": "",
-      "hourEnd": "",
-      "allDay": false,
+      "id": "13eec01afe1031e48d923736c61d4c1b",
+      "title": "Novo Evento",
+      "start": "2023-08-18T03:00:00.000Z",
+      "end": "2023-08-19T03:00:00.000Z",
+      "allDay": true,
       "extendedProps": {
         "editable": true
       },
-      "editable": true,
-      "comments": ""
+      "editable": true
     }
   ]
 }
