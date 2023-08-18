@@ -246,8 +246,8 @@ const criarEvento = async () => {
         periodo: eventParams.value.periodo,
         start: eventParams.value.start,
         end: eventParams.value.end,
-        hourStart: '',
-        hourEnd: '',
+        hourStart: eventParams.value.hourStart,
+        hourEnd: eventParams.value.hourEnd,
         allDay: eventParams.value.allDay,
         extendedProps: {
             editable: true,
