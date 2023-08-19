@@ -11,9 +11,14 @@
                     <a href="#"><i class="material-icons">insights</i>Dashboard</a>
                 </router-link>
             </li>
-            <li class="item" @click="toggleDashboardMenu">
+            <li class="item">
+                <router-link to="/inventory">
+                    <a href="#"><i class="material-icons">list_alt</i>Produtos</a>
+                </router-link>
+            </li>
+            <!-- <li class="item" @click="toggleDashboardMenu">
                 <i class="material-icons">content_paste</i>                
-                <a>Inventory</a>
+                <a>Produtos</a>
                 <i class="material-icons dropdown_icon" title="eye">{{ showDashboardMenu ? 'expand_less' : 'expand_more' }}</i>
             </li>
             <ul class="item collapse" id="dashboardCollapsedMenu"  v-if="showDashboardMenu">
@@ -29,10 +34,25 @@
                         <a href="#"><i class="material-icons">settings</i>Config</a>
                     </router-link>
                 </li>
-            </ul>
+            </ul> -->
             <li class="item">
                 <router-link to="/Calendario">
                     <a href="#"><i class="material-icons">calendar_month</i>Calendário</a>
+                </router-link>
+            </li>
+            <li class="item">
+                <router-link to="/Receitas">
+                    <a href="#"><i class="material-icons">add</i>Receitas</a>
+                </router-link>
+            </li>
+            <li class="item">
+                <router-link to="/Despesas">
+                    <a href="#"><i class="material-icons">remove</i>Despesas</a>
+                </router-link>
+            </li>
+            <li class="item">
+                <router-link to="/Orders">
+                    <a href="#"><i class="material-icons">shopping_cart</i>Orders</a>
                 </router-link>
             </li>
             <li class="item">
@@ -40,10 +60,12 @@
                     <a href="#"><i class="material-icons">attach_money</i>Financeiro</a>
                 </router-link>
             </li>
+            <li class="item">
+                <router-link to="/inventory_config">
+                    <a href="#"><i class="material-icons">settings</i>Cadastros</a>
+                </router-link>
+            </li>
         </ul>        
-    </div>
-    <div class="sidebar">
-        
     </div>
 </template>
   

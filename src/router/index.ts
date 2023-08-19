@@ -13,6 +13,9 @@ import RegistrarNovoUsuario from "@/views/Login/RegistrarNovoUsuario.vue";
 import { isAuthenticated } from '../../auth';
 import CalendarPageVue from "@/views/Calendar/CalendarPage.vue";
 import FinancePageVue from "@/views/Finance/FinancePage.vue";
+import ReceitasPageVue from "@/views/Finance/ReceitasPage.vue";
+import DespesasPageVue from "@/views/Finance/DespesasPage.vue";
+import OrdersPageVue from "@/views/Orders/OrdersPage.vue";
 
 const routes: RouteRecordRaw[] = [
   
@@ -71,6 +74,24 @@ const routes: RouteRecordRaw[] = [
         path: "/Calendario",
         name: "Calendário",
         component: CalendarPageVue,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "/Receitas",
+        name: "Receitas",
+        component: ReceitasPageVue,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "/Despesas",
+        name: "Despesas",
+        component: DespesasPageVue,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "/Orders",
+        name: "Orders",
+        component: OrdersPageVue,
         meta: { requiresAuth: true },
       },
       {
