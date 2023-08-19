@@ -13,9 +13,12 @@ import RegistrarNovoUsuario from "@/views/Login/RegistrarNovoUsuario.vue";
 import { isAuthenticated } from '../../auth';
 import CalendarPageVue from "@/views/Calendar/CalendarPage.vue";
 import FinancePageVue from "@/views/Finance/FinancePage.vue";
-import ReceitasPageVue from "@/views/Finance/ReceitasPage.vue";
-import DespesasPageVue from "@/views/Finance/DespesasPage.vue";
+import ReceitasPageVue from "@/views/Finance/Receitas/ReceitasPage.vue";
+import AdicionarReceitasPageVue from "@/views/Finance/Receitas/AdicionarReceita.vue";
+import DespesasPageVue from "@/views/Finance/Despesas/DespesasPage.vue";
+import AdicionarDespesasPageVue from "@/views/Finance/Despesas/AdicionarDespesa.vue";
 import OrdersPageVue from "@/views/Orders/OrdersPage.vue";
+import AdicionarOrdemPageVue from "@/views/Orders/AdicionarOrdem.vue";
 
 const routes: RouteRecordRaw[] = [
   
@@ -83,15 +86,33 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true },
       },
       {
+        path: "/Adicionar_Receita",
+        name: "Adicionar Receita",
+        component: AdicionarReceitasPageVue,
+        meta: { requiresAuth: true },
+      },
+      {
         path: "/Despesas",
         name: "Despesas",
         component: DespesasPageVue,
         meta: { requiresAuth: true },
       },
       {
+        path: "/Adicionar_Despesa",
+        name: "Adicionar Despesa",
+        component: AdicionarDespesasPageVue,
+        meta: { requiresAuth: true },
+      },
+      {
         path: "/Orders",
         name: "Orders",
         component: OrdersPageVue,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "/Adicionar_Ordem",
+        name: "Adicionar Ordem",
+        component: AdicionarOrdemPageVue,
         meta: { requiresAuth: true },
       },
       {

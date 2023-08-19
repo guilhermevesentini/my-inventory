@@ -25,6 +25,15 @@
           <div class="btn" @click="HandleCriarEvento" v-if="btnCriarNovoEvento">
             <i class="material-icons">add</i> Adicionar
           </div>
+          <div class="btn" @click="HandleCriarReceitas" v-if="btnCriarNovaReceita">
+            <i class="material-icons">add</i> Adicionar
+          </div>
+          <div class="btn" @click="HandleCriarDespesa" v-if="btnCriarNovaDespesa">
+            <i class="material-icons">add</i> Adicionar
+          </div>
+          <div class="btn" @click="HandleCriarOrdem" v-if="btnCriarNovaOrdem">
+            <i class="material-icons">add</i> Adicionar
+          </div>
           <router-link class="inventory__actions___filters--link" to="/novoProduto" v-slot="{ navigate }"
             v-if="adicionar">
             <div class="inventory__actions___filters--btn-Adicionar" @click="navigate">
@@ -73,6 +82,18 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  btnCriarNovaReceita: {
+    type: Boolean,
+    default: false
+  },
+  btnCriarNovaDespesa: {
+    type: Boolean,
+    default: false
+  },
+  btnCriarNovaOrdem: {
+    type: Boolean,
+    default: false
+  },
   adicionar: {
     type: Boolean,
     default: false
@@ -85,6 +106,9 @@ const emit = defineEmits<{
   (event: "clickSalvar"): void;
   (event: "clickCriar"): void;
   (event: "clickCriarNovoEvento"): void;
+  (event: "clickCriarNovaReceita"): void;
+  (event: "clickCriarNovaDespesa"): void;
+  (event: "clickCriarNovaOrdem"): void;
   (event: "update:atualizarFiltro"): void;
 }>();
 
@@ -102,6 +126,15 @@ const HandleCriar = () => {
 }
 const HandleCriarEvento = () => {
   emit('clickCriarNovoEvento')
+}
+const HandleCriarReceitas = () => {
+  emit('clickCriarNovaReceita')
+}
+const HandleCriarDespesa = () => {
+  emit('clickCriarNovaDespesa')
+}
+const HandleCriarOrdem = () => {
+  emit('clickCriarNovaOrdem')
 }
 const HandleAtualizarFiltro = () => {
   emit('update:atualizarFiltro')

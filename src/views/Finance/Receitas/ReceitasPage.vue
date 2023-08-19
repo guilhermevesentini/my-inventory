@@ -1,10 +1,10 @@
 <template>
   <div class="row" style="margin: 10px 0;">
     <div class="col-md-12">
-      <MenuSuperiorAcoes name="Ordens" :btnCriarNovaOrdem="true" @clickCriarNovaOrdem="adicionarOrdem" />
+      <MenuSuperiorAcoes name="Receitas" :btnCriarNovaReceita="true" @clickCriarNovaReceita="adicionarReceita" />
     </div>
 
-    <InfoNoItems v-if="listaDeOrdens.length <= 0" nome="ordem" />
+    <InfoNoItems v-if="listaDeReceitas.length <= 0" />
 
     <table id="table-desktop" class="table table-bordered table-responsive">
       <thead>
@@ -19,7 +19,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in listaDeOrdens" :key="item.id">
+        <tr v-for="item in listaDeReceitas" :key="item.id">
           <td>{{ item.nome }}</td>
           <td>{{ item.descricao }}</td>          
           <td>{{ item.recorrente }}</td>
@@ -27,10 +27,10 @@
           <td>{{ item.previsao }}</td>
           <td>{{ item.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</td>
           <td style="text-align: center; width: 40px;">
-            <i class="material-icons" @click="editarOrdem(item._id)" title="Editar">edit</i>
+            <i class="material-icons" @click="editarReceita(item._id)" title="Editar">edit</i>
           </td>
           <td style="text-align: center; width: 40px;">
-            <i class="material-icons" @click="deletarOrdem(item.id)" title="deletar">delete</i>
+            <i class="material-icons" @click="deletarReceita(item.id)" title="deletar">delete</i>
           </td>
         </tr>
       </tbody>
@@ -84,7 +84,7 @@ import router from "@/router";
 
 let showModal = ref(false)
 
-interface IOrdens {
+interface IReceitas {
   id: string
   nome: string
   descricao: string
@@ -95,47 +95,47 @@ interface IOrdens {
   observacao: string
 }
 
-const listaDeOrdens = ref<Array<IOrdens>>([]);
+const listaDeReceitas = ref<Array<IReceitas>>([]);
 
-const adicionarOrdem = () => {
-  router.push('/Adicionar_Ordem')
+const adicionarReceita = () => {
+  router.push('/Adicionar_Receita')
 }
 
-const editarOrdem = () => {
+const editarReceita = () => {
   console.log('editar');
 
   //router.push('/Adicionar_Receita')
 }
 
-const deletarOrdem = async (productId: string) => {
-  const req = await fetch(`http://localhost:3001/orders/${productId}`, {
+const deletarReceita = async (productId: string) => {
+  const req = await fetch(`http://localhost:3001/receitas/${productId}`, {
     method: "DELETE",
   });
 
   if (req.ok) {
-    obterOrdens();
+    obterReceitas();
   }
 }
 
-const obterOrdens = async () => {
-  const req = await fetch(`http://localhost:3001/orders`);
+const obterReceitas = async () => {
+  const req = await fetch(`http://localhost:3001/receitas`);
   const response = await req.json();
 
   //const produtosDoUsuario = response.filter(produto => produto._id === userId.toString());
   //console.log(produtosDoUsuario);
 
-  listaDeOrdens.value = response;
+  listaDeReceitas.value = response;
 }
 
 const totalPreco = computed(() => {
-  const valores = listaDeOrdens.value.map(t => t.valor)
+  const valores = listaDeReceitas.value.map(t => t.valor)
   return valores.reduce((valor, valores) => {
     return valor + valores;
   }, 0);
 });
 
 onMounted(() => {
-  obterOrdens()
+  obterReceitas()
 })
 </script>
     

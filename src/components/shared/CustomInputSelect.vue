@@ -19,6 +19,7 @@ const buscarCategorias = async (data: any) => {
         const response = await fetch(`http://localhost:3001/${data}`);
         if (response.ok) {
             const data = await response.json();
+            categoriasList.length = 0;
             // Popule a lista categorias apenas com os _id das categorias
             categoriasList.push(...data);
         } else {

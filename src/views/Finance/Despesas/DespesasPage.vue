@@ -1,10 +1,10 @@
 <template>
   <div class="row" style="margin: 10px 0;">
     <div class="col-md-12">
-      <MenuSuperiorAcoes name="Ordens" :btnCriarNovaOrdem="true" @clickCriarNovaOrdem="adicionarOrdem" />
+      <MenuSuperiorAcoes name="Despesas" :btnCriarNovaDespesa="true" @clickCriarNovaDespesa="adicionarDespesa" />
     </div>
 
-    <InfoNoItems v-if="listaDeOrdens.length <= 0" nome="ordem" />
+    <InfoNoItems v-if="listaDeDespesas.length <= 0" nome="despesa" />
 
     <table id="table-desktop" class="table table-bordered table-responsive">
       <thead>
@@ -19,18 +19,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in listaDeOrdens" :key="item.id">
+        <tr v-for="item in listaDeDespesas" :key="item.id">
           <td>{{ item.nome }}</td>
-          <td>{{ item.descricao }}</td>          
+          <td>{{ item.descricao }}</td>
           <td>{{ item.recorrente }}</td>
           <td>{{ item.frequencia }}</td>
           <td>{{ item.previsao }}</td>
           <td>{{ item.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</td>
           <td style="text-align: center; width: 40px;">
-            <i class="material-icons" @click="editarOrdem(item._id)" title="Editar">edit</i>
+            <i class="material-icons" @click="editarDespesa(item._id)" title="Editar">edit</i>
           </td>
           <td style="text-align: center; width: 40px;">
-            <i class="material-icons" @click="deletarOrdem(item.id)" title="deletar">delete</i>
+            <i class="material-icons" @click="deletarDespesa(item.id)" title="deletar">delete</i>
           </td>
         </tr>
       </tbody>
@@ -84,7 +84,7 @@ import router from "@/router";
 
 let showModal = ref(false)
 
-interface IOrdens {
+interface IDespesas {
   id: string
   nome: string
   descricao: string
@@ -95,47 +95,44 @@ interface IOrdens {
   observacao: string
 }
 
-const listaDeOrdens = ref<Array<IOrdens>>([]);
+const listaDeDespesas = ref<Array<IDespesas>>([]);
 
-const adicionarOrdem = () => {
-  router.push('/Adicionar_Ordem')
+const adicionarDespesa = () => {
+  router.push('/Adicionar_Despesa')
 }
 
-const editarOrdem = () => {
+const editarDespesa = () => {
   console.log('editar');
 
-  //router.push('/Adicionar_Receita')
+  //router.push('/Adicionar_Despesa')
 }
 
-const deletarOrdem = async (productId: string) => {
-  const req = await fetch(`http://localhost:3001/orders/${productId}`, {
+const deletarDespesa = async (productId: string) => {
+  const req = await fetch(`http://localhost:3001/despesas/${productId}`, {
     method: "DELETE",
   });
 
   if (req.ok) {
-    obterOrdens();
+    obterDespesas();
   }
 }
 
-const obterOrdens = async () => {
-  const req = await fetch(`http://localhost:3001/orders`);
+const obterDespesas = async () => {
+  const req = await fetch(`http://localhost:3001/despesas`);
   const response = await req.json();
 
-  //const produtosDoUsuario = response.filter(produto => produto._id === userId.toString());
-  //console.log(produtosDoUsuario);
-
-  listaDeOrdens.value = response;
+  listaDeDespesas.value = response;
 }
 
 const totalPreco = computed(() => {
-  const valores = listaDeOrdens.value.map(t => t.valor)
+  const valores = listaDeDespesas.value.map(t => t.valor)
   return valores.reduce((valor, valores) => {
     return valor + valores;
   }, 0);
 });
 
 onMounted(() => {
-  obterOrdens()
+  obterDespesas()
 })
 </script>
     
