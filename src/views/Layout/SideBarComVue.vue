@@ -6,15 +6,11 @@
                     iNVENTORY
                 </a>                
             </li>               
-            <li class="item">
-                <router-link to="/dashboard">
-                    <a href="#"><i class="material-icons">insights</i>Dashboard</a>
-                </router-link>
+            <li class="item" @click="ClickNoLink('/Dashboard')">
+                <i class="material-icons">insights</i>Dashboard
             </li>
-            <li class="item">
-                <router-link to="/inventory">
-                    <a href="#"><i class="material-icons">list_alt</i>Produtos</a>
-                </router-link>
+            <li class="item" @click="ClickNoLink('/Inventory')">
+                <i class="material-icons">list_alt</i>Produtos
             </li>
             <!-- <li class="item" @click="toggleDashboardMenu">
                 <i class="material-icons">content_paste</i>                
@@ -35,41 +31,30 @@
                     </router-link>
                 </li>
             </ul> -->
-            <li class="item">
-                <router-link to="/Calendario">
-                    <a href="#"><i class="material-icons">calendar_month</i>Calendário</a>
-                </router-link>
+            <li class="item" @click="ClickNoLink('/Calendario')">
+                <i class="material-icons">calendar_month</i>Calendário
             </li>
-            <li class="item">
-                <router-link to="/Receitas">
-                    <a href="#"><i class="material-icons">add</i>Receitas</a>
-                </router-link>
+            <li class="item" @click="ClickNoLink('/Receitas')">
+                <i class="material-icons">add</i>Receitas
             </li>
-            <li class="item">
-                <router-link to="/Despesas">
-                    <a href="#"><i class="material-icons">remove</i>Despesas</a>
-                </router-link>
+            <li class="item" @click="ClickNoLink('/Despesas')">
+                <i class="material-icons">remove</i>Despesas
             </li>
-            <li class="item">
-                <router-link to="/Orders">
-                    <a href="#"><i class="material-icons">shopping_cart</i>Orders</a>
-                </router-link>
+            <li class="item" @click="ClickNoLink('/Orders')">
+                <i class="material-icons">shopping_cart</i>Orders
             </li>
-            <li class="item">
-                <router-link to="/Financeiro">
-                    <a href="#"><i class="material-icons">attach_money</i>Financeiro</a>
-                </router-link>
+            <li class="item" @click="ClickNoLink('/Financeiro')">
+                <i class="material-icons">attach_money</i>Financeiro
             </li>
-            <li class="item">
-                <router-link to="/inventory_config">
-                    <a href="#"><i class="material-icons">settings</i>Cadastros</a>
-                </router-link>
+            <li class="item" @click="ClickNoLink('/inventory_config')">
+                <i class="material-icons">settings</i>Cadastros
             </li>
         </ul>        
     </div>
 </template>
   
 <script lang="ts">
+import router from '@/router';
 import { defineComponent, ref, onMounted } from 'vue';
 
 export default defineComponent({
@@ -102,6 +87,11 @@ export default defineComponent({
             toggleDashboardMenu,
         };
     },
+    methods: {
+        ClickNoLink (path: string) {
+            return router.push(`${path}`)
+        }
+    }
 });
 </script>
   
