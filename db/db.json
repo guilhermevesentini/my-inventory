@@ -513,8 +513,8 @@
     {
       "id": "7468e05969c68223dcbe233fb0e1d52b",
       "title": "Novo Evento fee",
-      "start": "2023-08-18T03:00:00.000Z",
-      "end": "2023-08-19T03:00:00.000Z",
+      "start": "2023-08-20T03:00:00.000Z",
+      "end": "2023-08-21T03:00:00.000Z",
       "allDay": true,
       "extendedProps": {
         "editable": true
@@ -556,6 +556,98 @@
         "editable": true
       },
       "editable": true
+    }
+  ],
+  "receitas": [
+    {
+      "id": "c40114f447f38bd5e314a627e39b0bc7",
+      "nome": "sefsefsef",
+      "descricao": "esfesfesfef",
+      "valor": 3213213,
+      "previsao": "2023-08-03",
+      "recorrente": "Sim",
+      "frequencia": "Quinzenal",
+      "observacao": ""
+    },
+    {
+      "id": "4d855c859d90491a74f6e76b713db751",
+      "nome": "awdawd",
+      "descricao": "awdwadwd",
+      "valor": 45345,
+      "previsao": "2023-08-16",
+      "recorrente": "Não",
+      "frequencia": "",
+      "observacao": ""
+    }
+  ],
+  "despesas": [
+    {
+      "id": "12113c5d13163ecfb5d4fd9c9683eff1",
+      "nome": "awdawdawd",
+      "descricao": "wadawdwd",
+      "valor": 324,
+      "previsao": "2023-08-24",
+      "recorrente": "Sim",
+      "frequencia": "Semestral",
+      "observacao": ""
+    },
+    {
+      "id": "1e72ef2e2098ea28605b7f48f48b7e34",
+      "nome": "sefsef",
+      "descricao": "esfsefe",
+      "valor": 456546,
+      "previsao": "2023-08-24",
+      "recorrente": "Não",
+      "frequencia": "",
+      "observacao": ""
+    }
+  ],
+  "orders": [
+    {
+      "id": "5c6203ec69b576f8f0630e5ca65f9c9f",
+      "nome": "awdwad",
+      "descricao": "awdwadwa",
+      "valor": 3466456,
+      "previsao": "2023-08-01",
+      "recorrente": "Não",
+      "frequencia": "",
+      "observacao": ""
+    }
+  ],
+  "frequencias": [
+    {
+      "id": "366c0de2a2f35351f72e92ffe2bdcdad",
+      "nome": "Diário"
+    },
+    {
+      "id": "366c0de2a2f35351f72e92ffe2bdadwa",
+      "nome": "Semanal"
+    },
+    {
+      "id": "366c0de2a2f35351f72e92ffe2bdgsee",
+      "nome": "Quinzenal"
+    },
+    {
+      "id": "366c0de2a2f35351f72e92ffe2bdbvhf",
+      "nome": "Mensal"
+    },
+    {
+      "id": "366c0de2a2f35351f72e92ffe2bhktty",
+      "nome": "Semestral"
+    },
+    {
+      "id": "366c0de2a2f35351f72e92ffe2bdmyij",
+      "nome": "Anual"
+    }
+  ],
+  "recorrencias": [
+    {
+      "id": "366c0de2a2f35351f72e92ffe2bdbvxc",
+      "nome": "Sim"
+    },
+    {
+      "id": "366c0de2a2f35351f72e92ffe2bnbfbn",
+      "nome": "Não"
     }
   ]
 }
