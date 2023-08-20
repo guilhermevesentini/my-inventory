@@ -15,10 +15,13 @@ import CalendarPageVue from "@/views/Calendar/CalendarPage.vue";
 import FinancePageVue from "@/views/Finance/FinancePage.vue";
 import ReceitasPageVue from "@/views/Finance/Receitas/ReceitasPage.vue";
 import AdicionarReceitasPageVue from "@/views/Finance/Receitas/AdicionarReceita.vue";
+import EditarReceitasPageVue from "@/views/Finance/Receitas/EditarReceita.vue";
 import DespesasPageVue from "@/views/Finance/Despesas/DespesasPage.vue";
 import AdicionarDespesasPageVue from "@/views/Finance/Despesas/AdicionarDespesa.vue";
+import EditarDespesasPageVue from "@/views/Finance/Despesas/EditarDespesa.vue";
 import OrdersPageVue from "@/views/Orders/OrdersPage.vue";
 import AdicionarOrdemPageVue from "@/views/Orders/AdicionarOrdem.vue";
+import EditarOrdemPageVue from "@/views/Orders/EditarOrdem.vue";
 
 const routes: RouteRecordRaw[] = [
   
@@ -92,6 +95,12 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true },
       },
       {
+        path: "/Editar_Receita/:id",
+        name: "Edirtar Receita",
+        component: EditarReceitasPageVue,
+        meta: { requiresAuth: true },
+      },
+      {
         path: "/Despesas",
         name: "Despesas",
         component: DespesasPageVue,
@@ -104,6 +113,12 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true },
       },
       {
+        path: "/Editar_Despesa/:id",
+        name: "Editar Despesa",
+        component: EditarDespesasPageVue,
+        meta: { requiresAuth: true },
+      },
+      {
         path: "/Orders",
         name: "Orders",
         component: OrdersPageVue,
@@ -113,6 +128,12 @@ const routes: RouteRecordRaw[] = [
         path: "/Adicionar_Ordem",
         name: "Adicionar Ordem",
         component: AdicionarOrdemPageVue,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "/Editar_Ordem/:id",
+        name: "Editar Ordem",
+        component: EditarOrdemPageVue,
         meta: { requiresAuth: true },
       },
       {

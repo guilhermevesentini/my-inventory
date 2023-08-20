@@ -27,7 +27,7 @@
           <td>{{ item.previsao }}</td>
           <td>{{ item.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</td>
           <td style="text-align: center; width: 40px;">
-            <i class="material-icons" @click="editarOrdem(item._id)" title="Editar">edit</i>
+            <i class="material-icons" @click="editarOrdem(item.id)" title="Editar">edit</i>
           </td>
           <td style="text-align: center; width: 40px;">
             <i class="material-icons" @click="deletarOrdem(item.id)" title="deletar">delete</i>
@@ -101,11 +101,11 @@ const adicionarOrdem = () => {
   router.push('/Adicionar_Ordem')
 }
 
-const editarOrdem = () => {
-  console.log('editar');
-
-  //router.push('/Adicionar_Receita')
-}
+const editarOrdem = ((produto: string) => {
+  console.log(produto);
+  
+  router.push({ path: `/Editar_Ordem/${produto}` });
+})
 
 const deletarOrdem = async (productId: string) => {
   const req = await fetch(`http://localhost:3001/orders/${productId}`, {

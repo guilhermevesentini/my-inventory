@@ -75,11 +75,25 @@
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue';
 import { IProduto } from '../../@types/types';
-import CardLayout from '@/views/shared/CardsLayout.vue'
-import { BIconWatch } from 'bootstrap-vue';
+import CardLayout from '@/views/Dashboard/Charts/Cards/CardsLayout.vue'
+import  useObterDadosDashboard from '@/composables/dashboard/ObterDadosWidgets';
 
 const listaDeProdutos = ref<IProduto[]>([]);
 const listaDeEventos = ref<any[]>([]);
+
+const widgetsValues = {
+  orders: 0,
+  produtos: 0,
+  receitas: 0,
+  despesas: 0,
+}
+
+const { dados, loading } = useObterDadosDashboard('receitas');
+
+console.log(dados, loading);
+
+
+
 
 var stockOptions = {
   chart: {
