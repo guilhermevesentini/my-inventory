@@ -88,12 +88,7 @@ const widgetsValues = {
   despesas: 0,
 }
 
-const { dados, loading } = useObterDadosDashboard('receitas');
-
-console.log(dados, loading);
-
-
-
+const { dados } = useObterDadosDashboard('receitas');
 
 var stockOptions = {
   chart: {
@@ -324,8 +319,6 @@ const eventosHoje = computed(() => {
   const formattedEventDate = `${eventDate.getFullYear()}/${(eventDate.getMonth() + 1).toString().padStart(2, '0')}/${eventDate.getDate().toString().padStart(2, '0')}`;
   return formattedEventDate === formattedDate;
 });
-
-  console.log(eventosToday);
   
   return eventosToday
 })

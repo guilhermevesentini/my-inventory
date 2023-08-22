@@ -600,6 +600,16 @@
       "recorrente": "Não",
       "frequencia": "",
       "observacao": ""
+    },
+    {
+      "id": "fc856fd53b6fba726a4708fdc24dcd84",
+      "nome": "awdwadwa",
+      "descricao": "wadwad",
+      "valor": 5646,
+      "previsao": "2023-08-23",
+      "recorrente": "Sim",
+      "frequencia": "Semanal",
+      "observacao": ""
     }
   ],
   "orders": [
