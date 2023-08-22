@@ -1,6 +1,6 @@
 <template>
     <p v-if="isLoading"></p>
-    <apexchart type="area" :options="chartOptions" :series="stockSeries" v-if="!isLoading"></apexchart>
+    <apexchart type="area" :options="chartOptions" :series="series" v-if="!isLoading"></apexchart>
 </template>
   
 <script setup lang="ts">
@@ -50,7 +50,7 @@ const chartOptions = computed(() => {
   }
 })
 
-const stockSeries = ref([
+const series = ref([
     {
         data: [30, 15, 45]
     }
@@ -70,7 +70,7 @@ const obterDados = async (path: string) => {
 
         chartOptions.value.title.text = responseLength
 
-        stockSeries.value = generateRandomData(10)
+        series.value = generateRandomData(10)
         isLoading.value = false
     }
 }
