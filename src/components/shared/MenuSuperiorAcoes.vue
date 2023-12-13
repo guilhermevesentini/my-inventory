@@ -6,8 +6,8 @@
       </div>
       <div class="inventory__actions___filters col-md-8">
 
-        <BarraDePesquisa class="inventory__actions___filters--pesquisa" @filtroMudou="HandleAtualizarFiltro"
-          v-if="pesquisa" />
+        <!-- <BarraDePesquisa class="inventory__actions___filters--pesquisa" @filtroMudou="HandleAtualizarFiltro"
+          v-if="pesquisa" /> -->
 
         <div class="inventory__actions___actions col-md-8">
           <div class="btn" @click="HandleVoltar" v-if="btnVoltar">
@@ -34,13 +34,6 @@
           <div class="btn" @click="HandleCriarOrdem" v-if="btnCriarNovaOrdem">
             <i class="material-icons">add</i> Adicionar
           </div>
-          <router-link class="inventory__actions___filters--link" to="/novoProduto" v-slot="{ navigate }"
-            v-if="adicionar">
-            <div class="inventory__actions___filters--btn-Adicionar" @click="navigate">
-              <i class="material-icons">add</i>
-              Adicionar
-            </div>
-          </router-link>
         </div>
       </div>
     </div>
@@ -141,76 +134,3 @@ const HandleAtualizarFiltro = () => {
 }
 
 </script>
-<style lang="scss" scoped>
-.inventory__actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 4em;
-  border-bottom: 1px solid #80808040;
-  margin-bottom: 1.5rem;
-
-  .inventory__actions___actions {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 0;
-
-    .btn {
-      display: flex;
-      margin-left: 5px;
-    }
-  }
-}
-
-.inventory__actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 4em;
-  border-bottom: 1px solid #80808040;
-  margin-bottom: 1.5rem;
-
-  .inventory__actions___filters {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-
-    .inventory__actions___filters--link {
-      text-decoration: none;
-    }
-
-    .inventory__actions___filters--btn-Adicionar {
-      display: flex;
-      padding: 5px;
-      margin: 5px;
-      border-radius: 5px;
-      color: #333;
-
-      i {
-        text-decoration: none;
-      }
-    }
-
-    .inventory__actions___filters--btn-Adicionar:hover {
-      border: 1px solid #0067ff;
-      color: #0067ff;
-      transition: ease-in-out 0.5s;
-    }
-  }
-}
-
-.adicionar_produto {
-  display: flex;
-  float: right;
-  margin: 10px 0;
-  padding: 7px;
-  flex-direction: row;
-  align-content: center;
-  align-items: center;
-}
-
-.adicionar_produto i {
-  margin-right: 5px;
-}
-</style>

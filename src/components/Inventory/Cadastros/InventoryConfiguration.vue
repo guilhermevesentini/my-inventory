@@ -99,7 +99,7 @@
 <script lang="ts" setup>
 import { onMounted, ref, watch } from "@vue/runtime-core";
 import router from "@/router";
-import BarraDePesquisa from '@/components/BarraDePesquisa.vue';
+//import BarraDePesquisa from '@/components/BarraDePesquisa.vue';
 import BreadCrumb from "@/components/shared/BreadCrumb.vue";
 import TableComponent from "@/components/shared/TableComponent.vue";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";

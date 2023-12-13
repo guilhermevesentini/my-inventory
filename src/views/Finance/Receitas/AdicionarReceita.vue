@@ -46,13 +46,17 @@
 </template>
 
 <script setup lang="ts">
+import {inject} from 'vue';
 import { computed, reactive } from "@vue/runtime-core"
 import router from "@/router";
 import useGerarId from "@/composables/shared/useCriarRandomId"
 import { IGerarId } from "@/composables/types";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 import SelectComponent from "@/components/shared/CustomInputSelect.vue";
+import HttpClient from "@/infra/HttpClient";
+import ReceitasGateway from '@/gateways/ReceitasGateway';
 
+const receitasGateway = inject('receitasGateway') as ReceitasGateway;
 
 const config: IGerarId = {
     quantidade: 16,
@@ -81,7 +85,7 @@ let receitaDetails: IReceitas = reactive({
     observacao: ''
 })
 
-let produto = computed(() => receitaDetails)
+let produto = computed(() => receitaDetails);
 
 const Salvar = (async () => {
     const novoId = useGerarId(config);
@@ -89,13 +93,7 @@ const Salvar = (async () => {
     // Alterar o valor do campo "_id" do objeto "produto.value"
     produto.value.id = novoId;
 
-    const dataJson = JSON.stringify(produto.value);
-
-    const req = await fetch("http://localhost:3001/receitas", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: dataJson,
-    });
+    const req = await receitasGateway.adicionarReceitas(produto.value);
 
     if (req.ok) {
         Limpar()

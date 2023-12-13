@@ -187,11 +187,6 @@ const Voltar = () => {
         align-items: center;
         justify-content: flex-end;
         padding: 0;
-        .btn {
-            display: flex;          
-            margin-left: 5px;
-        }
-    }
 }
 
 .input_form {

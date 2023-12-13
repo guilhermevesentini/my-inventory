@@ -17,7 +17,7 @@
       <div class="table-responsive custom-scrollbar" v-if="produtosFiltrados.length > 0" style="
            max-height: calc(100vh - 195px); overflow-y: auto; margin: 10px 0;
             ">
-        <BarraDePesquisa @filtroMudou="atualizarFiltro" />
+        <!-- <BarraDePesquisa @filtroMudou="atualizarFiltro" /> -->
         <table id="table-desktop" class="table table-bordered table-responsive">
           <thead>
             <tr>

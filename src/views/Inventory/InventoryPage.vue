@@ -16,7 +16,7 @@
         <div class="table-responsive custom-scrollbar" style="
            max-height: calc(100vh - 195px); overflow-y: auto; margin: 10px 0;
             ">
-          <BarraDePesquisa @filtroMudou="atualizarFiltro" />
+          <!-- <BarraDePesquisa @filtroMudou="atualizarFiltro" /> -->
           <table id="table-desktop" class="table table-bordered table-responsive">
             <thead>
               <tr>
@@ -98,7 +98,7 @@ import { computed, onMounted, ref } from "@vue/runtime-core";
 import { IProduto } from "../../@types/types";
 import { darkMode } from "@/composables/shared/darkMode";
 import router from "@/router";
-import BarraDePesquisa from '@/components/BarraDePesquisa.vue';
+// import BarraDePesquisa from '@/components/BarraDePesquisa.vue';
 import BreadCrumb from "@/components/shared/BreadCrumb.vue";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 //import MenuDeAcoes from '@/components/shared/MenuSuperiorAcoes.vue'

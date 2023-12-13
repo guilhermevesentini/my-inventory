@@ -560,24 +560,34 @@
   ],
   "receitas": [
     {
-      "id": "c40114f447f38bd5e314a627e39b0bc7",
-      "nome": "tttttttttt",
-      "descricao": "esfesfesfef",
-      "valor": 4550,
-      "previsao": "2023-08-03",
+      "id": "82dfe3b9b02f9352f555a29e4cf0081b",
+      "nome": "awdwadwad",
+      "descricao": "wadwadd",
+      "valor": 1561652,
+      "previsao": "",
       "recorrente": "Sim",
-      "frequencia": "Quinzenal",
-      "observacao": ""
+      "frequencia": "Semanal",
+      "observacao": "awdwadwadd"
     },
     {
-      "id": "4d855c859d90491a74f6e76b713db751",
-      "nome": "awdawd",
-      "descricao": "awdwadwd",
-      "valor": 2505,
-      "previsao": "2023-08-16",
+      "id": "5229ef1283805a3d24a96503b22c90a5",
+      "nome": "awdwad",
+      "descricao": "awdwad",
+      "valor": 123,
+      "previsao": "2023-12-09",
       "recorrente": "Não",
       "frequencia": "",
-      "observacao": ""
+      "observacao": "awdwad"
+    },
+    {
+      "id": "6e50364f3a501da309d5a24f2fca3793",
+      "nome": "awdwad",
+      "descricao": "wadwad",
+      "valor": 2123,
+      "previsao": "2023-12-13",
+      "recorrente": "Sim",
+      "frequencia": "Diário",
+      "observacao": "wadwad"
     }
   ],
   "despesas": [

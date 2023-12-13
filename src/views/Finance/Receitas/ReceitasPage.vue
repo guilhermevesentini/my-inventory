@@ -79,10 +79,12 @@ import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 import TableComponent from "@/components/shared/TableComponent.vue";
 import InfoNoItems from "@/components/shared/InfoNoItems.vue";
 import { onMounted, computed } from "@vue/runtime-core";
-import { ref } from "vue";
+import { ref, inject } from "vue";
 import router from "@/router";
+import ReceitasGateway from "@/gateways/ReceitasGateway";
 
 let showModal = ref(false)
+const receitasComp = inject('receitasGateway') as ReceitasGateway;
 
 interface IReceitas {
   id: string
@@ -108,9 +110,7 @@ const editarReceita = ((produto: string) => {
 })
 
 const deletarReceita = async (productId: string) => {
-  const req = await fetch(`http://localhost:3001/receitas/${productId}`, {
-    method: "DELETE",
-  });
+  const req = await receitasComp.excluirReceitas(productId);
 
   if (req.ok) {
     obterReceitas();
@@ -118,8 +118,7 @@ const deletarReceita = async (productId: string) => {
 }
 
 const obterReceitas = async () => {
-  const req = await fetch(`http://localhost:3001/receitas`);
-  const response = await req.json();
+  const response = await receitasComp.obterReceitas();
 
   //const produtosDoUsuario = response.filter(produto => produto._id === userId.toString());
   //console.log(produtosDoUsuario);
@@ -138,6 +137,3 @@ onMounted(() => {
   obterReceitas()
 })
 </script>
-    
-<style lang="scss" scoped></style>
-    

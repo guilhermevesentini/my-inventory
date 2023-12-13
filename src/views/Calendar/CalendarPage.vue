@@ -140,7 +140,7 @@ import { onMounted, ref } from 'vue';
 
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import pt from '@fullcalendar/core/locales/pt';
+//import pt from '@fullcalendar/core/locales/pt';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
@@ -429,7 +429,7 @@ const updateEvent = async (eventToUpdate) => {
 };
 
 const calendarOptions = {
-    locale: pt,
+    // locale: pt,
     plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin],
     initialView: 'dayGridMonth',
     editable: true,

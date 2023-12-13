@@ -50,7 +50,9 @@ import useGerarId from "@/composables/shared/useCriarRandomId"
 import { IGerarId } from "@/composables/types";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 import SelectComponent from "@/components/shared/CustomInputSelect.vue";
-import { onMounted } from "vue";
+import { onMounted, inject } from "vue";
+import HttpClient from "@/infra/HttpClient";
+import ReceitasGateway from "@/gateways/ReceitasGateway";
 
 const routeId = router.currentRoute.value.params.id;
 
@@ -58,11 +60,10 @@ let produto = reactive<any>({})
 
 let produtoEditado = computed(() => produto)
 
+const receitasGateway = inject('receitasGateway') as ReceitasGateway;
+
 const getProduto = (async (id: string) => {
-    const req = await fetch(`http://localhost:3001/receitas/${id}`);
-    const response = await req.json();
-    console.log(response);
-    
+    const response = await receitasGateway.obterReceita(id);
     Object.assign(produto, response);
 })
 
@@ -77,11 +78,8 @@ const Voltar = (() => {
 })
 
 const Salvar = (async () => {
-    const req = await fetch(`http://localhost:3001/receitas/${routeId}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(produto),
-    });
+    const id = String(routeId);
+    const req = await receitasGateway.editarReceitas(id, produto);
 
     if(req.ok){
         router.push('/Receitas')
@@ -91,7 +89,8 @@ const Salvar = (async () => {
 })
 
 onMounted(() => {
-    getProduto(router.currentRoute.value.params.id);
+    const id = String(routeId);
+    getProduto(id);
 })
 </script>
 
