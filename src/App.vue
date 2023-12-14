@@ -23,24 +23,19 @@ router.beforeEach((to, from, next) => {
 <style lang="scss">
 @import '@/scss/index.scss';
 
-* {
-    box-sizing: border-box;
-  }
-  #app {
-    font-family: -var($font-family-sans-serif);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50;
-    overflow: hidden;
-  }
-  body, html {
-    height: 100%;
-  }
-  i {
-    cursor: pointer;  
-  }
+#app {
+  font-family: -var($font-family-sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  overflow: hidden;
+}
 
-  .input_form {
-    margin: 7px 0;
-  }
+body,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 </style>

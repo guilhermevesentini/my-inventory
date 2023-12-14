@@ -1,48 +1,27 @@
 <template>
-    <main class="" :class="{ dark_mode_on: darkMode, light_mode_on: !darkMode }">        
-        <div class="main-content">     
-            <HeaderCompVue />       
-            <div class="main-content__frame" :class="{ dark_mode_on: darkMode, light_mode_on: !darkMode }">
-                <router-view />
-            </div>            
-        </div>
-    </main>
+    <div class="main-content">
+        <router-view />
+    </div>
 </template>
 
 <script lang="ts" setup>
-import { darkMode } from "@/composables/shared/darkMode";
-import HeaderCompVue from "./HeaderCompVue.vue";
-
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .main-content {
-    overflow-y: auto;
-    overflow-x: hidden;
-    background-color: rgb(224 224 224);
-    height: 100vh;
-}
-
-.main-content__frame {
-    padding: 0 0.7rem;
+    padding: 10px;
     margin: 0.5rem;
     border-radius: 10px;
     background-color: #fff;
+    height: calc(100% - 50px);
+    width: auto;
+    overflow: hidden;
+    overflow-x: hidden;
 }
 
-.light_mode_on {
-    background-color: #fff;
-    color: #333;
-}
-
-.dark_mode_on {
-    background-color: #333;
-    color: #fff;
-}
-
-@media (max-width: 776px) {
+@media (min-width: 1200px) {
     .main-content {
-        margin-left: 0;
+        overflow-y: auto;
     }
 }
-</style>@/composables/shared/darkMode
+</style>

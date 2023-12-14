@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 import VueApexCharts from 'vue3-apexcharts';
 import { Modal } from 'vue-modal';
 import router from './router';
@@ -20,6 +20,7 @@ const invetoryGateway = new InventoryHttpGateway(httpClient, baseUrl);
 app.provide('receitasGateway', receitasGateway);
 app.provide('invetoryGateway', invetoryGateway);
 
+app.use(ElementPlus)
 app.component('ModalVue', Modal);
 app.use(router);
 app.use(VueApexCharts);

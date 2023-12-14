@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="row">
+    teste
+
+    <el-button>I am ElButton</el-button>
+    <!-- <div class="row">
       <div class="col-md-12">
         <CardLayout />
       </div>
@@ -27,11 +30,13 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script lang="ts" setup>
+import { ElButton } from 'element-plus'
+
 import CardLayout from '@/views/Dashboard/Charts/Cards/CardsLayout.vue'
 import EstoqueCard from '@/views/Dashboard/Charts/Cards/EstoqueCard.vue'
 import CompraXvenda from '@/views/Dashboard/Charts/Cards/CompraEVenda.vue'

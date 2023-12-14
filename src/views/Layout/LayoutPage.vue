@@ -1,47 +1,35 @@
 <template>
-  <div class="layout_page" :class="{ dark_mode_on: darkMode, light_mode_on: !darkMode }">    
-    <div class="wrapper">
-      <div class="wrapper_container row">
-        <div class="col-2 wrapper_sidebar" style="padding-right: 0;">
+  <div class="common-layout">
+    <el-container style="height: 100vh;">
+      <el-header>
+        <HeaderCompVue />
+      </el-header>
+      <el-container>
+        <el-aside width="200px" class="full-height-aside">
           <SideBarComVueVue />
-        </div>
-        <div class="col-10" style="padding-left: 0;">
-          <MainContentVue />
-        </div>
-      </div>
-    </div>
+        </el-aside>
+        <el-container>
+          <el-main>
+            <MainContentVue />
+          </el-main>
+        </el-container>
+      </el-container>
+    </el-container>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { darkMode, toggleMode } from "@/composables/shared/darkMode";
-import HeaderCompVue from "./HeaderCompVue.vue";
 import SideBarComVueVue from "./SideBarComVue.vue";
 import MainContentVue from "./MainContentVue.vue";
-import Footer from "./FooterLayout.vue";
+import HeaderCompVue from "./HeaderCompVue.vue";
 
 </script>
 
-<style>
-.light_mode_on {
-  background-color: #fff;
-  color: #333;
+<style lang="scss">
+.el-main {
+  --el-main-padding: 0px;
 }
-
-.dark_mode_on {
-  background-color: #333;
-  color: #fff;
-}
-
-.layout_page {
-  display: flex;
-  flex-direction: column;
-}
-
-.wrapper_sidebar {
-  box-shadow: 6px -1px 12px -5px rgba(0,0,0,0.75);
--webkit-box-shadow: 6px -1px 12px -5px rgba(0,0,0,0.75);
--moz-box-shadow: 6px -1px 12px -5px rgba(0,0,0,0.75);
+.full-height-aside {
+  height: 100%; /* Define a altura do el-aside para ocupar toda a altura do el-container pai */
 }
 </style>
-@/composables/shared/darkMode
