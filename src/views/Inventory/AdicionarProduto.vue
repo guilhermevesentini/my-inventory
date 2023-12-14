@@ -12,7 +12,60 @@
             />
         </div>
         <div class="col-md-12">
-            <FormularioProdutos :produto="produtoDetails" @update:produto="updateProdutoDetails" />
+            <div class="row">
+            <div class="input_form col-md-4">
+                <label>Nome:</label>
+                <input class="form-control" type="text" placeholder="Digite o nome" v-model="produtoDetails.nome" />
+            </div>
+            <div class="input_form col-md-4">
+                <label>Descrição:</label>
+                <input class="form-control" type="text" placeholder="Digite a descrição"
+                    v-model="produtoDetails.descricao" />
+            </div>
+            <div class="input_form col-md-4">
+                <SelectComponent label="Categoria:" v-model="produtoDetails.categoria" data="categorias" />
+            </div>
+            <div class="input_form col-md-4">
+                <label>Codigo:</label>
+                <input class="form-control" type="text" placeholder="Digite o código" v-model="produtoDetails.codigo" />
+            </div>
+            <div class="input_form col-md-4">
+                <label>Marca:</label>
+                <input class="form-control" type="text" placeholder="Digite a marca" v-model="produtoDetails.marca" />
+            </div>
+            <div class="input_form col-md-4">
+                <label>Modelo:</label>
+                <input class="form-control" type="text" placeholder="Digite o modelo" v-model="produtoDetails.modelo" />
+            </div>
+            <div class="input_form col-md-4">
+                <label>Quantidade:</label>
+                <input class="form-control" type="number" placeholder="Digite a quantidade"
+                    v-model="produtoDetails.quantidade" />
+            </div>
+            <div class="input_form col-md-4">
+                <label>Preço:</label>
+                <input class="form-control" type="number" placeholder="Digite o preço" v-model="produtoDetails.preco" />
+            </div>
+            <div class="input_form col-md-4">
+                <SelectComponent label="Forcecedor:" v-model="produtoDetails.fornecedor" data="fornecedores" />
+            </div>
+            <div class="input_form col-md-4">
+                <label>Data de Aquisição:</label>
+                <input class="form-control" type="date" placeholder="Digite a data de aquisição"
+                    v-model="produtoDetails.dataAquisicao" />
+            </div>
+            <div class="input_form col-md-4">
+                <SelectComponent label="Unidades:" v-model="produtoDetails.localizacao" data="unidades" />
+            </div>
+            <div class="input_form col-md-4">
+                <SelectComponent label="Tag:" v-model="produtoDetails.tag" data="tags" />
+            </div>
+            <div class="input_form col-md-12" style="width: 100%">
+                <label>Observação:</label>
+                <textarea name="observacao" rows="6" style="width: 100%;" placeholder="Digite sua observação"
+                    v-model="produtoDetails.observacao"></textarea>
+            </div>
+        </div>
         </div>
     </div>
 </template>
@@ -23,7 +76,6 @@ import { IProduto } from '@/@types/types'
 import router from "@/router";
 import useGerarId from "@/composables/shared/useCriarRandomId"
 import { IGerarId } from "@/composables/types";
-import FormularioProdutos from "@/components/shared/FormularioProdutos.vue";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 
 const config: IGerarId = {

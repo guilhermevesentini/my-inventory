@@ -95,25 +95,6 @@
       "categoria": "Música e Shows"
     },
     {
-      "id": 7,
-      "_id": "ae77fa5b2fc1d3fa8b42194638f7d938",
-      "_id_Produto": "c9b2cf21fb432325784ce16837b71ba2",
-      "nome": "bia",
-      "descricao": "awdawdwad",
-      "codigo": "wadwad",
-      "marca": "wdwad",
-      "modelo": "awdawd",
-      "categoria": "Pet Shop",
-      "quantidade": 26,
-      "preco": 36,
-      "fornecedor": "Rockstar",
-      "dataAquisicao": "",
-      "localizacao": "",
-      "tag": "",
-      "observacao": "",
-      "total": 0
-    },
-    {
       "id": 8,
       "_id": "ae77fa5b2fc1d3fa8b42194638f7d938",
       "_id_Produto": "789e84065ea860c35e277ea095e5eb03",
@@ -551,6 +532,17 @@
       "title": "Novo Evento",
       "start": "2023-08-10",
       "end": "2023-08-14",
+      "allDay": true,
+      "extendedProps": {
+        "editable": true
+      },
+      "editable": true
+    },
+    {
+      "id": "f46e09ceba0edf47135a341010e3f3c7",
+      "title": "Novo Evento",
+      "start": "2023-12-01",
+      "end": "2023-12-02",
       "allDay": true,
       "extendedProps": {
         "editable": true

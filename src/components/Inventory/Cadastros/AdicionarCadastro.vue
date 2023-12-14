@@ -99,10 +99,10 @@ const listaDeCadastros = reactive<Array<IItem>>([]);
     }
 };
 
-const validarProduto = (cadastro) => {
+const validarProduto = (cadastro: any) => {
     if (cadastro.length <= 0) return true;
 
-    const hasInvalidName = cadastro.some(element => element.nome.length > 20 || element.nome === '');
+    const hasInvalidName = cadastro.some((element: any) => element.nome.length > 20 || element.nome === '');
     if (hasInvalidName) {
         alert("Nome ou descrição não deve conter mais do que 20 caracteres!");
         return false;
@@ -187,16 +187,17 @@ const Voltar = () => {
         align-items: center;
         justify-content: flex-end;
         padding: 0;
-}
-
-.input_form {
+    }
+    .input_form {
     margin: 10px 0;
-}
+    }
 
-.acoes {
-    display: flex;
-    margin: 10px 0;
-    justify-content: space-between;
-    flex-direction: row;
-    align-items: center;
-}</style>
+    .acoes {
+        display: flex;
+        margin: 10px 0;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+    }
+}
+</style>

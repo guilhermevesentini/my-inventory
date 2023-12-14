@@ -1,18 +1,14 @@
-import { mount, shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import ReceitasPage from '../../src/views/Finance/Receitas/ReceitasPage.vue';
-import FetchAdapater from '@/infra/FetchAdapter';
-import ReceitasHttpGateway from '@/gateways/ReceitaHttpGateway';
-import ReceitasFakeHttpGateway from '@/gateways/ReceitasFakeHttpGateway';
+import ReceitasFakeHttpGateway from '@/services/receitas/gateways/ReceitasFakeHttpGateway';
 
 describe("Receitas", () => {
   const receitasGateway = new ReceitasFakeHttpGateway();
 
-  const factory = () => shallowMount(ReceitasPage, {
+  const factory = () => mount(ReceitasPage, {
     global: {
-      
       provide: {
-        receitasGateway,
-        keyState: 'up-pressed',
+        receitasGateway: receitasGateway
       },      
     }
   })
@@ -22,13 +18,9 @@ describe("Receitas", () => {
 
     const wrapper = factory();
     
-    //expect(wrapper.html()).toMatch(msg);
-
-    //console.log(wrapper.html());
-    
     expect(msg).toMatch(msg);
 
-    //expect(wrapper.html()).toMatch(msg);
+    console.log(wrapper.html());
   });
 });
 

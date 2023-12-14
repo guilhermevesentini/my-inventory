@@ -1,7 +1,7 @@
 <template>
   <div class="row" style="margin: 10px 0;">
     <div class="col-md-12">
-      <MenuSuperiorAcoes name="Inventário" :adicionar="true" />
+      <MenuSuperiorAcoes name="Inventário" :btn-criar-novo-produto="true" @click-criar-novo-produto="adicionarProduto"/>
     </div>
 
     <div class="col-md-12">
@@ -16,7 +16,6 @@
         <div class="table-responsive custom-scrollbar" style="
            max-height: calc(100vh - 195px); overflow-y: auto; margin: 10px 0;
             ">
-          <!-- <BarraDePesquisa @filtroMudou="atualizarFiltro" /> -->
           <table id="table-desktop" class="table table-bordered table-responsive">
             <thead>
               <tr>
@@ -95,13 +94,15 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from "@vue/runtime-core";
+import {inject} from 'vue';
 import { IProduto } from "../../@types/types";
 import { darkMode } from "@/composables/shared/darkMode";
 import router from "@/router";
-// import BarraDePesquisa from '@/components/BarraDePesquisa.vue';
 import BreadCrumb from "@/components/shared/BreadCrumb.vue";
+import InvetoryGateway from "@/services/Inventory/gateways/InventorGateways";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
-//import MenuDeAcoes from '@/components/shared/MenuSuperiorAcoes.vue'
+
+const invetoryGateway = inject('invetoryGateway') as InvetoryGateway;
 
 const visible = ref(false)
 const listaDeProdutos = ref<Array<IProduto>>([]);
@@ -151,18 +152,16 @@ const prevPage = () => {
   currentPage.value--;
 };
 
+const adicionarProduto = () => {
+  router.push('/Adicionar_Produto')
+}
 
 onMounted(() => {
-  getProdutos(userToJs._id);
+  getProdutos();
 })
 
-const getProdutos = async (userId: string) => {
-  const req = await fetch(`http://localhost:3001/produtos`);
-  const response = await req.json();
-
-  //const produtosDoUsuario = response.filter(produto => produto._id === userId.toString());
-  //console.log(produtosDoUsuario);
-
+const getProdutos = async () => {
+  const response = await invetoryGateway.obterProdutos();
   listaDeProdutos.value = response;
 }
 
@@ -175,13 +174,11 @@ const listaDeProdutosComputed = computed(() => {
 });
 
 
-const deletarProduto = async (productId: string) => {
-  const req = await fetch(`http://localhost:3001/produtos/${productId}`, {
-    method: "DELETE",
-  });
+const deletarProduto = async (productId: string) => { 
+  const req = await invetoryGateway.excluirProduto(productId);
 
   if (req.ok) {
-    getProdutos(userToJs._id);
+    getProdutos();
   }
 }
 
@@ -202,12 +199,6 @@ const totalPreco = computed(() => {
   }, 0);
 });
 
-// let isExpanded = false;
-
-// const toggleIconExpand = (): void => {
-//   // Toggle the expansion state
-//   isExpanded = !isExpanded;
-// };
 </script>
 
 <style lang="scss" scoped>

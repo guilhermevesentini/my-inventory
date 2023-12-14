@@ -25,6 +25,9 @@
           <div class="btn" @click="HandleCriarEvento" v-if="btnCriarNovoEvento">
             <i class="material-icons">add</i> Adicionar
           </div>
+          <div class="btn" @click="HandleCriarProduto" v-if="btnCriarNovoProduto">
+            <i class="material-icons">add</i> Adicionar
+          </div>
           <div class="btn" @click="HandleCriarReceitas" v-if="btnCriarNovaReceita">
             <i class="material-icons">add</i> Adicionar
           </div>
@@ -79,6 +82,10 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  btnCriarNovoProduto: {
+    type: Boolean,
+    default: false
+  },
   btnCriarNovaDespesa: {
     type: Boolean,
     default: false
@@ -99,6 +106,7 @@ const emit = defineEmits<{
   (event: "clickSalvar"): void;
   (event: "clickCriar"): void;
   (event: "clickCriarNovoEvento"): void;
+  (event: "clickCriarNovoProduto"): void;
   (event: "clickCriarNovaReceita"): void;
   (event: "clickCriarNovaDespesa"): void;
   (event: "clickCriarNovaOrdem"): void;
@@ -122,6 +130,9 @@ const HandleCriarEvento = () => {
 }
 const HandleCriarReceitas = () => {
   emit('clickCriarNovaReceita')
+}
+const HandleCriarProduto = () => {
+  emit('clickCriarNovoProduto')
 }
 const HandleCriarDespesa = () => {
   emit('clickCriarNovaDespesa')
