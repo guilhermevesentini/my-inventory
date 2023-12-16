@@ -62,11 +62,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref } from "@vue/runtime-core"
-import { IProduto, ETipoProduto } from '@/@types/types'
+import { reactive, ref } from "@vue/runtime-core"
 import router from "@/router";
-import useGerarId from "@/composables/shared/useCriarRandomId"
-import { IGerarId } from "@/composables/types";
 import BreadCrumb from "../../shared/BreadCrumb.vue";
 
 interface IItem {
@@ -75,12 +72,6 @@ interface IItem {
         id: string;
         _id: string;
     }>;
-}
-
-
-const config: IGerarId = {
-    quantidade: 16,
-    tipo: 'string'
 }
 
 let nome = ref('')
@@ -99,10 +90,10 @@ const listaDeCadastros = reactive<Array<IItem>>([]);
     }
 };
 
-const validarProduto = (cadastro: any) => {
+const validarProduto = (cadastro: unknown) => {
     if (cadastro.length <= 0) return true;
 
-    const hasInvalidName = cadastro.some((element: any) => element.nome.length > 20 || element.nome === '');
+    const hasInvalidName = cadastro.some((element: unknown) => element.nome.length > 20 || element.nome === '');
     if (hasInvalidName) {
         alert("Nome ou descrição não deve conter mais do que 20 caracteres!");
         return false;

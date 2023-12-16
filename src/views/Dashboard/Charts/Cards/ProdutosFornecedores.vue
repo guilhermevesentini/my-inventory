@@ -1,12 +1,12 @@
 <template>
-    <div class="card" style="min-height: 100%;">
-        <div class="card-header">
-            Produtos por fornecedores
-        </div>
-        <div class="card-body">
-            <apexchart type="pie" :options="chartOptions" :series="series"></apexchart>
-        </div>
-    </div>
+    <el-card class="box-card">
+      <template #header>
+          <div class="card-header">
+              <span>Produtos por fornecedores</span>
+          </div>
+      </template>
+      <apexchart type="pie" :options="chartOptions" :series="series"></apexchart>
+  </el-card>
 </template>
   
 <script setup lang="ts">
@@ -54,3 +54,19 @@ onMounted(async () => {
     isLoading.value = false
 })
 </script>
+
+<style lang="scss" scoped>
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text {
+  font-size: 14px;
+}
+
+.item {
+  margin-bottom: 18px;
+}
+</style>

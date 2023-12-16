@@ -100,15 +100,12 @@
 import { onMounted, ref, watch } from "@vue/runtime-core";
 import router from "@/router";
 //import BarraDePesquisa from '@/components/BarraDePesquisa.vue';
-import BreadCrumb from "@/components/shared/BreadCrumb.vue";
 import TableComponent from "@/components/shared/TableComponent.vue";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 import ModalDeCadastro from "./ModalDeCadastro.vue";
 import { ICadastroItem, IListaDeCadastros } from "../types"
 import useGerarId from "@/composables/shared/useCriarRandomId";
 import { IGerarId } from "@/composables/types";
-
-let modalIsVisivel = ref<boolean>(false);
 
 const config: IGerarId = {
     quantidade: 16,
@@ -128,7 +125,7 @@ const listaDeCadastros = ref<IListaDeCadastros>({
   tags: [],
 });
 
-const getUser: any = localStorage.getItem('user')
+const getUser: unknown = localStorage.getItem('user')
 const userToJs = JSON.parse(getUser);
 
 onMounted(() => {

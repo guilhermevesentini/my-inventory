@@ -5,7 +5,8 @@ import Login from "@/views/Login/LoginPage.vue";
 import RegistrarNovoUsuario from "@/views/Login/RegistrarNovoUsuario.vue";
 import routesPaths from "./interfaces/routesPaths";
 
-const routes: Array<RouteRecordRaw> = [
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const routes: Array<RouteRecordRaw | unknown | any> = [
   { path: '/login', component: Login },
   { path: '/NovoUsuario', component: RegistrarNovoUsuario },
   { 

@@ -44,19 +44,18 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive } from "@vue/runtime-core"
+import { reactive } from "@vue/runtime-core"
 import router from "@/router";
-import useGerarId from "@/composables/shared/useCriarRandomId"
-import { IGerarId } from "@/composables/types";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 import SelectComponent from "@/components/shared/CustomInputSelect.vue";
 import { onMounted } from "vue";
 
 const routeId = router.currentRoute.value.params.id;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let produto = reactive<any>({})
 
-let produtoEditado = computed(() => produto)
+//let produtoEditado = computed(() => produto)
 
 const getProduto = (async (id: string) => {
     const req = await fetch(`http://localhost:3001/orders/${id}`);

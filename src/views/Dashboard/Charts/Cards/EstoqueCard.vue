@@ -1,12 +1,12 @@
 <template>
-    <div class="card">
-        <div class="card-header">
-            Estoque - Controle analítico (2009 - 2016)
-        </div>
-        <div class="card-body">
-            <apexchart type="line" :options="chartOptions" :series="series"></apexchart>
-        </div>
-    </div>
+    <el-card class="box-card">
+        <template #header>
+            <div class="card-header">
+                <span>Estoque - Controle analítico (2009 - 2016)</span>
+            </div>
+        </template>
+        <apexchart type="line" :options="chartOptions" :series="series" />
+    </el-card>
 </template>
   
 <script setup lang="ts">
@@ -155,5 +155,26 @@ const obterDados = async (path: string) => {
     }
 }
 
-//onMounted(() => obterDados(props?.path))
+onMounted(() => {
+    if(props.path) {
+        obterDados(props.path)
+    }
+})
 </script>
+
+<style lang="scss" scoped>
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text {
+  font-size: 14px;
+}
+
+.item {
+  margin-bottom: 18px;
+}
+
+</style>

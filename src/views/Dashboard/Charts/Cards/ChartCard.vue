@@ -75,5 +75,9 @@ const obterDados = async (path: string) => {
     }
 }
 
-onMounted(() => obterDados(props?.path))
+onMounted(() => {
+  if(props.path) {
+    obterDados(props.path)
+  }  
+})
 </script>

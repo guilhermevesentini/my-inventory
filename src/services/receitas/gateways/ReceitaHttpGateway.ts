@@ -5,19 +5,19 @@ export default class ReceitasHttpGateway implements ReceitasGateway {
 
     constructor(readonly httpClient: HttpClient, readonly BaseUrl: string){}
 
-    async obterReceitas(): Promise<any> {
+    async obterReceitas(): Promise<unknown> {
         return await this.httpClient.get(`${this.BaseUrl}/receitas`);
     }
-    async obterReceita(id: string): Promise<any> {
+    async obterReceita(id: string): Promise<unknown> {
         return await this.httpClient.get(`${this.BaseUrl}/receitas/${id}`);
     }
-    async adicionarReceitas(item: any): Promise<any> {
+    async adicionarReceitas(item: unknown): Promise<unknown> {
         return await this.httpClient.post(`${this.BaseUrl}/receitas`, item);
     }
-    async editarReceitas(id: any, item: any): Promise<any> {
+    async editarReceitas(id: unknown, item: unknown): Promise<unknown> {
         return await this.httpClient.put(`${this.BaseUrl}/receitas/${id}`, item)
     }
-    async excluirReceitas(id: string): Promise<any> {
+    async excluirReceitas(id: string): Promise<unknown> {
         return await this.httpClient.delete(`${this.BaseUrl}/receitas/${id}`);
     }
     

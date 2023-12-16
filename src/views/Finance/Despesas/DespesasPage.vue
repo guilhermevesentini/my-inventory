@@ -76,7 +76,6 @@
     
 <script lang="ts" setup>
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
-import TableComponent from "@/components/shared/TableComponent.vue";
 import InfoNoItems from "@/components/shared/InfoNoItems.vue";
 import { onMounted, computed } from "@vue/runtime-core";
 import { ref } from "vue";

@@ -10,13 +10,13 @@
 <style lang="scss" scoped>
 .main-content {
     padding: 10px;
-    margin: 0.5rem;
+    margin: 10px;
     border-radius: 10px;
     background-color: #fff;
-    height: calc(100% - 50px);
     width: auto;
     overflow: hidden;
     overflow-x: hidden;
+    min-height: calc(100% - 40px);
 }
 
 @media (min-width: 1200px) {

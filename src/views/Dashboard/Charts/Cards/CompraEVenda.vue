@@ -1,24 +1,24 @@
 <template>
-    <div class="card" v-if="isLoading">
-        <div class="card-header">
-            Compra x Venda de mercadoria
-        </div>
-        <div class="card-body">
-            <apexchart type="line" :options="chartOptions" :series="series"></apexchart>
-        </div>
-    </div>
+    <el-card class="box-card">
+      <template #header>
+          <div class="card-header">
+              <span>Compra x Venda de mercadoria</span>
+          </div>
+      </template>
+      <apexchart type="line" :options="chartOptions" :series="series"></apexchart>
+  </el-card>
 </template>
   
 <script setup lang="ts">
-import { ref, onMounted, defineProps, computed } from 'vue'
+import { ref, computed } from 'vue'
 
-const props = defineProps({
-    path: String,
-    color: String,
-    title: String
-})
+// const props = defineProps({
+//     path: String,
+//     color: String,
+//     title: String
+// })
 
-const isLoading = ref(true)
+//const isLoading = ref(true)
 
 const chartOptions = computed(() => {
     return {
@@ -38,7 +38,7 @@ const chartOptions = computed(() => {
             dashArray: [8, 5]
         },
         legend: {
-            tooltipHoverFormatter: function (val, opts) {
+            tooltipHoverFormatter: function (val: string, opts: { w: { globals: { series: { [x: string]: { [x: string]: string } } } }; seriesIndex: string | number; dataPointIndex: string | number }) {
                 return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
             }
         },
@@ -57,21 +57,21 @@ const chartOptions = computed(() => {
             y: [
                 {
                     title: {
-                        formatter: function (val) {
+                        formatter: function (val: string) {
                             return val + " (mins)"
                         }
                     }
                 },
                 {
                     title: {
-                        formatter: function (val) {
+                        formatter: function (val: string) {
                             return val + " per session"
                         }
                     }
                 },
                 {
                     title: {
-                        formatter: function (val) {
+                        formatter: function (val: unknown) {
                             return val;
                         }
                     }
@@ -95,24 +95,40 @@ const series = ref([
     }
 ])
 
-const generateRandomData = (length: number) => {
-    return [{ data: Array.from({ length }, () => Math.floor(Math.random() * 100)) }]
-}
+// const generateRandomData = (length: number) => {
+//     return [{ data: Array.from({ length }, () => Math.floor(Math.random() * 100)) }]
+// }
 
-const obterDados = async (path: string) => {
+// const obterDados = async (path: string) => {
 
-    const req = await fetch(`http://localhost:3001/${path}`)
-    const response = await req.json();
+//     const req = await fetch(`http://localhost:3001/${path}`)
+//     const response = await req.json();
 
-    if (response) {
-        const responseLength = response.length;
+//     if (response) {
+//         const responseLength = response.length;
 
-        chartOptions.value.title.text = responseLength
+//         chartOptions.value.title.text = responseLength
 
-        series.value = generateRandomData(10)
-        isLoading.value = false
-    }
-}
+//         series.value = generateRandomData(10)
+//         isLoading.value = false
+//     }
+// }
 
 //onMounted(() => obterDados(props?.path))
 </script>
+
+<style lang="scss" scoped>
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text {
+  font-size: 14px;
+}
+
+.item {
+  margin-bottom: 18px;
+}
+</style>

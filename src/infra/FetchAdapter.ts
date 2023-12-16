@@ -1,15 +1,13 @@
-import router from "@/router";
 import HttpClient from "./HttpClient";
-import { RouteRecordName } from "vue-router";
 
 export default class FetchAdapater implements HttpClient {
     
-    async get(url: string): Promise<any> {
+    async get(url: string): Promise<unknown> {
         const req = await fetch(url);
         const response = await req.json();        
         return response
     }
-    async post(url: string, body: any): Promise<any> {
+    async post(url: string, body: unknown): Promise<unknown> {
         const response = await fetch(url, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -17,7 +15,7 @@ export default class FetchAdapater implements HttpClient {
         });
         return response
     }
-    async put(url: string, body: any): Promise<any> {
+    async put(url: string, body: unknown): Promise<unknown> {
         const response = await fetch(url, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
@@ -25,7 +23,7 @@ export default class FetchAdapater implements HttpClient {
         });
         return response
     }
-    async delete(url: string): Promise<any> {
+    async delete(url: string): Promise<unknown> {
         const response = await fetch(url, {
             method: "DELETE",
         });

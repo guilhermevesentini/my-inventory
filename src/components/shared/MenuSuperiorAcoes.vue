@@ -1,50 +1,25 @@
 <template>
-  <div>
-    <div class="inventory__actions">
-      <div class="inventory__actions___breadCrumb col-md-4">
-        <BreadCrumb :name="name" />
-      </div>
-      <div class="inventory__actions___filters col-md-8">
-
-        <!-- <BarraDePesquisa class="inventory__actions___filters--pesquisa" @filtroMudou="HandleAtualizarFiltro"
-          v-if="pesquisa" /> -->
-
-        <div class="inventory__actions___actions col-md-8">
-          <div class="btn" @click="HandleVoltar" v-if="btnVoltar">
-            <i class="material-icons">keyboard_return</i>
-          </div>
-          <div class="btn" @click="HandleLimpar" v-if="btnLimpar">
-            <i class="material-icons">cleaning_services</i>
-          </div>
-          <div class="btn" @click="HandleSalvar" v-if="btnSalvar">
-            <i class="material-icons">save</i>
-          </div>
-          <div class="btn" @click="HandleCriar" v-if="btnCriar">
-            <i class="material-icons">add</i>
-          </div>
-          <div class="btn" @click="HandleCriarEvento" v-if="btnCriarNovoEvento">
-            <i class="material-icons">add</i> Adicionar
-          </div>
-          <div class="btn" @click="HandleCriarProduto" v-if="btnCriarNovoProduto">
-            <i class="material-icons">add</i> Adicionar
-          </div>
-          <div class="btn" @click="HandleCriarReceitas" v-if="btnCriarNovaReceita">
-            <i class="material-icons">add</i> Adicionar
-          </div>
-          <div class="btn" @click="HandleCriarDespesa" v-if="btnCriarNovaDespesa">
-            <i class="material-icons">add</i> Adicionar
-          </div>
-          <div class="btn" @click="HandleCriarOrdem" v-if="btnCriarNovaOrdem">
-            <i class="material-icons">add</i> Adicionar
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <el-row class="row-bg" justify="space-between">
+    <el-col :span="6"><BreadCrumb :name="props.name" /></el-col>
+    <el-col :span="6" style="display: flex;flex-wrap: wrap; justify-content: flex-end;">
+      <el-button type="primary" plain v-if="btnVoltar" @click="HandleVoltar" :icon="Plus" round>Adicionar</el-button>
+      <el-button type="primary" plain v-if="btnLimpar" @click="HandleLimpar" :icon="Plus" round>Adicionar</el-button>
+      <el-button type="primary" plain v-if="btnSalvar" @click="HandleSalvar" :icon="Plus" round>Adicionar</el-button>
+      <el-button type="primary" plain v-if="btnCriar" @click="HandleCriar" :icon="Plus" round>Adicionar</el-button>
+      <el-button type="primary" plain v-if="btnCriarNovoEvento" @click="HandleCriarEvento" :icon="Plus" round>Adicionar</el-button>
+      <el-button type="primary" plain v-if="btnCriarNovoProduto" @click="HandleCriarProduto" :icon="Plus" round>Adicionar</el-button>
+      <el-button type="primary" plain v-if="btnCriarNovaReceita" @click="HandleCriarReceitas" :icon="Plus" round>Adicionar</el-button>
+      <el-button type="primary" plain v-if="btnCriarNovaDespesa" @click="HandleCriarDespesa" :icon="Plus" round>Adicionar</el-button>
+      <el-button type="primary" plain v-if="btnCriarNovaOrdem" @click="HandleCriarOrdem" :icon="Plus" round>Adicionar</el-button>
+    </el-col>
+  </el-row>
 </template>
 <script lang="ts" setup>
 import BreadCrumb from './BreadCrumb.vue';
-import { defineProps, defineEmits, ref, watchEffect } from 'vue';
+import { defineProps, defineEmits } from 'vue';
+import {
+  Plus
+} from '@element-plus/icons-vue'
 
 const props = defineProps({
   BreadCrumbName: {
@@ -140,8 +115,23 @@ const HandleCriarDespesa = () => {
 const HandleCriarOrdem = () => {
   emit('clickCriarNovaOrdem')
 }
-const HandleAtualizarFiltro = () => {
-  emit('update:atualizarFiltro')
-}
 
 </script>
+
+<style lang="scss">
+.el-row {
+  margin-bottom: 20px;
+  padding: 10px 10px 25px 10px;
+}
+.el-row:last-child {
+  margin-bottom: 0;
+}
+.el-col {
+  border-radius: 4px;
+}
+
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+</style>

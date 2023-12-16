@@ -3,15 +3,15 @@
         <div class="mensagem_nao_contem_produto">
             <img src="../../assets/img/empty.png" alt="empty">
             <div>
-                <p>Não existe nenhuma {{ nome }} cadastrada.</p>
-                <p>Clique em Adicionar para cadastrar sua primeira {{ nome }}.</p>
+                <p>Não existe nenhuma {{ props.nome }} cadastrada.</p>
+                <p>Clique em Adicionar para cadastrar sua primeira {{ props.nome }}.</p>
             </div>
         </div>
     </div>
 </template>
   
 <script lang="ts" setup>
-import defineProps from 'vue';
+import { defineProps } from 'vue';
 
 const props = defineProps({
     nome: {

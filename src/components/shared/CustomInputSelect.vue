@@ -14,7 +14,7 @@ import { ref, watch, defineProps, defineEmits, PropType, reactive, watchEffect }
 
 let categoriasList: ICategorias[] = reactive([]);
 
-const buscarCategorias = async (data: any) => {
+const buscarCategorias = async (data: unknown) => {
     try {
         const response = await fetch(`http://localhost:3001/${data}`);
         if (response.ok) {

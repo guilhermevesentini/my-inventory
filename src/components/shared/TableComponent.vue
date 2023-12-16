@@ -44,7 +44,6 @@
 
 <script lang="ts" setup>
 import { ref, defineProps, defineEmits, computed, watch } from 'vue';
-import PaginationComponent from './PaginationComponent.vue';
 
 const props = defineProps({
   items: {
@@ -94,7 +93,7 @@ const gotoPage = (page) => {
   current.value = page;
 };
 
-const selecionarLinha = (id: number) => {
+const selecionarLinha = () => {
   // Lógica para selecionar a linha
 };
 

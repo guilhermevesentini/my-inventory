@@ -83,12 +83,12 @@ const ClickNoLink = (path: string) => {
 </script>
   
 
-<style lang="scss" scoped>.full-height {
+<style lang="scss" scoped>
+.full-height {
     height: 100%;
-    /* Define altura para ocupar toda a altura do seu contêiner pai */
+    padding: 0;
 }
 
 .full-height-menu {
     height: 100%;
-    /* Define altura para ocupar toda a altura do menu */
 }</style>

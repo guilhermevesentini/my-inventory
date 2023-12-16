@@ -144,11 +144,10 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
-import ModalEvent from '@/components/shared/ModalEvent.vue';
 import useGerarId from '@/composables/shared/useCriarRandomId';
 import { IGerarId } from '@/composables/types';
 
-let calendar: any;
+let calendar: unknown = Calendar;
 let modalShow = ref(false);
 let modalCriarShow = ref(false);
 const calendarRef = ref(null);
@@ -169,8 +168,6 @@ let eventFromCalendar = ref({
     editable: true,
     comments: ''
 });
-
-const eventComment = ref('')
 
 const config: IGerarId = {
     quantidade: 16,
@@ -210,10 +207,6 @@ const eventParams = ref<IEvento>({
     editable: true,
     comments: '',
 });
-
-const handleDateClick = async (info) => {
-    criarNovoEvento(info)
-}
 
 const handleCriarNovoEvento = async () => {
     limparParams()
@@ -300,11 +293,6 @@ const criarEvento = async () => {
 
 
 
-const openModal = () => {
-    const modal = document.getElementById('myModal');
-    modalShow.value = true;
-};
-
 const salvarEvento = async () => {
     const id = eventFromCalendar.value.id;
 
@@ -361,7 +349,7 @@ const handleEventClick = (info) => {
     modalShow.value = true
 };
 
-const criarNovoEvento = async (event: any) => {
+const criarNovoEvento = async (event: unknown) => {
     //criar novo ao selecionar as datas
     const novoId = useGerarId(config);
 

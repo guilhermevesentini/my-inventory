@@ -64,10 +64,8 @@
 
 <script setup lang="ts">
 import { computed, onMounted, reactive } from "@vue/runtime-core"
-import { IProduto, ETipoProduto } from '@/@types/types'
+import { IProduto } from '@/@types/types'
 import router from "@/router";
-import MenuDeAcoes from '@/components/shared/MenuSuperiorAcoes.vue'
-import BreadCrumb from "../../shared/BreadCrumb.vue";
 import SelectComponent from "@/components/shared/CustomInputSelect.vue"
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 
@@ -87,24 +85,24 @@ const getProduto = (async (id: number) => {
     Object.assign(produto, response);
 })
 
-const categorias: ETipoProduto[] = [
-    ETipoProduto.Mercado,
-    ETipoProduto.Moda,
-    ETipoProduto.Moveis,
-    ETipoProduto.MusicaShows,
-    ETipoProduto.Natal,
-    ETipoProduto.Papelaria,
-    ETipoProduto.PetShop,
-    ETipoProduto.ReligiaoEspiritualidade,
-    ETipoProduto.Relogios,
-    ETipoProduto.SaudeCuidadosPessoais,
-    ETipoProduto.Servicos,
-    ETipoProduto.SuplementosAlimentares,
-    ETipoProduto.TabletsIpadEReaders,
-    ETipoProduto.TelefoniaFixa,
-    ETipoProduto.TVVideo,
-    ETipoProduto.UtilidadesDomesticas,
-];
+// const categorias: ETipoProduto[] = [
+//     ETipoProduto.Mercado,
+//     ETipoProduto.Moda,
+//     ETipoProduto.Moveis,
+//     ETipoProduto.MusicaShows,
+//     ETipoProduto.Natal,
+//     ETipoProduto.Papelaria,
+//     ETipoProduto.PetShop,
+//     ETipoProduto.ReligiaoEspiritualidade,
+//     ETipoProduto.Relogios,
+//     ETipoProduto.SaudeCuidadosPessoais,
+//     ETipoProduto.Servicos,
+//     ETipoProduto.SuplementosAlimentares,
+//     ETipoProduto.TabletsIpadEReaders,
+//     ETipoProduto.TelefoniaFixa,
+//     ETipoProduto.TVVideo,
+//     ETipoProduto.UtilidadesDomesticas,
+// ];
 
 let produtoEditado = computed(() => produto)
 

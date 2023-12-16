@@ -1,129 +1,75 @@
 <template>
-  <div class="row" style="margin: 10px 0;">
-    <div class="col-md-12">
+  <el-row :gutter="20">
+    <el-col :span="24">
       <MenuSuperiorAcoes name="Inventário" :btn-criar-novo-produto="true" @click-criar-novo-produto="adicionarProduto"/>
-    </div>
-
-    <div class="col-md-12">
-      <div class="mensagem_nao_contem_produto" v-if="produtosFiltrados.length <= 0">
+    </el-col>
+    <el-col :span="24" v-if="produtosFiltrados.length <= 0">
+      <div class="mensagem_nao_contem_produto" >
         <img src="../../assets/img/empty.png" alt="empty">
         <div>
           <p>Não existe nenhum produto cadastrado.</p>
           <p>Clique em Adicionar para cadastrar seu primeiro produto.</p>
         </div>
       </div>
-      <div v-if="produtosFiltrados.length > 0">
-        <div class="table-responsive custom-scrollbar" style="
-           max-height: calc(100vh - 195px); overflow-y: auto; margin: 10px 0;
-            ">
-          <table id="table-desktop" class="table table-bordered table-responsive">
-            <thead>
-              <tr>
-                <!-- <th></th> -->
-                <th>Id</th>
-                <th>Nome</th>
-                <th>Categoria</th>
-                <th>Quantidade</th>
-                <th>Preço</th>
-                <th>Total</th>
-                <th colspan="2">Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="produto in produtosFiltrados" :key="produto.id" style="max-width: 25px;">
-                <!-- <td @click="toggleIconExpand" style="max-width: 25px;">
-                <a data-bs-toggle="collapse" href="#subLinha" role="button" aria-expanded="false"
-                    aria-controls="subLinha">
-                    <i class="material-icons" title="eye">{{ isExpanded ? 'expand_less' : 'expand_more' }}</i>
-                  </a>
-                </td> -->
-                <td>{{ produto.id }}</td>
-                <td>{{ produto.nome }}</td>
-                <td>{{ produto.categoria }}</td>
-                <td>{{ produto.quantidade }}</td>
-                <td>{{ produto.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</td>
-                <td>{{ produto.total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</td>
-                <td style="text-align: center; max-width: 25px;">
-                  <i class="material-icons" @click="selecionarLinha(produto.id)" title="Editar">edit</i>
-                </td>
-                <td style="text-align: center; max-width: 25px;">
-                  <i class="material-icons" @click="deletarProduto(produto.id)" title="deletar">delete</i>
-                </td>
-              </tr>
-              <!-- <tr>
-              <td colspan="10" class="collapse" id="subLinha">
-                <div>adawdwad</div>
-              </td>              
-            </tr> -->
-            </tbody>
-            <tfoot>
-              <tr>
-                <th colspan="3">Total</th>
-                <th>{{ totalQuantidade }}</th>
-                <th></th>
-                <th>{{ totalPreco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</th>
-                <th colspan="2"></th>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-        <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content">
-            <li class="page-item" :class="{ disabled: currentPage === 1 }">
-              <button class="page-link" @click="prevPage" :disabled="currentPage === 1">
-                <span aria-hidden="true">&laquo;</span>
-              </button>
-            </li>
-            <li class="page-item" v-for="page in
-             Math.ceil(listaDeProdutosComputed.length / itemsPerPage)" :key="page"
-              :class="{ active: currentPage === page }">
-              <button class="page-link" @click="currentPage = page">{{ page }}</button>
-            </li>
-            <li class="page-item"
-              :class="{ disabled: currentPage === Math.ceil(listaDeProdutosComputed.length / itemsPerPage) }">
-              <button class="page-link" @click="nextPage"
-                :disabled="currentPage === Math.ceil(listaDeProdutosComputed.length / itemsPerPage)">Next</button>
-            </li>
-          </ul>
-        </nav>
-      </div>
-
-    </div>
-  </div>
+    </el-col>
+    <el-col :span="24" v-if="produtosFiltrados.length > 0"> 
+      <el-table :data="produtosFiltrados" style="width: 100%">
+          <el-table-column label="Id" prop="id" />
+          <el-table-column label="Nome" prop="nome" />
+          <el-table-column label="Categoria" prop="categoria" />
+          <el-table-column label="Quantidade" prop="preco" />
+          <el-table-column label="Preço" prop="quantidade" />
+          <el-table-column label="Total" prop="total" />
+          <el-table-column align="right">
+            <template #header>
+              <el-input v-model="filtroAtual" size="small" placeholder="Type to search" />
+            </template>
+            <template #default="scope">
+              <el-button size="small" @click="selecionarLinha(scope.row.id)"
+                >Editar</el-button
+              >
+              <el-button
+                size="small"
+                type="danger"
+                @click="deletarProduto(scope.row.id)"
+                >Excluir</el-button
+              >
+            </template>
+          </el-table-column>
+      </el-table>
+    </el-col>
+    <el-col :span="12">
+      <el-pagination
+        v-model:current-page="currentPage"
+        :page-size="itemsPerPage"
+        layout="prev, pager, next"
+        :total="listaDeProdutosComputed.length"
+        @current-change="handlePageChange"
+      />
+    </el-col>
+  </el-row>  
 </template>
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from "@vue/runtime-core";
 import {inject} from 'vue';
 import { IProduto } from "../../@types/types";
-import { darkMode } from "@/composables/shared/darkMode";
 import router from "@/router";
-import BreadCrumb from "@/components/shared/BreadCrumb.vue";
 import InvetoryGateway from "@/services/Inventory/gateways/InventorGateways";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 
 const invetoryGateway = inject('invetoryGateway') as InvetoryGateway;
-
-const visible = ref(false)
 const listaDeProdutos = ref<Array<IProduto>>([]);
 const filtroAtual = ref<string>('');
 
 const currentPage = ref(1);
 const itemsPerPage = ref(5);
 
-const getUser: any = localStorage.getItem('user')
-const userToJs = JSON.parse(getUser);
-
-
 function removerAcentos(texto: string) {
   return texto
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase();
-}
-
-function atualizarFiltro(filtro: string) {
-  filtroAtual.value = filtro
 }
 
 const produtosFiltrados = computed(() => {
@@ -144,17 +90,13 @@ const produtosFiltrados = computed(() => {
   return filteredItems.slice(startIndex, startIndex + itemsPerPage.value);
 });
 
-const nextPage = () => {
-  currentPage.value++;
-};
-
-const prevPage = () => {
-  currentPage.value--;
-};
-
 const adicionarProduto = () => {
   router.push('/Adicionar_Produto')
 }
+
+const handlePageChange = (newPage: number) => {
+  currentPage.value = newPage;
+};
 
 onMounted(() => {
   getProdutos();
@@ -182,94 +124,13 @@ const deletarProduto = async (productId: string) => {
   }
 }
 
-
 const selecionarLinha = ((produto: number) => {
   router.push({ path: `/EditarProduto/${produto}` });
 })
 
-const totalQuantidade = computed(() => {
-  return produtosFiltrados.value.reduce((total, produto) => {
-    return total + produto.quantidade;
-  }, 0);
-});
-
-const totalPreco = computed(() => {
-  return produtosFiltrados.value.reduce((total, produto) => {
-    return total + (produto.preco * produto.quantidade);
-  }, 0);
-});
-
 </script>
 
 <style lang="scss" scoped>
-.dark_mode_on_table {
-  color: #fff;
-  background-color: #333;
-}
-
-.light_mode_on_table {
-  color: #333;
-  background-color: #fff;
-}
-
-table {
-  height: 100%;
-  border-collapse: collapse;
-
-  thead {
-    th {
-      position: sticky;
-      top: 0;
-      background-color: #f2f2f2;
-      z-index: 2;
-    }
-  }
-
-  tbody {
-    tr:hover {
-      background-color: #333;
-    }
-  }
-
-  tfoot {
-    th {
-      position: sticky;
-      bottom: 0;
-      background-color: #f2f2f2;
-      z-index: 2;
-    }
-  }
-
-  .table_line {
-    cursor: pointer;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 40px !important;
-  }
-}
-
-.navigation {
-  display: flex;
-}
-
-.custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: #888888 #f2f2f2;
-}
-
-.custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background-color: #f2f2f2;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #888888;
-  border-radius: 10px;
-}
 
 .mensagem_nao_contem_produto {
   display: flex;
@@ -290,20 +151,6 @@ table {
 
   p {
     text-align: center;
-  }
-}
-
-#table-mobile {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  #table-mobile {
-    display: block;
-  }
-
-  #table-desktop {
-    display: none;
   }
 }
 </style>

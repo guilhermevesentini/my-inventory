@@ -31,16 +31,16 @@
   
 <script lang="ts" setup>
 
-import { defineProps, defineEmits, ref, computed } from 'vue';
+import { defineEmits, ref } from 'vue';
 
-const props = defineProps({
-    modalId: {
-        type: String
-    },
-    title: {
-        type: String
-    }
-})
+// const props = defineProps({
+//     modalId: {
+//         type: String
+//     },
+//     title: {
+//         type: String
+//     }
+// })
 
 let nome = ref('')
 

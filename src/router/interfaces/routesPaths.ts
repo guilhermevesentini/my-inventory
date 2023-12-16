@@ -1,7 +1,7 @@
 interface IRoutes {
     path: string,
     name: string,
-    component: any,
+    component: unknown,
     meta: { requiresAuth: boolean }
 }
 

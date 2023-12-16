@@ -24,4 +24,9 @@ module.exports = defineConfig({
       }
     }
   },  
+  devServer: {
+    client: {
+      overlay: true,
+    },
+  },
 });

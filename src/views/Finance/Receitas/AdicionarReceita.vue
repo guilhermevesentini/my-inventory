@@ -53,8 +53,7 @@ import useGerarId from "@/composables/shared/useCriarRandomId"
 import { IGerarId } from "@/composables/types";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 import SelectComponent from "@/components/shared/CustomInputSelect.vue";
-import HttpClient from "@/infra/HttpClient";
-import ReceitasGateway from '@/gateways/ReceitasGateway';
+import ReceitasGateway from '@/services/receitas/gateways/ReceitasGateway';
 
 const receitasGateway = inject('receitasGateway') as ReceitasGateway;
 

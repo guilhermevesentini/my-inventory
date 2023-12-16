@@ -1,25 +1,25 @@
 <template>
-    <div class="card" style="min-height: 100%;">
-        <div class="card-header">
-            Lembretes
-        </div>
-        <div class="card-body">
-            <ul style="list-style: none; padding-left: 0">
-                <li v-for="evento in eventosHoje" v-bind:key="evento"
-                    style="background-color: #319dd344;padding: 10px; margin-bottom: 10px; border-radius: 5px;">
-                    <span v-if="evento.allDay">Todo o dia: </span>
-                    <span v-if="!evento.allDay">{{ evento.hourStart }} - {{ evento.hourEnd }}: </span>
-                    {{ evento.title }}
-                </li>
-            </ul>
-        </div>
-    </div>
+  <el-card class="box-card">
+      <template #header>
+          <div class="card-header">
+              <span>Lembretes</span>
+          </div>
+      </template>
+      <ul style="list-style: none; padding-left: 0">
+        <li v-for="evento in eventosHoje" v-bind:key="evento"
+            style="background-color: #319dd344;padding: 10px; margin-bottom: 10px; border-radius: 5px;">
+            <span v-if="evento.allDay">Todo o dia: </span>
+            <span v-if="!evento.allDay">{{ evento.hourStart }} - {{ evento.hourEnd }}: </span>
+            {{ evento.title }}
+        </li>
+    </ul>
+  </el-card>
 </template>
   
 <script setup lang="ts">
 import { onMounted, ref, computed } from 'vue'
 
-const listaDeEventos = ref<any[]>([]);
+const listaDeEventos = ref<unknown[]>([]);
 
 const getEventos = async () => {
   try {
@@ -53,6 +53,21 @@ onMounted(() => {
 })
 </script>
   
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text {
+  font-size: 14px;
+}
+
+.item {
+  margin-bottom: 18px;
+}
+
+</style>
   
   

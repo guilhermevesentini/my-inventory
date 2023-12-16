@@ -112,9 +112,9 @@ const Voltar = (() => {
     router.push('/Despesas')
 })
 
-const updateProdutoDetails = (updatedProduto) => {
-    despesaDetails = updatedProduto;
-};
+// const updateProdutoDetails = (updatedProduto: IDespesas) => {
+//     despesaDetails = updatedProduto;
+// };
 
 </script>
 
