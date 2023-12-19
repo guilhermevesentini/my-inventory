@@ -1,7 +1,7 @@
 <template>
     <el-row class="full-height">
         <el-col :span="24">
-            <el-menu default-active="2" class="full-height-menu" @open="handleOpen" @close="handleClose">
+            <el-menu :default-active="activeMenu" class="full-height-menu">
                 <el-menu-item index="1" @click="ClickNoLink('/Dashboard')">
                     <el-icon>
                         <DataAnalysis />
@@ -69,12 +69,28 @@ import {
 } from '@element-plus/icons-vue'
 
 
-const handleOpen = (key: string, keyPath: string[]) => {
-    console.log(key, keyPath)
-}
-const handleClose = (key: string, keyPath: string[]) => {
-    console.log(key, keyPath)
-}
+
+const routeIndexMapping: { [key: string]: string } = {
+  '/Dashboard': '1',
+  '/Inventory': '2',
+  '/Calendario': '3',
+  '/Receitas': '4',
+  '/Despesas': '5',
+  '/Orders': '6',
+  '/Financeiro': '7',
+  '/Cadastros': '8',
+};
+
+router.afterEach(() => {
+  activeMenu = getActiveMenu();
+});
+
+const getActiveMenu = (): string => {
+  const currentRoute = router.currentRoute.value.path;
+  return routeIndexMapping[currentRoute] || '1'; // Defina o padrão como '1' se a rota não estiver mapeada
+};
+
+let activeMenu = getActiveMenu();
 
 const ClickNoLink = (path: string) => {
     return router.push(`${path}`)

@@ -9,6 +9,7 @@ import FetchAdapater from './infra/FetchAdapter';
 import ReceitasHttpGateway from './services/receitas/gateways/ReceitaHttpGateway';
 import InventoryHttpGateway from './services/Inventory/gateways/InventoryHttpGateway';
 import SharedHttpGateway from './services/shared/gateways/SharedHttpGateway';
+//import VueMask from 'v-mask'
 
 const app = createApp(App);
 
@@ -24,6 +25,7 @@ app.provide('invetoryGateway', invetoryGateway);
 app.provide('sharedGateway', sharedGateway);
 
 app.use(ElementPlus)
+//app.use(VueMask)
 app.component('ModalVue', Modal);
 app.use(router);
 app.use(VueApexCharts);

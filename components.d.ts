@@ -35,6 +35,7 @@ declare module '@vue/runtime-core' {
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
+    FormProduto: typeof import('./src/components/Inventory/Produtos/FormProduto.vue')['default']
     FormularioProdutos: typeof import('./src/components/shared/FormularioProdutos.vue')['default']
     FrameProdutos: typeof import('./src/components/Inventory/Produtos/FrameProdutos.vue')['default']
     InfoNoItems: typeof import('./src/components/shared/InfoNoItems.vue')['default']

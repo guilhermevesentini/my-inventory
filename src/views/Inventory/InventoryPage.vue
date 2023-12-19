@@ -17,8 +17,8 @@
           <el-table-column label="Id" prop="id" />
           <el-table-column label="Nome" prop="nome" />
           <el-table-column label="Categoria" prop="categoria" />
-          <el-table-column label="Quantidade" prop="preco" />
-          <el-table-column label="Preço" prop="quantidade" />
+          <el-table-column label="Quantidade" prop="quantidade" />
+          <el-table-column label="Preço" prop="preco" />
           <el-table-column label="Total" prop="total" />
           <el-table-column align="right">
             <template #header>
