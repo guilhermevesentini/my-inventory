@@ -340,6 +340,25 @@
       "tag": "Tag 13",
       "observacao": "",
       "total": 1798.8
+    },
+    {
+      "id": 22,
+      "_id": "ae77fa5b2fc1d3fa8b42194638f7d938",
+      "_id_Produto": "4736b7dd4d6842236046fa1fd43246bc",
+      "nome": "teste",
+      "descricao": "teste",
+      "codigo": "234324",
+      "marca": "fefse",
+      "modelo": "sefsefsef",
+      "categoria": "366c0de2a2f35351f72e92ffe2bdccef",
+      "quantidade": "3434",
+      "preco": "132",
+      "fornecedor": "366c0de2a2f35351f72e92ffe2bdccef",
+      "dataAquisicao": "2023-12-12T03:00:00.000Z",
+      "localizacao": "366c0de2a2f35351f72e92ffe2bdccef",
+      "tag": "d032a22e66f33c72b8e5e9445aa60ee7",
+      "observacao": "q2eq2e",
+      "total": 0
     }
   ],
   "categorias": [

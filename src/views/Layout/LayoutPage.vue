@@ -32,7 +32,7 @@ import HeaderCompVue from "./HeaderCompVue.vue";
 .el-main {
   --el-main-padding: 0px;
   background-color: #e6e6e6;
-  overflow-y: hidden;
+  overflow-y: auto;
   height: 91.5vh;
 }
 .full-height-aside {

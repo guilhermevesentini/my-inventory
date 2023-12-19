@@ -10,12 +10,6 @@ const routesPaths: IRoutes[] = [
       path: "/dashboard",
       name: "Dashboard",
       component: () => import('@/views/Dashboard/DashboardPage.vue'),
-      meta: { requiresAuth: true }
-    },
-    {
-      path: "/dashboard",
-      name: "Dashboard",
-      component: () => import('@/views/Dashboard/DashboardPage.vue'),
       meta: { requiresAuth: true },
     },
     {
@@ -28,7 +22,7 @@ const routesPaths: IRoutes[] = [
     {
       path: "/Adicionar_Produto",
       name: "Adicionar_Produto",
-      component: () => import('@/views/Inventory/InventoryPage.vue'),
+      component: () => import('@/views/Inventory/AdicionarProduto.vue'),
       meta: { requiresAuth: true },
     },
     {

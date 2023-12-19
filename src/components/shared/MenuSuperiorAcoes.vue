@@ -2,8 +2,8 @@
   <el-row class="row-bg" justify="space-between">
     <el-col :span="6"><BreadCrumb :name="props.name" /></el-col>
     <el-col :span="6" style="display: flex;flex-wrap: wrap; justify-content: flex-end;">
-      <el-button type="primary" plain v-if="btnVoltar" @click="HandleVoltar" :icon="Plus" round>Adicionar</el-button>
-      <el-button type="primary" plain v-if="btnLimpar" @click="HandleLimpar" :icon="Plus" round>Adicionar</el-button>
+      <el-button plain v-if="btnVoltar" @click="HandleVoltar" :icon="TopLeft" round>Voltar</el-button>
+      <el-button plain v-if="btnLimpar" @click="HandleLimpar" :icon="Brush" round>Limpar</el-button>
       <el-button type="primary" plain v-if="btnSalvar" @click="HandleSalvar" :icon="Plus" round>Adicionar</el-button>
       <el-button type="primary" plain v-if="btnCriar" @click="HandleCriar" :icon="Plus" round>Adicionar</el-button>
       <el-button type="primary" plain v-if="btnCriarNovoEvento" @click="HandleCriarEvento" :icon="Plus" round>Adicionar</el-button>
@@ -18,7 +18,9 @@
 import BreadCrumb from './BreadCrumb.vue';
 import { defineProps, defineEmits } from 'vue';
 import {
-  Plus
+  Plus,
+  TopLeft,
+  Brush
 } from '@element-plus/icons-vue'
 
 const props = defineProps({
