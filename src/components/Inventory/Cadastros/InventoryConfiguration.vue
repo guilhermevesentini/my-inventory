@@ -136,7 +136,7 @@ watch(listaDeCadastros, (newVal) => {
   console.log('Dados atualizados:', newVal);
 });
 
-const getCadastros = async (userId: string) => {
+const getCadastros = async () => {
   try {
     const urls = [
       'http://localhost:3001/categorias',

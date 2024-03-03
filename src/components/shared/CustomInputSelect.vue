@@ -1,10 +1,11 @@
 <template>
     <div>
-        <label>{{ label }}</label>
-        <select class="form-control" v-model="selectedValue" placeholder="Selecione...">
-            <option disabled value="">{{ placeholder }}</option>
-            <option v-for="option in categoriasList" :value="option.nome" :key="option._id">{{ option.nome }}</option>
-        </select>
+      <el-select
+        v-model="selectedValue"
+        placeholder="Selecione..."
+      >
+      <el-option v-for="option in categoriasList" :value="option.nome" :key="option._id">{{ option.nome }}</el-option>
+      </el-select>
     </div>    
 </template>
   
@@ -20,14 +21,11 @@ const buscarCategorias = async (data: unknown) => {
         if (response.ok) {
             const data = await response.json();
             categoriasList.length = 0;
-            // Popule a lista categorias apenas com os _id das categorias
             categoriasList.push(...data);
         } else {
-            // Trate o erro, se necessário
             console.error("Erro ao buscar categorias");
         }
     } catch (error) {
-        // Trate o erro, se necessário
         console.error("Erro ao buscar categorias", error);
     }
 };
@@ -65,7 +63,7 @@ const selectedValue = ref(props.modelValue);
 const endPointName = ref(props.data);
 
 const emit = defineEmits<{
-  (event: "update:modelValue", value: string): void;
+  (event: "update:modelValue", value: string | undefined): void;
 }>();
 
 watch(selectedValue, (newValue) => {

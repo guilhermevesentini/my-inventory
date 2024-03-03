@@ -1,88 +1,71 @@
 <template>
-  <div class="row" style="margin: 10px 0;">
-    <div class="col-md-12">
-      <MenuSuperiorAcoes name="Receitas" :btnCriarNovaReceita="true" @clickCriarNovaReceita="adicionarReceita" />
-    </div>
-
-    <InfoNoItems v-if="listaDeReceitas.length <= 0" />
-
-    <table id="table-desktop" class="table table-bordered table-responsive">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Descrição</th>
-          <th>Valor</th>
-          <th>Recorrênte</th>
-          <th>Frequência</th>
-          <th>Previsão</th>
-          <th colspan="2"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in listaDeReceitas" :key="item.id">
-          <td>{{ item.nome }}</td>
-          <td>{{ item.descricao }}</td>          
-          <td>{{ item.recorrente }}</td>
-          <td>{{ item.frequencia }}</td>
-          <td>{{ item.previsao }}</td>
-          <td>{{ item.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</td>
-          <td style="text-align: center; width: 40px;">
-            <i class="material-icons" @click="editarReceita(item.id)" title="Editar">edit</i>
-          </td>
-          <td style="text-align: center; width: 40px;">
-            <i class="material-icons" @click="deletarReceita(item.id)" title="deletar">delete</i>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <th colspan="5">Total</th>
-          <th>{{ totalPreco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</th>
-          <th colspan="3"></th>
-        </tr>
-      </tfoot>
-    </table>
-
-
-    <div class="modal-mask" v-show="showModal" transition="modal">
-      <div class="modal-wrapper">
-        <div class="modal-container">
-
-          <div class="modal-header">
-            <slot name="header">
-              default header
-            </slot>
-          </div>
-
-          <div class="modal-body">
-            <slot name="body">
-              default body
-            </slot>
-          </div>
-
-          <div class="modal-footer">
-            <slot name="footer">
-              default footer
-              <button class="modal-default-button" @click="showModal = false">
-                OK
-              </button>
-            </slot>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <el-row :gutter="20" v-if="loading">
+    <el-col :span="24">
+      <InventoryPageSkeleton />
+    </el-col>
+  </el-row>
+  <el-row v-else>
+    <el-col :span="24">
+      <MenuSuperiorAcoes name="Receitas" :btnCriarNovaReceita="true" @clickCriarNovaReceita="adicionarReceita"/>
+    </el-col>
+    <el-col>
+      <el-col :span="24" v-if="!showTable">
+        <InfoNoItems nome="Receita" />
+      </el-col>
+      <el-col :span="24" v-if="showTable"> 
+        <el-table :data="listaDeReceitas" style="width: 100%" v-loading="loadingTable">
+            <el-table-column label="Nome" prop="nome" />
+            <el-table-column label="Descrição" prop="descricao" />
+            <el-table-column label="Valor" prop="recorrente" />
+            <el-table-column label="Recorrênte" prop="recorrente" />
+            <el-table-column label="Frequência" prop="frequencia" />
+            <el-table-column label="Previsão" prop="previsao" />
+            <el-table-column align="right" width="250">
+              <template #header>
+                <el-input v-model="filtroAtual" size="small" clearable  placeholder="Digite aqui..." :suffix-icon="Search" style="width: 100%"/>
+              </template>
+              <template #default="scope">
+                <el-button size="small" @click="editarReceita(scope.row.id)"
+                  >Editar</el-button
+                >
+                <el-button
+                  size="small"
+                  type="danger"
+                  @click="deletarReceita(scope.row.id)"
+                  >Excluir</el-button
+                >
+              </template>
+            </el-table-column>
+        </el-table>
+        <el-col :span="12">
+        <el-pagination
+          v-model:current-page="currentPage"
+          :page-size="itemsPerPage"
+          layout="prev, pager, next"
+          :total="listaDeReceitas.length"
+          @current-change="handlePageChange"
+        />
+      </el-col>
+      </el-col>
+    </el-col>  
+  </el-row>
 </template>
     
 <script lang="ts" setup>
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 import InfoNoItems from "@/components/shared/InfoNoItems.vue";
-import { onMounted, computed } from "@vue/runtime-core";
-import { ref, inject } from "vue";
+import { onMounted } from "@vue/runtime-core";
+import { ref, inject, computed } from "vue";
 import router from "@/router";
 import ReceitasGateway from "@/services/receitas/gateways/ReceitasGateway";
 
-let showModal = ref(false)
+const loading = ref(false);
+
+const loadingTable = ref(false);
+
+const currentPage = ref(1);
+const itemsPerPage = ref(5);
+
 const receitasComp = inject('receitasGateway') as ReceitasGateway;
 
 interface IReceitas {
@@ -97,6 +80,8 @@ interface IReceitas {
 }
 
 const listaDeReceitas = ref<Array<IReceitas>>([]);
+
+const showTable = computed(() => listaDeReceitas?.value?.length >= 1 ? true : false)
 
 const adicionarReceita = () => {
   router.push('/Adicionar_Receita')
@@ -116,21 +101,26 @@ const deletarReceita = async (productId: string) => {
   }
 }
 
+const handlePageChange = (newPage: number) => {
+  currentPage.value = newPage;
+};
+
 const obterReceitas = async () => {
-  const response = await receitasComp.obterReceitas();
+  try {
+    loading.value = true;
+    const response = await receitasComp.obterReceitas();
 
-  //const produtosDoUsuario = response.filter(produto => produto._id === userId.toString());
-  //console.log(produtosDoUsuario);
+    //const produtosDoUsuario = response.filter(produto => produto._id === userId.toString());
+    //console.log(produtosDoUsuario);
 
-  listaDeReceitas.value = response;
+    listaDeReceitas.value = response;
+  } catch(err){
+    console.log(err);    
+  } finally {
+    loading.value = false;
+  }
+   
 }
-
-const totalPreco = computed(() => {
-  const valores = listaDeReceitas.value.map(t => t.valor)
-  return valores.reduce((valor, valores) => {
-    return valor + valores;
-  }, 0);
-});
 
 onMounted(() => {
   obterReceitas()

@@ -32,10 +32,13 @@ declare module '@vue/runtime-core' {
     ElPagination: typeof import('element-plus/es')['ElPagination']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElSelect: typeof import('element-plus/es')['ElSelect']
+    ElSkeleton: typeof import('element-plus/es')['ElSkeleton']
+    ElSkeletonItem: typeof import('element-plus/es')['ElSkeletonItem']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     FormProduto: typeof import('./src/components/Inventory/Produtos/FormProduto.vue')['default']
+    FormReceitas: typeof import('./src/components/Inventory/Produtos/FormReceitas.vue')['default']
     FormularioProdutos: typeof import('./src/components/shared/FormularioProdutos.vue')['default']
     FrameProdutos: typeof import('./src/components/Inventory/Produtos/FrameProdutos.vue')['default']
     InfoNoItems: typeof import('./src/components/shared/InfoNoItems.vue')['default']
@@ -48,5 +51,9 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TableComponent: typeof import('./src/components/shared/TableComponent.vue')['default']
+    TableTemplateSkeleton: typeof import('./src/components/shared/TableTemplateSkeleton.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

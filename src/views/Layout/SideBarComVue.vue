@@ -68,8 +68,6 @@ import {
     Setting,
 } from '@element-plus/icons-vue'
 
-
-
 const routeIndexMapping: { [key: string]: string } = {
   '/Dashboard': '1',
   '/Inventory': '2',
@@ -87,7 +85,7 @@ router.afterEach(() => {
 
 const getActiveMenu = (): string => {
   const currentRoute = router.currentRoute.value.path;
-  return routeIndexMapping[currentRoute] || '1'; // Defina o padrão como '1' se a rota não estiver mapeada
+  return routeIndexMapping[currentRoute] || '1';
 };
 
 let activeMenu = getActiveMenu();
@@ -107,4 +105,13 @@ const ClickNoLink = (path: string) => {
 
 .full-height-menu {
     height: 100%;
-}</style>
+    display: flex;
+    flex-direction: column;
+
+    .el-menu-item:last-child {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+}
+</style>

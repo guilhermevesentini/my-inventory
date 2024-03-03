@@ -17,3 +17,8 @@ export interface ICadastroItem {
     unidades = 'unidade',
     tags = 'tag',
   }
+
+  export interface IStandardList {
+    id: string,
+    nome: string
+  }
