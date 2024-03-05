@@ -1,48 +1,17 @@
 <template>
-    <div class="row" style="margin: 10px 0;">
-        <div class="col-md-12">
-            <MenuSuperiorAcoes 
-                name="Nova Ordem" 
-                :btnVoltar="true"
-                :btnLimpar="true"
-                :btnSalvar="true"
-                @clickVoltar="Voltar"
-                @clickLimpar="Limpar"
-                @clickSalvar="Salvar"
-            />
-        </div>
-        <div class="col-md-12">
-            <div class="row">
-                <div class="input_form col-md-4">
-                    <label>Nome:</label>
-                    <input class="form-control" type="text" placeholder="Digite o nome" v-model="ordem.nome" />
-                </div>   
-                <div class="input_form col-md-4">
-                    <label>Descrição:</label>
-                    <input class="form-control" type="text" placeholder="Digite a descrição" v-model="ordem.descricao" />
-                </div>
-                <div class="input_form col-md-4">
-                    <label>Valor:</label>
-                    <input class="form-control" type="number" placeholder="Digite o valor" v-model="ordem.valor" />
-                </div>
-                <div class="input_form col-md-4">
-                    <SelectComponent label="Recorrente:" v-model="ordem.recorrente" data="recorrencias" />
-                </div>
-                <div class="input_form col-md-4" v-if="ordem.recorrente == 'Sim'">
-                    <SelectComponent label="Frequência:" v-model="ordem.frequencia" data="frequencias" />
-                </div>
-                <div class="input_form col-md-4">
-                    <label>Previsão:</label>
-                    <input class="form-control" type="date" v-model="ordem.previsao" />
-                </div>  
-                <div class="input_form col-md-12" style="width: 100%">
-                    <label>Observação:</label>
-                    <textarea name="observacao" rows="6" style="width: 100%;" placeholder="Digite sua observação"
-                    v-model="ordem.observacao"></textarea>
-                </div>     
-            </div>
-        </div>
-    </div>
+    <el-row>
+        <el-col :span="24">
+            <MenuSuperiorAcoes name="Nova Receita" :btnVoltar="true" :btnLimpar="true"
+                @clickVoltar="Voltar" @clickLimpar="Limpar" @clickSalvar="Salvar"/>
+        </el-col>
+        <el-col :span="24">
+            <FormOrdems 
+            :produto="ordem"
+            @click-salvar="Salvar"
+            @click-voltar="Voltar"
+            ></FormOrdems>
+        </el-col>
+    </el-row>
 </template>
 
 <script setup lang="ts">
@@ -51,23 +20,12 @@ import router from "@/router";
 import useGerarId from "@/composables/shared/useCriarRandomId"
 import { IGerarId } from "@/composables/types";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
-import SelectComponent from "@/components/shared/CustomInputSelect.vue";
-
+import { IOrdens } from "../Finance/types";
+import FormOrdems from "@/components/Inventory/Produtos/FormOrdems.vue";
 
 const config: IGerarId = {
     quantidade: 16,
     tipo: 'string'
-}
-
-interface IOrdens {
-    id: string
-    nome: string
-    descricao: string
-    valor: number
-    recorrente: string
-    previsao: string
-    frequencia: string
-    observacao: string
 }
 
 let ordensDetails: IOrdens = reactive({

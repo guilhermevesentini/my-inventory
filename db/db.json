@@ -245,10 +245,6 @@
     {
       "id": "1d6b52b9f4b46522472a7217a59b2f8e",
       "nome": "TV e Vídeo"
-    },
-    {
-      "id": "b4cc9b9197321f6321a364c71c59e7fc",
-      "nome": "Utilidades Domésticas"
     }
   ],
   "fornecedores": [
@@ -398,20 +394,9 @@
     },
     {
       "id": "c76fd9521c5dc9f2a9de9847790343c3",
-      "title": "Novo Evento",
-      "start": "2024-02-27",
-      "end": "2024-02-28",
-      "allDay": true,
-      "extendedProps": {
-        "editable": true
-      },
-      "editable": true
-    },
-    {
-      "id": "9ee3f445c1b2a4d56369203e6ad353a1",
-      "title": "Novo Evento",
-      "start": "2024-03-03",
-      "end": "2024-03-04",
+      "title": "teste",
+      "start": "2024-03-04T03:00:00.000Z",
+      "end": "2024-03-07T03:00:00.000Z",
       "allDay": true,
       "extendedProps": {
         "editable": true
@@ -419,8 +404,18 @@
       "editable": true,
       "periodo": "",
       "hourStart": "",
-      "hourEnd": "",
-      "comments": "sfsf"
+      "hourEnd": ""
+    },
+    {
+      "id": "af3af41e78dad4068ee79616d46add73",
+      "title": "Novo Evento",
+      "start": "2024-03-01",
+      "end": "2024-03-02",
+      "allDay": true,
+      "extendedProps": {
+        "editable": true
+      },
+      "editable": true
     }
   ],
   "receitas": [
@@ -504,8 +499,8 @@
       "descricao": "awdwadwa",
       "valor": 1500,
       "previsao": "2023-08-01",
-      "recorrente": "Não",
-      "frequencia": "",
+      "recorrente": "Sim",
+      "frequencia": "Diário",
       "observacao": ""
     }
   ],

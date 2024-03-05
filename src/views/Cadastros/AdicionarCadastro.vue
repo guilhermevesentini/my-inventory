@@ -1,23 +1,19 @@
 <template>
-    <div class="row" style="margin: 10px 0;"> 
-        <div class="col-md-12">
-            <div class="inventory__actions">
-                <div class="inventory__actions___breadCrumb col-md-4">
-                    <BreadCrumb />
-                </div>
-                <div class="inventory__actions___actions col-md-8">
-                    <div class="btn" @click="Voltar">
-                        <i class="material-icons">keyboard_return</i>                        
-                    </div>
-                    <div class="btn" @click="Limpar">
-                        <i class="material-icons">cleaning_services</i>                        
-                    </div>
-                    <div class="btn" @click="Salvar">
-                        <i class="material-icons">save</i>                        
-                    </div>
-                </div>
-            </div>
-        </div>
+    <el-row>
+        <el-col :span="24">
+            <MenuSuperiorAcoes name="Novo Produto" :btnVoltar="true" :btnLimpar="true"
+                @clickVoltar="Voltar" @clickLimpar="Limpar" />
+        </el-col>
+        <el-col :span="24">
+            <FormProduto 
+            :produto="produto"
+            @click-salvar="Salvar"
+            @click-voltar="Voltar"
+            ></FormProduto>
+        </el-col>
+    </el-row>
+
+    <div class="row" style="margin: 10px 0;">
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-4">
@@ -64,7 +60,6 @@
 <script setup lang="ts">
 import { reactive, ref } from "@vue/runtime-core"
 import router from "@/router";
-import BreadCrumb from "../../shared/BreadCrumb.vue";
 
 interface IItem {
     item: Array<{

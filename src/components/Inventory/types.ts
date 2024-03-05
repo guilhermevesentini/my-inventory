@@ -1,5 +1,5 @@
 export interface ICadastroItem {
-    id: number;
+    id: number | string;
     nome: string;
     // Adicione outras propriedades comuns se existirem
   }

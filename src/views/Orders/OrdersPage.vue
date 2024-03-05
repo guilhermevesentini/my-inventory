@@ -1,77 +1,54 @@
 <template>
-  <div class="row" style="margin: 10px 0;">
-    <div class="col-md-12">
-      <MenuSuperiorAcoes name="Ordens" :btnCriarNovaOrdem="true" @clickCriarNovaOrdem="adicionarOrdem" />
-    </div>
-
-    <InfoNoItems v-if="listaDeOrdens.length <= 0" nome="ordem" />
-
-    <table id="table-desktop" class="table table-bordered table-responsive">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Descrição</th>
-          <th>Valor</th>
-          <th>Recorrênte</th>
-          <th>Frequência</th>
-          <th>Previsão</th>
-          <th colspan="2"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in listaDeOrdens" :key="item.id">
-          <td>{{ item.nome }}</td>
-          <td>{{ item.descricao }}</td>          
-          <td>{{ item.recorrente }}</td>
-          <td>{{ item.frequencia }}</td>
-          <td>{{ item.previsao }}</td>
-          <td>{{ item.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</td>
-          <td style="text-align: center; width: 40px;">
-            <i class="material-icons" @click="editarOrdem(item.id)" title="Editar">edit</i>
-          </td>
-          <td style="text-align: center; width: 40px;">
-            <i class="material-icons" @click="deletarOrdem(item.id)" title="deletar">delete</i>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <th colspan="5">Total</th>
-          <th>{{ totalPreco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</th>
-          <th colspan="3"></th>
-        </tr>
-      </tfoot>
-    </table>
-
-
-    <div class="modal-mask" v-show="showModal" transition="modal">
-      <div class="modal-wrapper">
-        <div class="modal-container">
-
-          <div class="modal-header">
-            <slot name="header">
-              default header
-            </slot>
-          </div>
-
-          <div class="modal-body">
-            <slot name="body">
-              default body
-            </slot>
-          </div>
-
-          <div class="modal-footer">
-            <slot name="footer">
-              default footer
-              <button class="modal-default-button" @click="showModal = false">
-                OK
-              </button>
-            </slot>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <el-row :gutter="20" v-if="loading">
+    <el-col :span="24">
+      <InventoryPageSkeleton />
+    </el-col>
+  </el-row>
+  <el-row v-else>
+    <el-col :span="24">
+      <MenuSuperiorAcoes name="Ordens" :btnCriarNovaOrdem="true" @clickCriarNovaOrdem="adicionarOrdem"/>
+    </el-col>
+    <el-col>
+      <el-col :span="24" v-if="!showTable">
+        <InfoNoItems nome="Ordem" />
+      </el-col>
+      <el-col :span="24" v-if="showTable"> 
+        <el-table :data="listaDeOrdens" style="width: 100%" v-loading="loadingTable">
+            <el-table-column label="Nome" prop="nome" />
+            <el-table-column label="Descrição" prop="descricao" />
+            <el-table-column label="Valor" prop="recorrente" />
+            <el-table-column label="Recorrênte" prop="recorrente" />
+            <el-table-column label="Frequência" prop="frequencia" />
+            <el-table-column label="Previsão" prop="previsao" />
+            <el-table-column align="right" width="250">
+              <template #header>
+                <el-input v-model="filtroAtual" size="small" clearable  placeholder="Digite aqui..." :suffix-icon="Search" style="width: 100%"/>
+              </template>
+              <template #default="scope">
+                <el-button size="small" @click="editarOrdem(scope.row.id)"
+                  >Editar</el-button
+                >
+                <el-button
+                  size="small"
+                  type="danger"
+                  @click="deletarOrdem(scope.row.id)"
+                  >Excluir</el-button
+                >
+              </template>
+            </el-table-column>
+        </el-table>
+        <el-col :span="12">
+        <el-pagination
+          v-model:current-page="currentPage"
+          :page-size="itemsPerPage"
+          layout="prev, pager, next"
+          :total="listaDeOrdens.length"
+          @current-change="handlePageChange"
+        />
+      </el-col>
+      </el-col>
+    </el-col>  
+  </el-row>
 </template>
     
 <script lang="ts" setup>
@@ -80,8 +57,10 @@ import InfoNoItems from "@/components/shared/InfoNoItems.vue";
 import { onMounted, computed } from "@vue/runtime-core";
 import { ref } from "vue";
 import router from "@/router";
+import { Search } from '@element-plus/icons-vue'
 
-let showModal = ref(false)
+const loading = ref(false);
+const loadingTable = ref(false);
 
 interface IOrdens {
   id: string
@@ -96,13 +75,16 @@ interface IOrdens {
 
 const listaDeOrdens = ref<Array<IOrdens>>([]);
 
+const showTable = computed(() => listaDeOrdens?.value?.length >= 1 ? true : false)
+
+const currentPage = ref(1);
+const itemsPerPage = ref(5);
+
 const adicionarOrdem = () => {
   router.push('/Adicionar_Ordem')
 }
 
 const editarOrdem = ((produto: string) => {
-  console.log(produto);
-  
   router.push({ path: `/Editar_Ordem/${produto}` });
 })
 
@@ -126,12 +108,9 @@ const obterOrdens = async () => {
   listaDeOrdens.value = response;
 }
 
-const totalPreco = computed(() => {
-  const valores = listaDeOrdens.value.map(t => t.valor)
-  return valores.reduce((valor, valores) => {
-    return valor + valores;
-  }, 0);
-});
+const handlePageChange = (newPage: number) => {
+  currentPage.value = newPage;
+};
 
 onMounted(() => {
   obterOrdens()

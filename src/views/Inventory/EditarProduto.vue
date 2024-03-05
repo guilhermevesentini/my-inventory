@@ -21,6 +21,8 @@ import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 import FormProduto from "@/components/Inventory/Produtos/FormProduto.vue";
 import InventoryHttpGateway from "@/services/Inventory/gateways/InventoryHttpGateway";
 
+const routeId = router.currentRoute.value?.params?.id;
+
 let produto = reactive<IProduto>({
 id: 0,
 _id: "",
@@ -43,7 +45,9 @@ total: 0
 
 const invetoryGateway = inject('invetoryGateway') as InventoryHttpGateway;
 
-const getProduto = (async (id: number) => {
+const getProduto = (async (id: number | undefined) => {
+    if (!id) return 
+    
     const req = await invetoryGateway.obterProduto(id);
 
     Object.assign(produto, req);
@@ -88,7 +92,7 @@ const Limpar = (() => {
 })
 
 onMounted(async () => {
-    await getProduto(Number(router.currentRoute.value.params.id));
+    await getProduto(Number(routeId));
 })
 
 </script>

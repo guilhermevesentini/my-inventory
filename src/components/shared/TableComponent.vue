@@ -1,100 +1,89 @@
 <template>
-  <div>
-    <table id="table-desktop" class="table table-bordered table-responsive">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th colspan="2"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in itemsToShow" :key="item.id">
-          <td>{{ item.nome }}</td>
-          <td style="text-align: center; width: 40px;">
-            <i class="material-icons" @click="selecionarLinha(item._id)" title="Editar">edit</i>
-          </td>
-          <td style="text-align: center; width: 40px;">
-            <i class="material-icons" @click="deletarProduto(item.id)" title="deletar">delete</i>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <nav aria-label="Page navigation example" v-if="showPaginationCheck && showPagination">
-    <ul class="pagination justify-content">
-      <li class="page-item" :class="{ disabled: current === 1 }">
-        <button class="page-link" @click="prevPage" :disabled="current === 1">
-          <span aria-hidden="true">&laquo;</span>
-        </button>
-      </li>
-      <li class="page-item" v-for="page in 
-      totalPageCount" :key="page" 
-      :class="{ active: current === page }">
-        <button class="page-link" @click="gotoPage(page)">{{ page }}</button>
-      </li>
-      <li class="page-item" :class="{ disabled: current === Math.ceil(items?.length / itemsPerPage) }">
-        <button class="page-link" @click="nextPage" :disabled="current === Math.ceil(items?.length / itemsPerPage)">
-          <span aria-hidden="true">&raquo;</span>
-        </button>
-      </li>
-    </ul>
-  </nav>
-  </div>
+  <el-row>
+    <el-col>
+      <el-col :span="24"> 
+        <el-table v-bind="$attrs" style="width: 100%">
+            <el-table-column label="Nome" prop="nome" />
+            <el-table-column align="right" width="250">
+              <!-- <template #header>
+                <el-input v-model="filtroAtual" size="small" clearable  placeholder="Digite aqui..." :suffix-icon="Search" style="width: 100%"/>
+              </template> -->
+              <template #default="scope">
+                <el-button size="small" @click="selecionarLinha()"
+                  >Editar</el-button
+                >
+                <el-button
+                  size="small"
+                  type="danger"
+                  @click="deletarProduto(scope.row.id)"
+                  >Excluir</el-button
+                >
+              </template>
+            </el-table-column>
+        </el-table>
+        <el-col :span="12">
+            <el-pagination
+              v-model:current-page="currentPage"
+              :page-size="itemsPerPagePage"
+              layout="prev, pager, next"
+              :total="5"
+              @current-change="handlePageChange"
+            />
+        </el-col>
+      </el-col>
+    </el-col>  
+  </el-row>
 </template>
 
 <script lang="ts" setup>
-import { ref, defineProps, defineEmits, computed, watch } from 'vue';
+import { ref, defineEmits } from 'vue';
+//import { Search } from '@element-plus/icons-vue'
 
-const props = defineProps({
-  items: {
-    type: Array,
-  },
-  showPagination: {
-    type: Boolean,
-    default: false,
-  },
-  itemsPerPage: {
-    type: Number,
-    default: 5,
-  },
-});
+const currentPage = ref(1);
+const itemsPerPagePage = ref(5);
 
-const current = ref(1);
-const itemsPerPage = ref(props.itemsPerPage);
+//const filtroAtual = ref<string>('');
 
-const showPaginationCheck = computed(() => {
-  const hasLength = itemsPerPage.value < props.items?.length;
+// function removerAcentos(texto: string) {
+//   return texto
+//     .normalize("NFD")
+//     .replace(/[\u0300-\u036f]/g, "")
+//     .toLowerCase();
+// }
+
+// const produtosFiltrados = computed(() => {
+//   try {
+//     if(!props?.items) return
+
+//     //const termoBusca = removerAcentos(props?.items?.trim().toLowerCase());
+//     let filteredItems = props.items;
+
+//     console.log(filteredItems);
+    
   
-  return props.showPagination && hasLength;
-})
-
-const totalPageCount = computed(() => {
-  return Math.ceil((props.items?.length || 0) / itemsPerPage.value);
-});
-
-const itemsToShow = computed(() => {
-  const startIndex = (current.value - 1) * itemsPerPage.value;
-  const endIndex = startIndex + itemsPerPage.value;
-  return props.items.slice(startIndex, endIndex);
-});
-
-const nextPage = () => {
-  const totalPages = itemsPerPage.value;
-  if(current.value < totalPages) {
-    current.value++;
-  }  
-};
-
-const prevPage = () => {
-  current.value--;
-};
-
-const gotoPage = (page) => {
-  current.value = page;
-};
+//     if (filteredItems) {
+//       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//       filteredItems = filteredItems.filter((produto: any) => {
+//         return (
+//           removerAcentos(produto.nome).includes(filtroAtual.value)
+//         );
+//       });
+//     }  
+//     const startIndex = (currentPage.value - 1) * itemsPerPage.value;
+//     return filteredItems.slice(startIndex, startIndex + itemsPerPage.value);
+//   }catch(err){
+//     throw new Error(
+//       'Erro ao carregar os produtos'
+//       );
+//   }
+// });
 
 const selecionarLinha = () => {
   // Lógica para selecionar a linha
+};
+
+const handlePageChange = (newPage: number) => {
+  currentPage.value = newPage;
 };
 
 const emit = defineEmits<{
@@ -105,14 +94,8 @@ const deletarProduto = (id: string) => {
   emit('deletar', id);
 };
 
-// Watch for changes in itemsPerPage prop and update totalPageCount
-watch(() => props.itemsPerPage, () => {
-  itemsPerPage.value = props.itemsPerPage;
-});
-
-// ... Rest of your script setup ...
 </script>
 
 <style lang="scss" scoped>
-/* Coloque os estilos SCSS específicos do componente aqui */
+
 </style>

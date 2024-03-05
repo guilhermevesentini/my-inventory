@@ -26,7 +26,18 @@ module.exports = defineConfig({
   },  
   devServer: {
     client: {
-      overlay: true,
+      overlay: {
+        runtimeErrors: (error) => {
+          const ignoreErrors = [
+            "ResizeObserver loop limit exceeded",
+            "ResizeObserver loop completed with undelivered notifications.",
+          ];
+          if (ignoreErrors.includes(error.message)) {
+            return false;
+          }
+          return true;
+        },
+      },
     },
   },
 });

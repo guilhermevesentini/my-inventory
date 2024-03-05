@@ -32,21 +32,21 @@ const routesPaths: IRoutes[] = [
       meta: { requiresAuth: true },
     },
     {
-      path: "/Inventory_config/",
+      path: "/Cadastros/",
       name: "Cadastros",
-      component: () => import('@/components/Inventory/Cadastros/InventoryConfiguration.vue'),
+      component: () => import('@/views/Cadastros/CadastrosPage.vue'),
       meta: { requiresAuth: true },
     },
     {
       path: "/Adicionar_cadastro",
       name: "Adicionar Cadastro",
-      component: () => import('@/components/Inventory/Cadastros/AdicionarCadastro.vue'),
+      component: () => import('@/views/Cadastros/AdicionarCadastro.vue'),
       meta: { requiresAuth: true },
     },
     {
       path: "/Editar_cadastro",
       name: "Editar Cadastro",
-      component: () => import('@/components/Inventory/Cadastros/EditarCadastro.vue'),
+      component: () => import('@/views/Cadastros/EditarCadastro.vue'),
       meta: { requiresAuth: true },
     },
     {
@@ -114,6 +114,7 @@ const routesPaths: IRoutes[] = [
       name: "Financeiro",
       component: () => import('@/views/Finance/Receitas/ReceitasPage.vue'),
       meta: { requiresAuth: true },
-}]
+  }
+]
 
 export default routesPaths

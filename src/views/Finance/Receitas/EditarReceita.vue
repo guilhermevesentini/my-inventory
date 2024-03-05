@@ -21,7 +21,7 @@ import { onMounted, inject } from "vue";
 import ReceitasGateway from "@/services/receitas/gateways/ReceitasGateway";
 import FormReceitas from "@/components/Inventory/Produtos/FormReceitas.vue";
 
-const routeId = router.currentRoute.value.params.id;
+const routeId = router.currentRoute.value?.params?.id;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let produto = reactive<any>({})
@@ -30,14 +30,16 @@ let produto = reactive<any>({})
 
 const receitasGateway = inject('receitasGateway') as ReceitasGateway;
 
-const getProduto = (async (id: string) => {
+const getProduto = (async (id: string | undefined) => {
+    if(!id) return
+    
     const response = await receitasGateway.obterReceita(id);
     Object.assign(produto, response);
 })
 
 const Limpar = (() => {
-    produto.value.id = '';
-    produto.value.nome = '';
+    produto.id = '';
+    produto.nome = '';
 })
 
 const Voltar = (() => {

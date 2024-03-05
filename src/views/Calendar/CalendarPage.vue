@@ -1,15 +1,122 @@
 <template>
-    <div class="row" style="margin: 10px 0;">
-        <div class="col-md-12">
-            <MenuSuperiorAcoes name="Calendário" :btnCriarNovoEvento="true" @clickCriarNovoEvento="handleCriarNovoEvento" />
-        </div>
-
-        <div class="col-md-12">
+    <el-row :gutter="20">
+        <el-col :span="24">
+            <MenuSuperiorAcoes name="Calendário" :btnCriarNovoEvento="true"
+                @clickCriarNovoEvento="handleCriarNovoEvento" />
+        </el-col>
+        <el-col :span="24">
+            <!-- <el-calendar ref="calendarRef" /> -->
             <div class="calendar" ref="calendarRef"></div>
-        </div>
-    </div>
+        </el-col>
+    </el-row>
 
-    <div class="modal modal-mask" v-show="modalShow" transition="modal">
+    <el-dialog v-model="modalShow" title="Tips" width="500" draggable>
+        <template #header>
+            Cadastro
+        </template>
+
+        <template #default>
+            <el-form :model="eventFromCalendar" label-width="auto" style="max-width: 600px">
+                <el-form-item label="Título">
+                    <el-input v-model="eventFromCalendar.title" />
+                </el-form-item>
+                <el-form-item label="Durante todo o dia">
+                    <el-switch v-model="eventFromCalendar.allDay" />
+                </el-form-item>
+                <el-form-item label="Range">
+                    <el-col :span="16">
+                        <el-date-picker v-model="eventFromCalendar.start" type="date" placeholder="Pick a date"
+                            style="width: 100%" />
+                    </el-col>
+                    <el-col :span="2" class="text-center">
+                        <span class="text-gray-500">-</span>
+                    </el-col>
+                    <el-col :span="16">
+                        <el-date-picker v-model="eventFromCalendar.end" type="date" placeholder="Pick a date"
+                            style="width: 100%" />
+                    </el-col>
+                </el-form-item>
+                <el-form-item label="Activity form">
+                    <el-input v-model="eventFromCalendar.comments" type="textarea" />
+                </el-form-item>
+            </el-form>
+        </template>
+
+        <template #footer>
+            <div class="dialog-footer">
+                <el-button @click="modalShow = false">Cancel</el-button>
+                <el-button type="danger" @click="excluirEvento">Excluir</el-button>
+                <el-button type="primary" @click="salvarEvento">
+                    Confirm
+                </el-button>
+            </div>
+        </template>
+    </el-dialog>
+
+    <el-dialog v-model="modalCriarShow" title="Tips" width="500" draggable>
+
+        <template #header>
+            Criar Evento
+        </template>
+
+        <template #default>
+            <el-form :model="eventParams" label-width="auto" style="max-width: 600px">
+                <el-form-item label="Título">
+                    <el-input v-model="eventParams.title" />
+                </el-form-item>
+                <el-form-item label="Por Periodo">
+                    <el-switch v-model="eventParams.periodo" />
+                </el-form-item>
+                <el-form-item label="Data">
+                    <el-col :span="24">
+                        <el-date-picker v-model="eventParams.date" type="date" placeholder="Pick a date"
+                            style="width: 100%" />
+                    </el-col>
+                </el-form-item>
+                <el-form-item label="Durante todo o dia">
+                    <el-switch v-model="eventParams.allDay" />
+                </el-form-item>
+                <el-form-item label="Range" v-if="eventParams.periodo">
+                    <el-col :span="16">
+                        <el-date-picker v-model="eventParams.start" type="date" placeholder="Pick a date"
+                            style="width: 100%" />
+                    </el-col>
+                    <el-col :span="2" class="text-center">
+                        <span class="text-gray-500">-</span>
+                    </el-col>
+                    <el-col :span="16">
+                        <el-date-picker v-model="eventParams.end" type="date" placeholder="Pick a date"
+                            style="width: 100%" />
+                    </el-col>
+                </el-form-item>
+                <el-form-item label="Periodo" v-if="!eventParams.allDay">
+                    <el-col :span="16">
+                        <el-time-picker v-model="eventParams.hourStart" placeholder="Pick a time" style="width: 100%" />
+                    </el-col>
+                    <el-col :span="2" class="text-center">
+                        <span class="text-gray-500">-</span>
+                    </el-col>
+                    <el-col :span="16">
+                        <el-time-picker v-model="eventParams.hourEnd" placeholder="Pick a time" style="width: 100%" />
+                    </el-col>
+                </el-form-item>
+                <el-form-item label="Activity form">
+                    <el-input v-model="eventParams.comments" type="textarea" />
+                </el-form-item>
+            </el-form>
+        </template>
+
+        <template #footer>
+            <div class="dialog-footer">
+                <el-button @click="modalCriarShow = false">Cancel</el-button>
+                <el-button type="danger" @click="excluirEvento">Excluir</el-button>
+                <el-button type="primary" @click="criarEvento">
+                    Confirm
+                </el-button>
+            </div>
+        </template>
+    </el-dialog>
+    <!-- <div class="modal modal-mask" v-show="modalShow" transition="modal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -20,18 +127,19 @@
                     <div class="row">
                         <div class="col-md-12">
                             <label>Título:</label>
-                            <input class="form-control" type="text" placeholder="Digite o título" v-model="eventFromCalendar.title"/>
+                            <input class="form-control" type="text" placeholder="Digite o título"
+                                v-model="eventFromCalendar.title" />
                         </div>
                         <div class="col-md-12">
                             <div class="input_form col-md-12">
                                 <label>Início:</label>
-                                <input class="form-control" type="date" v-model="eventFromCalendar.start"/>
+                                <input class="form-control" type="date" v-model="eventFromCalendar.start" />
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="input_form col-md-12">
                                 <label>Fim:</label>
-                                <input class="form-control" type="date" v-model="eventFromCalendar.end"/>
+                                <input class="form-control" type="date" v-model="eventFromCalendar.end" />
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -42,98 +150,103 @@
                         </div>
                         <div class="input_form col-md-12">
                             <label>Observação:</label>
-                            <textarea name="observacao" rows="6" style="width: 100%; max-height: 100px;" placeholder="Digite sua observação"
-                                v-model="eventFromCalendar.comments"></textarea>
+                            <textarea name="observacao" rows="6" style="width: 100%; max-height: 100px;"
+                                placeholder="Digite sua observação" v-model="eventFromCalendar.comments"></textarea>
                         </div>
                     </div>
 
                 </div>
-                <div class="modal-footer"  style="display: flex; justify-content: space-between;">
+                <div class="modal-footer" style="display: flex; justify-content: space-between;">
                     <div>
                         <button type="button" class="btn btn-secondary" @click="modalShow = false">Fechar</button>
                     </div>
                     <div>
                         <button type="button" class="btn btn-danger" @click="excluirEvento">Excluir</button>
-                        <button type="button" class="btn btn-primary" @click="salvarEvento" style="margin-left: 10px;">Salvar</button>
-                    </div>                    
+                        <button type="button" class="btn btn-primary" @click="salvarEvento"
+                            style="margin-left: 10px;">Salvar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <div class="modal modal-mask" v-show="modalCriarShow" transition="modal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Criar Evento</h5>
-                <button type="button" class="btn-close" @click="modalCriarShow = false"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>Título:</label>
-                        <input class="form-control" type="text" placeholder="Digite o título" v-model="eventParams.title"/>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="input_form col-md-12">
-                            <input type="checkbox" id="duracao" v-model="eventParams.periodo" />
-                            <label for="duracao" style="margin-left: 5px;">Por período</label>
+
+
+    <!-- <div class="modal modal-mask" v-show="modalCriarShow" transition="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Criar Evento</h5>
+                    <button type="button" class="btn-close" @click="modalCriarShow = false"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Título:</label>
+                            <input class="form-control" type="text" placeholder="Digite o título"
+                                v-model="eventParams.title" />
                         </div>
-                    </div>
-                    <div class="col-md-12" v-if="!eventParams.periodo">
-                        <div class="input_form col-md-12">
-                            <label>Data:</label>
-                            <input class="form-control" type="date" v-model="eventParams.date"/>
+                        <div class="col-md-12">
+                            <div class="input_form col-md-12">
+                                <input type="checkbox" id="duracao" v-model="eventParams.periodo" />
+                                <label for="duracao" style="margin-left: 5px;">Por período</label>
+                            </div>
                         </div>
-                    </div> 
-                    <div class="col-md-12" v-if="eventParams.periodo">
-                        <div class="input_form col-md-12">
-                            <label>Início:</label>
-                            <input class="form-control" type="date" v-model="eventParams.start"/>
+                        <div class="col-md-12" v-if="!eventParams.periodo">
+                            <div class="input_form col-md-12">
+                                <label>Data:</label>
+                                <input class="form-control" type="date" v-model="eventParams.date" />
+                            </div>
                         </div>
-                    </div>                    
-                    <div class="col-md-12" v-if="eventParams.periodo">
-                        <div class="input_form col-md-12">
-                            <label>Fim:</label>
-                            <input class="form-control" type="date" v-model="eventParams.end"/>
+                        <div class="col-md-12" v-if="eventParams.periodo">
+                            <div class="input_form col-md-12">
+                                <label>Início:</label>
+                                <input class="form-control" type="date" v-model="eventParams.start" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="input_form col-md-12">
-                            <input type="checkbox" id="duracao" v-model="eventParams.allDay" />
-                            <label for="duracao" style="margin-left: 5px;">Durante todo o dia</label>
+                        <div class="col-md-12" v-if="eventParams.periodo">
+                            <div class="input_form col-md-12">
+                                <label>Fim:</label>
+                                <input class="form-control" type="date" v-model="eventParams.end" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="input_form col-md-6" v-if="!eventParams.allDay">
-                        <label for="inicioHour" style="margin-right: 5px;">Início: </label>
-                        <input type="time" id="inicioHour" v-model="eventParams.hourStart" />
-                    </div>
-                    <div class="input_form col-md-6" v-if="!eventParams.allDay">
-                        <label for="fimHour" style="margin-right: 5px;">Fim:</label>
-                        <input type="time" id="fimHour" v-model="eventParams.hourEnd" />
-                    </div>
-                    <div class="input_form col-md-12">
-                        <label>Observação:</label>
-                        <textarea name="observacao" rows="6" style="width: 100%; max-height: 100px;" placeholder="Digite sua observação"
-                            v-model="eventParams.comments"></textarea>
+                        <div class="col-md-12">
+                            <div class="input_form col-md-12">
+                                <input type="checkbox" id="duracao" v-model="eventParams.allDay" />
+                                <label for="duracao" style="margin-left: 5px;">Durante todo o dia</label>
+                            </div>
+                        </div>
+                        <div class="input_form col-md-6" v-if="!eventParams.allDay">
+                            <label for="inicioHour" style="margin-right: 5px;">Início: </label>
+                            <input type="time" id="inicioHour" v-model="eventParams.hourStart" />
+                        </div>
+                        <div class="input_form col-md-6" v-if="!eventParams.allDay">
+                            <label for="fimHour" style="margin-right: 5px;">Fim:</label>
+                            <input type="time" id="fimHour" v-model="eventParams.hourEnd" />
+                        </div>
+                        <div class="input_form col-md-12">
+                            <label>Observação:</label>
+                            <textarea name="observacao" rows="6" style="width: 100%; max-height: 100px;"
+                                placeholder="Digite sua observação" v-model="eventParams.comments"></textarea>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer"  style="display: flex; justify-content: space-between;">
-                <div>
-                    <button type="button" class="btn btn-secondary" @click="modalCriarShow = false">Fechar</button>
+                <div class="modal-footer" style="display: flex; justify-content: space-between;">
+                    <div>
+                        <button type="button" class="btn btn-secondary" @click="modalCriarShow = false">Fechar</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-danger" @click="excluirEvento">Excluir</button>
+                        <button type="button" class="btn btn-primary" @click="criarEvento"
+                            style="margin-left: 10px;">Salvar</button>
+                    </div>
                 </div>
-                <div>
-                    <button type="button" class="btn btn-danger" @click="excluirEvento">Excluir</button>
-                    <button type="button" class="btn btn-primary" @click="criarEvento" style="margin-left: 10px;">Salvar</button>
-                </div>                    
             </div>
         </div>
-    </div>
-</div>
+    </div> -->
 
 </template>
-  
+
 <script lang="ts" setup>
 import MenuSuperiorAcoes from '@/components/shared/MenuSuperiorAcoes.vue'
 import { onMounted, ref } from 'vue';
@@ -210,7 +323,7 @@ const eventParams = ref<IEvento>({
 
 const handleCriarNovoEvento = async () => {
     limparParams()
-    modalCriarShow.value = true   
+    modalCriarShow.value = true
 }
 
 const limparParams = () => {
@@ -265,12 +378,12 @@ const criarEvento = async () => {
         endDateTime.setHours(parseInt(hourEndParts[0]), parseInt(hourEndParts[1]), 0, 0);
 
         newEvent.start = startDateTime.toISOString();
-        
-        if(eventParams.value.periodo) {
+
+        if (eventParams.value.periodo) {
             // Add one day to endDateTime
             endDateTime.setDate(endDateTime.getDate() + 1);
         }
-        
+
         newEvent.end = endDateTime.toISOString();
     }
 
@@ -345,7 +458,7 @@ const handleEventClick = (info) => {
     eventFromCalendar.value.end = info.event.endStr
     eventFromCalendar.value.allDay = info.event.allDay
     eventFromCalendar.value.comments = info.event.extendedProps.comments
-    
+
     modalShow.value = true
 };
 
@@ -455,7 +568,7 @@ const obterEventos = async () => {
 
 onMounted(async () => {
     const fetchedData = await obterEventos();
-    
+
     const calendarEl = calendarRef.value;
 
     calendar = new Calendar(calendarEl, {
@@ -472,12 +585,12 @@ onMounted(async () => {
 
 
 </script>
-  
+
 <style lang="scss" scoped>
 @import '@/scss/calendar.scss';
 @import '@/scss/daygrid.scss';
+
 .calendar {
     padding-bottom: 1rem;
 }
 </style>
-  
