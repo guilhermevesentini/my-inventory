@@ -34,6 +34,7 @@ import InvetoryGateway from "@/services/Inventory/gateways/InventorGateways";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 import TableFilterableFrame from "@/components/shared/TableFilterableFrame.vue";
 import TableTemplateSkeleton from "@/components/shared/TableTemplateSkeleton.vue";
+import { ICadastroItem } from "../Cadastros/types";
 
 const loading = ref(false);
 
@@ -69,8 +70,8 @@ const deletarProduto = async (productId: string) => {
   }
 }
 
-const selecionarLinha = ((produto: number) => {
-  router.push({ path: `/EditarProduto/${produto}` });
+const selecionarLinha = ((produto: ICadastroItem) => {
+  router.push({ path: `/EditarProduto/${produto.id}` });
 })
 
 onMounted(() => {

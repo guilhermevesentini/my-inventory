@@ -30,6 +30,7 @@ import { onMounted } from "@vue/runtime-core";
 import { ref } from "vue";
 import router from "@/router";
 import { IOrdens } from "./types";
+import { ICadastroItem } from "../Cadastros/types";
 
 const loading = ref(false);
 
@@ -39,8 +40,8 @@ const adicionarOrdem = () => {
   router.push('/Adicionar_Ordem')
 }
 
-const editarOrdem = ((produto: string) => {
-  router.push({ path: `/Editar_Ordem/${produto}` });
+const editarOrdem = ((produto: ICadastroItem) => {
+  router.push({ path: `/Editar_Ordem/${produto.id}` });
 })
 
 const deletarOrdem = async (productId: string) => {

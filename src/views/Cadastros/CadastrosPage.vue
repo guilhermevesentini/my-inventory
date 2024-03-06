@@ -1,53 +1,94 @@
 <template>
   <el-row>
     <el-col :span="24">
-      <MenuSuperiorAcoes name="Cadastros" />
+      <MenuSuperiorAcoes name="Cadastros" :btn-criar-cadastro="true" @click-criar-cadastro="handleAbrirDialog" />
     </el-col>
     <el-col :span="24">
-      <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+      <el-tabs v-model="activeName" class="demo-tabs">
         <el-tab-pane label="Categorias" name="categorias">
-          <TableFilterableFrame 
-          :produtos="listaDeCadastros.categorias"
-          v-on:handle-deletar="deletarProduto" 
-          v-on:handle-editar="editarCadastro">
-          <template #tableCollumn>
-            <el-table-column label="Nome" prop="nome" />
-          </template>
-        </TableFilterableFrame>
+          <TableFilterableFrame :produtos="listaDeCadastros.categorias" v-on:handle-deletar="deletarProduto" :-loading="loadingTable"
+            v-on:handle-editar="handleAbrirEditarDialog">
+            <template #tableCollumn>
+              <el-table-column label="Nome" prop="nome" />
+            </template>
+          </TableFilterableFrame>
         </el-tab-pane>
         <el-tab-pane label="Fornecedores" name="fornecedores">
-          <TableComponent :data="listaDeCadastros.fornecedores" v-if="listaDeCadastros.fornecedores.length > 0" @deletar="deletarProduto" />
+          <TableFilterableFrame :produtos="listaDeCadastros.fornecedores" v-on:handle-deletar="deletarProduto" :-loading="loadingTable"
+            v-on:handle-editar="handleAbrirEditarDialog">
+            <template #tableCollumn>
+              <el-table-column label="Nome" prop="nome" />
+            </template>
+          </TableFilterableFrame>
         </el-tab-pane>
         <el-tab-pane label="Unidades" name="unidades">
-          <TableComponent :data="listaDeCadastros.unidades" v-if="listaDeCadastros.unidades.length > 0" @deletar="deletarProduto" />
+          <TableFilterableFrame :produtos="listaDeCadastros.unidades" v-on:handle-deletar="deletarProduto" :-loading="loadingTable"
+            v-on:handle-editar="handleAbrirEditarDialog($event)">
+            <template #tableCollumn>
+              <el-table-column label="Nome" prop="nome" />
+            </template>
+          </TableFilterableFrame>
         </el-tab-pane>
         <el-tab-pane label="Tags" name="tags">
-          <TableComponent :data="listaDeCadastros.tags" v-if="listaDeCadastros.tags.length > 0" @deletar="deletarProduto" />
+          <TableFilterableFrame :produtos="listaDeCadastros.tags" v-on:handle-deletar="deletarProduto" :-loading="loadingTable"
+            v-on:handle-editar="handleAbrirEditarDialog">
+            <template #tableCollumn>
+              <el-table-column label="Nome" prop="nome" />
+            </template>
+          </TableFilterableFrame>
         </el-tab-pane>
       </el-tabs>
     </el-col>
   </el-row>
+
+  <AdicionarCadastroDialog v-model="showCriarDialog" v-on:handle-fechar="handleFecharDialog"
+    v-on:handle-salvar="criarCadastro" />
+
+    <EditarCadastroDialog v-model="showEditarDialog" :id="idSelecionado" :nome="nomeSelecionado" :show-dialog="showEditarDialog" v-on:handle-fechar="handleFecharEditarDialog"
+    v-on:handle-editar="editarCadastro" />
 </template>
 
 <script lang="ts" setup>
-//import BarraDePesquisa from '@/components/BarraDePesquisa.vue';
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
-import { TabsPaneContext } from "element-plus";
 import { ref, onMounted } from "vue";
-import TableComponent from "@/components/shared/TableComponent.vue";
 import TableFilterableFrame from "@/components/shared/TableFilterableFrame.vue";
-import { IListaDeCadastros } from "./types";
+import { ICadastroItem, IForm, IListaDeCadastros } from "./types";
+import AdicionarCadastroDialog from "./AdicionarCadastroDialog.vue";
+import useGerarId from "@/composables/shared/useCriarRandomId";
+import { IGerarId } from "@/composables/types";
+import EditarCadastroDialog from "./EditarCadastroDialog.vue";
 
 const activeName = ref('categorias');
+const showCriarDialog = ref(false);
+const showEditarDialog = ref(false);
+const loadingTable = ref(false);
+const nomeSelecionado = ref('');
+const idSelecionado = ref<string | number>('');
 
-const handleClick = (tab: TabsPaneContext, event: Event) => {
-  console.log(tab, event)
+const handleAbrirDialog = () => {
+  showCriarDialog.value = true;
 }
 
-// const config: IGerarId = {
-//     quantidade: 16,
-//     tipo: 'string'
-// }
+const handleFecharDialog = () => {
+  showCriarDialog.value = false;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const handleAbrirEditarDialog = (params: any) => {
+  nomeSelecionado.value = params.nome;
+  idSelecionado.value = params.id;
+
+  showEditarDialog.value = true;
+}
+
+const handleFecharEditarDialog = () => {
+  showEditarDialog.value = false;
+}
+
+const config: IGerarId = {
+    quantidade: 16,
+    tipo: 'string'
+}
 
 const listaDeCadastros = ref<IListaDeCadastros>({
   categorias: [],
@@ -55,14 +96,6 @@ const listaDeCadastros = ref<IListaDeCadastros>({
   unidades: [],
   tags: [],
 });
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-//const getUser: any = localStorage.getItem('user')
-//const userToJs = JSON.parse(getUser);
-
-onMounted(() => {
-  getCadastros();
-})
 
 const getCadastros = async () => {
   try {
@@ -89,48 +122,91 @@ const getCadastros = async () => {
 };
 
 const deletarProduto = async (id: string) => {
-  const rota = activeName.value.toLocaleLowerCase();
-  const req = await fetch(`http://localhost:3001/${rota}/${id}`, {
-    method: "DELETE",
-  });
+  try {
+    loadingTable.value = true
+    const rota = activeName.value.toLocaleLowerCase();
+    const req = await fetch(`http://localhost:3001/${rota}/${id}`, {
+      method: "DELETE",
+    });
 
-  if (req.ok) {
-    getCadastros();
+    if (req.ok) {
+      getCadastros();
+    }
+  } catch(err){
+    console.log(err);    
+  } finally {
+    setTimeout(() => {
+      loadingTable.value = false
+    }, 1000); 
+  }  
+};
+
+const editarCadastro = async (nome: string, id: string) => {
+  console.log(nome);
+  
+  try {
+    loadingTable.value = true
+    const model = {
+      nome: nome
+    }
+    const req = await fetch(`http://localhost:3001/${activeName.value}/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(model),
+    });
+
+    if (req.ok) {
+      getCadastros();
+      showEditarDialog.value = false;
+    }
+  } catch(err){
+    console.log(err);    
+  } finally {
+    setTimeout(() => {
+      loadingTable.value = false
+    }, 1000); 
   }
 };
 
-const editarCadastro = () => {
-  // Lógica para selecionar a linha
-};
+const criarCadastro = async (params: IForm) => {
+  const rota = params.cadastro.toLocaleLowerCase();
 
-// const selecionarLinha = ((produto: number) => {
-//   router.push({ path: `/EditarProduto/${produto}` });
-// })
+  const novoId = useGerarId(config);
 
-// const criarCadastro = async (nome: string) => {
-//   const rota = categoriaSelecionada.value.toLocaleLowerCase();
+  const model: ICadastroItem = {
+    nome: params.nome,
+    id: novoId
+  }
 
-//   const novoId = useGerarId(config);
+  const dataJson = JSON.stringify(model);
 
-//   const model:ICadastroItem = {
-//     nome: nome,
-//     id: novoId
-//   }
+  try {
+    loadingTable.value = true
+    const req = await fetch(`http://localhost:3001/${rota}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: dataJson,
+    });
 
-//   const dataJson = JSON.stringify(model);
+    if (req.ok) {
+      getCadastros()
+      showCriarDialog.value = false;
+    } else {
+      alert('Failed to save data.');
+    }
+  } catch(err){
+    console.log(err);    
+  } finally {
+    setTimeout(() => {
+      loadingTable.value = false
+    }, 1000);    
+  }
+  
+}
 
-//   const req = await fetch(`http://localhost:3001/${rota}`, {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: dataJson,
-//   });
-
-//   if (req.ok) {
-//     getCadastros()
-//   } else {
-//     alert('Failed to save data.');
-//   }
-// }
+onMounted(() => {
+  getCadastros();
+})
 </script>
 
 <style lang="scss" scoped>

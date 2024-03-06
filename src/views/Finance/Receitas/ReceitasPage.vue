@@ -32,6 +32,7 @@ import router from "@/router";
 import ReceitasGateway from "@/services/receitas/gateways/ReceitasGateway";
 import TableFilterableFrame from "@/components/shared/TableFilterableFrame.vue";
 import TableTemplateSkeleton from "@/components/shared/TableTemplateSkeleton.vue";
+import { ICadastroItem } from "@/views/Cadastros/types";
 
 const loading = ref(false);
 
@@ -54,10 +55,8 @@ const adicionarReceita = () => {
   router.push('/Adicionar_Receita')
 }
 
-const editarReceita = ((produto: number) => {
-  console.log(produto);
-
-  router.push({ path: `/Editar_Receita/${produto}` });
+const editarReceita = ((produto: ICadastroItem) => {
+  router.push({ path: `/Editar_Receita/${produto.id}` });
 })
 
 const deletarReceita = async (productId: string) => {

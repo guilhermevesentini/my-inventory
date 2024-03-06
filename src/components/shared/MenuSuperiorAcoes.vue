@@ -11,6 +11,7 @@
       <el-button type="primary" plain v-if="btnCriarNovaReceita" @click="HandleCriarReceitas" :icon="Plus" round>Adicionar</el-button>
       <el-button type="primary" plain v-if="btnCriarNovaDespesa" @click="HandleCriarDespesa" :icon="Plus" round>Adicionar</el-button>
       <el-button type="primary" plain v-if="btnCriarNovaOrdem" @click="HandleCriarOrdem" :icon="Plus" round>Adicionar</el-button>
+      <el-button type="primary" plain v-if="btnCriarCadastro" @click="HandleCriarCadastro" :icon="Plus" round>Adicionar</el-button>
     </el-col>
   </el-row>
 </template>
@@ -21,7 +22,8 @@ import {
   Plus,
   TopLeft,
   Brush
-} from '@element-plus/icons-vue'
+} from '@element-plus/icons-vue';
+import { ICadastroItem } from '@/views/Cadastros/types';
 
 const props = defineProps({
   BreadCrumbName: {
@@ -71,6 +73,10 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  btnCriarCadastro: {
+    type: Boolean,
+    default: false
+  },
   adicionar: {
     type: Boolean,
     default: false
@@ -82,12 +88,13 @@ const emit = defineEmits<{
   (event: "clickLimpar"): void;
   (event: "clickSalvar"): void;
   (event: "clickCriar"): void;
-  (event: "clickCriarNovoEvento"): void;
-  (event: "clickCriarNovoProduto"): void;
-  (event: "clickCriarNovaReceita"): void;
-  (event: "clickCriarNovaDespesa"): void;
-  (event: "clickCriarNovaOrdem"): void;
-  (event: "update:atualizarFiltro"): void;
+  (event: "clickCriarNovoEvento"): ICadastroItem;
+  (event: "clickCriarNovoProduto"): ICadastroItem;
+  (event: "clickCriarNovaReceita"): ICadastroItem;
+  (event: "clickCriarNovaDespesa"): ICadastroItem;
+  (event: "clickCriarNovaOrdem"): ICadastroItem;
+  (event: "clickCriarCadastro"): ICadastroItem;
+  (event: "update:atualizarFiltro"): ICadastroItem;
 }>();
 
 const HandleVoltar = () => {
@@ -116,6 +123,9 @@ const HandleCriarDespesa = () => {
 }
 const HandleCriarOrdem = () => {
   emit('clickCriarNovaOrdem')
+}
+const HandleCriarCadastro = () => {
+  emit('clickCriarCadastro')
 }
 
 </script>

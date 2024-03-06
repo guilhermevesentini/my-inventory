@@ -46,7 +46,7 @@ const routesPaths: IRoutes[] = [
     {
       path: "/Editar_cadastro",
       name: "Editar Cadastro",
-      component: () => import('@/views/Cadastros/EditarCadastro.vue'),
+      component: () => import('@/views/Cadastros/EditarCadastroDialog.vue'),
       meta: { requiresAuth: true },
     },
     {

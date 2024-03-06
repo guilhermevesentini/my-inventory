@@ -53,4 +53,7 @@ declare module '@vue/runtime-core' {
     TableFilterableFrame: typeof import('./src/components/shared/TableFilterableFrame.vue')['default']
     TableTemplateSkeleton: typeof import('./src/components/shared/TableTemplateSkeleton.vue')['default']
   }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
+  }
 }

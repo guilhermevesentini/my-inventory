@@ -9,7 +9,7 @@ export enum ETipos {
 
 export interface ICadastroItem {
   id: number | string;
-  nome: string;
+  nome?: string;
 }
 
 export  interface IListaDeCadastros {
@@ -24,4 +24,17 @@ export interface ICadastrosList {
   fornecedores: [],
   unidades: [],
   tags: [],
+}
+
+export enum EListaCadastro {
+  categorias = 1,
+  fornecedores = 2,
+  unidades = 3,
+  tags = 4,
+}
+
+
+export interface IForm {
+  nome: string,
+  cadastro: string
 }

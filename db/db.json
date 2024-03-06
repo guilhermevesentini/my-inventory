@@ -192,7 +192,7 @@
   "categorias": [
     {
       "id": "366c0de2a2f35351f72e92ffe2bdccef",
-      "nome": "Mercado"
+      "nome": "Mercado teste"
     },
     {
       "id": "d032a22e66f33c72b8e5e9445aa60ee7",
@@ -205,26 +205,6 @@
     {
       "id": "ae15a8d73b45700c5b39cc944869e8d6",
       "nome": "Música e Shows"
-    },
-    {
-      "id": "81c855e7c1e5907461df94ab216ba850",
-      "nome": "Papelaria"
-    },
-    {
-      "id": "ac5b82987fb46b839ccbf0e33e124d5e",
-      "nome": "Pet Shop"
-    },
-    {
-      "id": "7b32f43ad8817756a343d85c805ad6a2",
-      "nome": "Religião e Espiritualidade"
-    },
-    {
-      "id": "1cb648dd4c2c93a53dfdd23645bb1c96",
-      "nome": "Relógios"
-    },
-    {
-      "id": "b74c61c1e48d4d8a018af9b75ec35f94",
-      "nome": "Saúde e Cuidados Pessoais"
     },
     {
       "id": "4b9fc40d11ed21e35b8a9d8c4a615a3e",
@@ -245,6 +225,18 @@
     {
       "id": "1d6b52b9f4b46522472a7217a59b2f8e",
       "nome": "TV e Vídeo"
+    },
+    {
+      "nome": "awdwad",
+      "id": "06639445282d6f3f56be9185788aee75"
+    },
+    {
+      "nome": "awdwadttttttttttttt",
+      "id": "1bc2e9129459ba1364d75f386969de44"
+    },
+    {
+      "nome": "awdwad",
+      "id": "e443945733dbf416c44797c8874c8754"
     }
   ],
   "fornecedores": [
@@ -263,6 +255,10 @@
     {
       "id": "ae15a8d73b45700c5b39cc944869e8d6",
       "nome": "Amazon"
+    },
+    {
+      "nome": "aaaaaa",
+      "id": "49e9c2b0977756e45581f8116edb4eed"
     }
   ],
   "unidades": [
@@ -421,7 +417,7 @@
   "receitas": [
     {
       "id": "82dfe3b9b02f9352f555a29e4cf0081b",
-      "nome": "aaaaaaaaaaaaaaa",
+      "nome": "bbbbb",
       "descricao": "wadwadd",
       "valor": 1561652,
       "previsao": "2024-03-19T03:00:00.000Z",
