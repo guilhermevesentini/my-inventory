@@ -22,7 +22,7 @@ import useGerarId from "@/composables/shared/useCriarRandomId"
 import { IGerarId } from "@/composables/types";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 import InventoryHttpGateway from "@/services/Inventory/gateways/InventoryHttpGateway";
-import FormProduto from "@/components/Inventory/Produtos/FormProduto.vue";
+import FormProduto from "./FormProduto.vue";
 
 
 const invetoryGateway = inject('invetoryGateway') as InventoryHttpGateway;

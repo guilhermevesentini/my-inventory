@@ -25,7 +25,7 @@
                 </el-form-item>
                 <el-form-item label="Range">
                     <el-col :span="16">
-                        <el-date-picker v-model="eventFromCalendar.start" type="date" placeholder="Pick a date"
+                        <el-date-picker v-model="eventFromCalendar.start" type="date" format="DD/MM/YYYY" placeholder="Pick a date"
                             style="width: 100%" />
                     </el-col>
                     <el-col :span="2" class="text-center">

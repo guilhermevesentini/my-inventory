@@ -31,6 +31,7 @@
                         label="Selecione a data"
                         placeholder="Selecione a data"
                         style="width: 100%"
+                        format="DD/MM/YYYY"
                         />
                 </el-form-item>
             </el-col>

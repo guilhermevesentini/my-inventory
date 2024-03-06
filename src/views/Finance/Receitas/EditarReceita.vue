@@ -19,7 +19,7 @@ import router from "@/router";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 import { onMounted, inject } from "vue";
 import ReceitasGateway from "@/services/receitas/gateways/ReceitasGateway";
-import FormReceitas from "@/components/Inventory/Produtos/FormReceitas.vue";
+import FormReceitas from "./FormReceitas.vue";
 
 const routeId = router.currentRoute.value?.params?.id;
 

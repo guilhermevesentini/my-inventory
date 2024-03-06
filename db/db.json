@@ -448,16 +448,6 @@
       "recorrente": "Sim",
       "frequencia": "Diário",
       "observacao": "wadwad"
-    },
-    {
-      "id": "34767ca70a8ec7c3f1fa84a85be345c0",
-      "nome": "",
-      "descricao": "",
-      "valor": 0,
-      "previsao": "2024-03-06T03:00:00.000Z",
-      "recorrente": "Sim",
-      "frequencia": "Semanal",
-      "observacao": ""
     }
   ],
   "despesas": [

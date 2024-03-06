@@ -18,8 +18,8 @@ import { reactive } from "@vue/runtime-core"
 import router from "@/router";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 import { onMounted } from "vue";
-import FormReceitas from "@/components/Inventory/Produtos/FormReceitas.vue";
 import { IDespesas } from "../types";
+import FormReceitas from "../Receitas/FormReceitas.vue";
 
 const routeId = router.currentRoute.value?.params?.id;
 

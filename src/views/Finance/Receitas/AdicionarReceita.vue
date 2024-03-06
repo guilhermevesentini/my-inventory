@@ -22,8 +22,8 @@ import useGerarId from "@/composables/shared/useCriarRandomId"
 import { IGerarId } from "@/composables/types";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 import ReceitasGateway from '@/services/receitas/gateways/ReceitasGateway';
-import FormReceitas from "@/components/Inventory/Produtos/FormReceitas.vue";
 import { IReceitas } from '../types';
+import FormReceitas from './FormReceitas.vue';
 
 const receitasGateway = inject('receitasGateway') as ReceitasGateway;
 

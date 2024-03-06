@@ -12,7 +12,7 @@
                     <el-icon>
                         <TakeawayBox />
                     </el-icon>
-                    <span>Produtos</span>
+                    <span>Inventário</span>
                 </el-menu-item>
                 <el-menu-item index="3" @click="ClickNoLink('/Calendario')">
                     <el-icon>
@@ -38,12 +38,12 @@
                     </el-icon>
                     <span>Orders</span>
                 </el-menu-item>
-                <el-menu-item index="7" @click="ClickNoLink('/Financeiro')">
+                <!-- <el-menu-item index="7" @click="ClickNoLink('/Financeiro')">
                     <el-icon>
                         <Money />
                     </el-icon>
                     <span>Financeiro</span>
-                </el-menu-item>
+                </el-menu-item> -->
                 <el-menu-item index="8" @click="ClickNoLink('/Cadastros')">
                     <el-icon>
                         <Setting />
@@ -64,7 +64,6 @@ import {
     Plus,
     Minus,
     Coordinate,
-    Money,
     Setting,
 } from '@element-plus/icons-vue'
 

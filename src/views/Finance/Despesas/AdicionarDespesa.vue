@@ -5,11 +5,11 @@
                 @clickVoltar="Voltar" @clickLimpar="Limpar" @clickSalvar="Salvar"/>
         </el-col>
         <el-col :span="24">
-            <FormReceitas 
+            <FormDespesas 
             :produto="produto"
             @click-salvar="Salvar"
             @click-voltar="Voltar"
-            ></FormReceitas>
+            ></FormDespesas>
         </el-col>
     </el-row>
 </template>
@@ -20,8 +20,8 @@ import router from "@/router";
 import useGerarId from "@/composables/shared/useCriarRandomId"
 import { IGerarId } from "@/composables/types";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
-import FormReceitas from "@/components/Inventory/Produtos/FormReceitas.vue";
 import { IDespesas } from "../types";
+import FormDespesas from "./FormDespesas.vue";
 
 const config: IGerarId = {
     quantidade: 16,

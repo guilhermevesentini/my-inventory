@@ -18,8 +18,8 @@ import { reactive } from "@vue/runtime-core"
 import router from "@/router";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 import { onMounted } from "vue";
-import FormOrdems from "@/components/Inventory/Produtos/FormOrdems.vue";
 import { IOrdens } from "../Finance/types";
+import FormOrdems from "./FormOrdems.vue";
 
 const routeId = router.currentRoute.value.params.id;
 

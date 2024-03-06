@@ -1,5 +1,4 @@
 export interface IProduto {
-
     id: number,
     _id: string,
     _id_Produto: string,

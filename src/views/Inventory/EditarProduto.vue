@@ -18,8 +18,8 @@ import { computed, onMounted, reactive, inject } from "@vue/runtime-core"
 import { IProduto } from '@/@types/types'
 import router from "@/router";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
-import FormProduto from "@/components/Inventory/Produtos/FormProduto.vue";
 import InventoryHttpGateway from "@/services/Inventory/gateways/InventoryHttpGateway";
+import FormProduto from "./FormProduto.vue";
 
 const routeId = router.currentRoute.value?.params?.id;
 

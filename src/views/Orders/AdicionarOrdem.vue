@@ -21,7 +21,7 @@ import useGerarId from "@/composables/shared/useCriarRandomId"
 import { IGerarId } from "@/composables/types";
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 import { IOrdens } from "../Finance/types";
-import FormOrdems from "@/components/Inventory/Produtos/FormOrdems.vue";
+import FormOrdems from "./FormOrdems.vue";
 
 const config: IGerarId = {
     quantidade: 16,

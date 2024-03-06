@@ -1,4 +1,3 @@
-<!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <template>
     <el-form ref="formRef" :model="produtoDetails" label-position="top" style="width: 100%">
         <el-row :gutter="10">
@@ -97,9 +96,9 @@
 
 <script setup lang="ts">
 import SharedHttpGateway from '@/services/shared/gateways/SharedHttpGateway';
-import { defineProps, defineEmits, reactive, onMounted, ref, inject, computed } from 'vue';
-import { IStandardList } from '../types';
+import { defineProps, defineEmits, reactive, onMounted, ref, inject } from 'vue';
 import { FormInstance } from 'element-plus';
+import { IStandardList } from '@/components/Inventory/types';
 
 const formRef = ref<FormInstance>()
 
@@ -137,11 +136,6 @@ const props = defineProps({
 });
 
 const produtoDetails = reactive(props.produto)
-
-const valid = computed(() => produtoDetails.quantidade)
-
-console.log(valid.value);
-
 
 const emits = defineEmits<{
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -6,7 +6,14 @@
     <el-col :span="24">
       <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
         <el-tab-pane label="Categorias" name="categorias">
-          <TableComponent :data="listaDeCadastros.categorias" v-if="listaDeCadastros.categorias.length > 0" @deletar="deletarProduto" />
+          <TableFilterableFrame 
+          :produtos="listaDeCadastros.categorias"
+          v-on:handle-deletar="deletarProduto" 
+          v-on:handle-editar="editarCadastro">
+          <template #tableCollumn>
+            <el-table-column label="Nome" prop="nome" />
+          </template>
+        </TableFilterableFrame>
         </el-tab-pane>
         <el-tab-pane label="Fornecedores" name="fornecedores">
           <TableComponent :data="listaDeCadastros.fornecedores" v-if="listaDeCadastros.fornecedores.length > 0" @deletar="deletarProduto" />
@@ -26,8 +33,10 @@
 //import BarraDePesquisa from '@/components/BarraDePesquisa.vue';
 import MenuSuperiorAcoes from "@/components/shared/MenuSuperiorAcoes.vue";
 import { TabsPaneContext } from "element-plus";
-import { IListaDeCadastros } from "@/components/Inventory/types";
 import { ref, onMounted } from "vue";
+import TableComponent from "@/components/shared/TableComponent.vue";
+import TableFilterableFrame from "@/components/shared/TableFilterableFrame.vue";
+import { IListaDeCadastros } from "./types";
 
 const activeName = ref('categorias');
 
@@ -90,6 +99,9 @@ const deletarProduto = async (id: string) => {
   }
 };
 
+const editarCadastro = () => {
+  // Lógica para selecionar a linha
+};
 
 // const selecionarLinha = ((produto: number) => {
 //   router.push({ path: `/EditarProduto/${produto}` });
